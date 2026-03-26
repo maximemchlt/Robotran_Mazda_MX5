@@ -10,7 +10,7 @@
 
 <p align="center">
   <b>Modélisation dynamique multicorps d'une Mazda MX-5 (Miata) en vue de l'analyse des comportements en virage, freinage et tenue de route.</b><br/>
-  Projet réalisé dans le cadre du cours <i>MECA2802 — Dynamique des véhicules</i>, École Polytechnique de Louvain.
+  Projet réalisé dans le cadre du cours <i>LEPL1504 — Projet 4 en mécanique</i>, École Polytechnique de Louvain.
 </p>
 
 ---
@@ -30,7 +30,7 @@
 
 ## 🎯 Contexte
 
-La **Mazda MX-5 (NA/NB)** est un roadster sport à propulsion arrière, idéal pour l'étude de la dynamique véhicule grâce à sa géométrie simple, son faible poids (~1 000 kg) et sa répartition des masses quasi-équilibrée (50/50 avant/arrière).
+La **Mazda MX-5 (NA/NB)** est un roadster sport à propulsion arrière, idéal pour l'étude de la dynamique véhicule grâce à sa géométrie simple, son faible poids (~1 000 kg) et sa répartition des masses quasi-équilibrée (55/45 avant/arrière).
 
 Ce projet utilise **Robotran**, logiciel de dynamique multicorps développé à l'UCLouvain, pour construire un modèle complet du véhicule et simuler différents scénarios de conduite :
 
@@ -46,33 +46,18 @@ Ce projet utilise **Robotran**, logiciel de dynamique multicorps développé à 
 ```
 Robotran_Mazda_MX5/
 │
-├── model/                      # Modèle Robotran
-│   ├── MX5.mbs                 # Fichier de définition multicorps
-│   ├── MX5_geometry.py         # Paramètres géométriques (suspensions, empattement…)
-│   └── MX5_params.m            # Paramètres physiques (masses, inerties, raideurs)
+├── animationR/                 # resultat d'animation optenu
 │
-├── user_files/                 # Fichiers utilisateur Robotran
-│   ├── user_ExtForces.c        # Forces extérieures (pneumatiques Pacejka)
-│   ├── user_JointForces.c      # Couples aux articulations (direction, moteur)
-│   └── user_model_calcs.c      # Calculs supplémentaires (stabilité, charge)
+├── dataR/                      # modèle representé
+│   └── Robotran_Mazda_MX5.mbs  # fichier contenant toutes les information sur le modèles
 │
-├── simulations/                # Scripts de simulation
-│   ├── steady_state_cornering/ # Virage en régime permanent
-│   ├── step_steer/             # Échelon de braquage (réponse transitoire)
-│   ├── emergency_braking/      # Freinage d'urgence
-│   └── roll_analysis/          # Analyse du roulis
+├── resultR/                    # tableau de resulats
 │
-├── postprocessing/             # Post-traitement & visualisation
-│   ├── plot_results.py         # Tracé des résultats (matplotlib)
-│   ├── animated_view.py        # Animation 3D de la trajectoire
-│   └── stability_map.m         # Carte stabilité sous/survirage
+├── symbolicR/                  # fichier générer par robotran
 │
-├── report/                     # Rapport de projet
-│   └── report_MX5_dynamics.pdf
+├── userfctR/                   # fonction modifier par nous pour ce projet
 │
-├── docs/                       # Documentation technique
-│   ├── model_description.md    # Description détaillée du modèle
-│   └── MX5_specs.md            # Fiche technique de la Mazda MX-5
+├── workR/                      # Fichier main contenu dedans
 │
 ├── README.md
 └── requirements.txt
