@@ -10,12 +10,12 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Thu Mar 26 12:39:45 2026
+#	==> Generation Date: Thu Mar 26 15:25:15 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
 #
-#	==> Number of joints: 12
+#	==> Number of joints: 18
 #
 #	==> Function: F7 - Link Forces (1D)
 #
@@ -41,8 +41,8 @@ def link(frc, trq, Flink, Z, Zd, s, tsim):
  
 # Link anchor points Kinematics
 
-    RLlnk2_22 = s.dpt[2,8]*C7-s.dpt[3,8]*S7
-    RLlnk2_32 = s.dpt[2,8]*S7+s.dpt[3,8]*C7
+    RLlnk2_22 = s.dpt[2,9]*C7-s.dpt[3,9]*S7
+    RLlnk2_32 = s.dpt[2,9]*S7+s.dpt[3,9]*C7
     POlnk2_22 = RLlnk2_22+s.dpt[2,1]
     POlnk2_32 = RLlnk2_32+s.dpt[3,1]
     ORlnk2_22 = -qd[7]*RLlnk2_32
@@ -56,8 +56,8 @@ def link(frc, trq, Flink, Z, Zd, s, tsim):
     e21 = Plnk21/Z1
     e31 = Plnk31/Z1
     Zd1 = ORlnk2_22*e21+ORlnk2_32*e31
-    RLlnk3_22 = s.dpt[2,12]*C10-s.dpt[3,12]*S10
-    RLlnk3_32 = s.dpt[2,12]*S10+s.dpt[3,12]*C10
+    RLlnk3_22 = s.dpt[2,14]*C10-s.dpt[3,14]*S10
+    RLlnk3_32 = s.dpt[2,14]*S10+s.dpt[3,14]*C10
     POlnk3_22 = RLlnk3_22+s.dpt[2,4]
     POlnk3_32 = RLlnk3_32+s.dpt[3,4]
     ORlnk3_22 = -qd[10]*RLlnk3_32
@@ -82,29 +82,29 @@ def link(frc, trq, Flink, Z, Zd, s, tsim):
     fPlnk11 = Flink1*e11
     fPlnk21 = Flink1*e21
     fPlnk31 = Flink1*e31
-    trqlnk6_1_1 = -fPlnk21*s.dpt[3,3]+fPlnk31*s.dpt[2,3]
-    trqlnk6_1_2 = fPlnk11*s.dpt[3,3]-fPlnk31*s.dpt[1,3]
+    trqlnk6_1_1 = -fPlnk21*(s.dpt[3,3]-s.l[3,6])+fPlnk31*s.dpt[2,3]
+    trqlnk6_1_2 = fPlnk11*(s.dpt[3,3]-s.l[3,6])-fPlnk31*s.dpt[1,3]
     trqlnk6_1_3 = -fPlnk11*s.dpt[2,3]+fPlnk21*s.dpt[1,3]
     fSlnk11 = Flink1*e11
     fSlnk21 = Flink1*(e21*C7+e31*S7)
     fSlnk31 = Flink1*(-e21*S7+e31*C7)
-    trqlnk7_1_1 = fSlnk21*s.dpt[3,8]-fSlnk31*(s.dpt[2,8]-s.l[2,7])
-    trqlnk7_1_2 = -fSlnk11*s.dpt[3,8]
-    trqlnk7_1_3 = fSlnk11*(s.dpt[2,8]-s.l[2,7])
+    trqlnk7_1_1 = fSlnk21*s.dpt[3,9]-fSlnk31*(s.dpt[2,9]-s.l[2,7])
+    trqlnk7_1_2 = -fSlnk11*s.dpt[3,9]
+    trqlnk7_1_3 = fSlnk11*(s.dpt[2,9]-s.l[2,7])
     fPlnk12 = Flink2*e12
     fPlnk22 = Flink2*(e22*C10+e32*S10)
     fPlnk32 = Flink2*(-e22*S10+e32*C10)
-    trqlnk10_2_1 = -fPlnk22*s.dpt[3,12]+fPlnk32*(s.dpt[2,12]-s.l[2,10])
-    trqlnk10_2_2 = fPlnk12*s.dpt[3,12]
-    trqlnk10_2_3 = -fPlnk12*(s.dpt[2,12]-s.l[2,10])
+    trqlnk10_2_1 = -fPlnk22*s.dpt[3,14]+fPlnk32*(s.dpt[2,14]-s.l[2,10])
+    trqlnk10_2_2 = fPlnk12*s.dpt[3,14]
+    trqlnk10_2_3 = -fPlnk12*(s.dpt[2,14]-s.l[2,10])
     fSlnk12 = Flink2*e12
     fSlnk22 = Flink2*e22
     fSlnk32 = Flink2*e32
     frclnk6_2_1 = fPlnk11-fSlnk12
     frclnk6_2_2 = fPlnk21-fSlnk22
     frclnk6_2_3 = fPlnk31-fSlnk32
-    trqlnk6_2_1 = trqlnk6_1_1+fSlnk22*s.dpt[3,6]-fSlnk32*s.dpt[2,6]
-    trqlnk6_2_2 = trqlnk6_1_2-fSlnk12*s.dpt[3,6]+fSlnk32*s.dpt[1,6]
+    trqlnk6_2_1 = trqlnk6_1_1+fSlnk22*(s.dpt[3,6]-s.l[3,6])-fSlnk32*s.dpt[2,6]
+    trqlnk6_2_2 = trqlnk6_1_2-fSlnk12*(s.dpt[3,6]-s.l[3,6])+fSlnk32*s.dpt[1,6]
     trqlnk6_2_3 = trqlnk6_1_3+fSlnk12*s.dpt[2,6]-fSlnk22*s.dpt[1,6]
  
 # Symbolic model output

@@ -74,20 +74,22 @@ print ("Equilibrium done.")
 # =============================================================================
 # Modal Analysis
 # =============================================================================
-print ("Modal analysis...")
-mbs_data.process = 4
-mbs_modal = Robotran.MbsModal(mbs_data)
-mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
-mbs_modal.run()
-print ("Modal analysis done.")
+# print ("Modal analysis...")
+# mbs_data.process = 4
+# mbs_modal = Robotran.MbsModal(mbs_data)
+# mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
+# mbs_modal.run()
+# print ("Modal analysis done.")
 
 # =============================================================================
 # Direct Dynamics
 # =============================================================================
-mbs_data.process = 3
-mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=1)
-mbs_dirdyn.run()
+# print ("Direct dynamics...")
+# mbs_data.process = 3
+# mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
+# mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=1)
+# mbs_dirdyn.run()
+# print ("Direct dynamics done.")
 
 # =============================================================================
 # Inverse Kinematics

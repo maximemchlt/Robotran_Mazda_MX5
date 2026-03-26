@@ -10,12 +10,12 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Thu Mar 26 12:39:45 2026
+#	==> Generation Date: Thu Mar 26 15:25:15 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
 #
-#	==> Number of joints: 12
+#	==> Number of joints: 18
 #
 #	==> Function: F18 - Constraints Quadratic Velocity Terms (Jdqd)
 #
@@ -43,6 +43,18 @@ def cons_jdqd(Jdqd, s):
     C12 = cos(q[12])
     S10 = sin(q[10])
     C10 = cos(q[10])
+    S13 = sin(q[13])
+    C13 = cos(q[13])
+    S17 = sin(q[17])
+    C17 = cos(q[17])
+    S18 = sin(q[18])
+    C18 = cos(q[18])
+    S14 = sin(q[14])
+    C14 = cos(q[14])
+    S15 = sin(q[15])
+    C15 = cos(q[15])
+    S16 = sin(q[16])
+    C16 = cos(q[16])
  
 # Augmented Joint Position Vectors
 
@@ -52,23 +64,23 @@ def cons_jdqd(Jdqd, s):
  
 # Constraints Quadratic Terms
 
-    RLjdqd1_22 = s.dpt[2,7]*C7
-    RLjdqd1_32 = s.dpt[2,7]*S7
+    RLjdqd1_22 = s.dpt[2,8]*C7
+    RLjdqd1_32 = s.dpt[2,8]*S7
     ORjdqd1_22 = -RLjdqd1_32*qd[7]
     ORjdqd1_32 = RLjdqd1_22*qd[7]
     Apqpjdqd1_22 = -ORjdqd1_32*qd[7]
     Apqpjdqd1_32 = ORjdqd1_22*qd[7]
     ROjdqd2_82 = -C8*S9-S8*C9
     ROjdqd2_92 = C8*C9-S8*S9
-    RLjdqd2_22 = s.dpt[2,9]*C8
-    RLjdqd2_32 = s.dpt[2,9]*S8
+    RLjdqd2_22 = s.dpt[2,11]*C8
+    RLjdqd2_32 = s.dpt[2,11]*S8
     OMjdqd2_12 = qd[8]+qd[9]
     ORjdqd2_22 = -RLjdqd2_32*qd[8]
     ORjdqd2_32 = RLjdqd2_22*qd[8]
     Apqpjdqd2_22 = -ORjdqd2_32*qd[8]
     Apqpjdqd2_32 = ORjdqd2_22*qd[8]
-    RLjdqd2_23 = ROjdqd2_82*s.dpt[3,10]
-    RLjdqd2_33 = ROjdqd2_92*s.dpt[3,10]
+    RLjdqd2_23 = ROjdqd2_82*s.dpt[3,12]
+    RLjdqd2_33 = ROjdqd2_92*s.dpt[3,12]
     ORjdqd2_23 = -OMjdqd2_12*RLjdqd2_33
     ORjdqd2_33 = OMjdqd2_12*RLjdqd2_23
     Apqpjdqd2_23 = Apqpjdqd2_22-OMjdqd2_12*ORjdqd2_33
@@ -77,31 +89,110 @@ def cons_jdqd(Jdqd, s):
     jdqd3 = Apqpjdqd1_32-Apqpjdqd2_33
     ROjdqd3_82 = -C11*S12-S11*C12
     ROjdqd3_92 = C11*C12-S11*S12
-    RLjdqd3_22 = s.dpt[2,13]*C11
-    RLjdqd3_32 = s.dpt[2,13]*S11
+    RLjdqd3_22 = s.dpt[2,16]*C11
+    RLjdqd3_32 = s.dpt[2,16]*S11
     OMjdqd3_12 = qd[11]+qd[12]
     ORjdqd3_22 = -RLjdqd3_32*qd[11]
     ORjdqd3_32 = RLjdqd3_22*qd[11]
     Apqpjdqd3_22 = -ORjdqd3_32*qd[11]
     Apqpjdqd3_32 = ORjdqd3_22*qd[11]
-    RLjdqd3_23 = ROjdqd3_82*s.dpt[3,14]
-    RLjdqd3_33 = ROjdqd3_92*s.dpt[3,14]
+    RLjdqd3_23 = ROjdqd3_82*s.dpt[3,17]
+    RLjdqd3_33 = ROjdqd3_92*s.dpt[3,17]
     ORjdqd3_23 = -OMjdqd3_12*RLjdqd3_33
     ORjdqd3_33 = OMjdqd3_12*RLjdqd3_23
     Apqpjdqd3_23 = Apqpjdqd3_22-OMjdqd3_12*ORjdqd3_33
     Apqpjdqd3_33 = Apqpjdqd3_32+OMjdqd3_12*ORjdqd3_23
-    RLjdqd4_22 = s.dpt[2,11]*C10
-    RLjdqd4_32 = s.dpt[2,11]*S10
+    RLjdqd4_22 = s.dpt[2,13]*C10
+    RLjdqd4_32 = s.dpt[2,13]*S10
     ORjdqd4_22 = -RLjdqd4_32*qd[10]
     ORjdqd4_32 = RLjdqd4_22*qd[10]
     Apqpjdqd4_22 = -ORjdqd4_32*qd[10]
     Apqpjdqd4_32 = ORjdqd4_22*qd[10]
     jdqd5 = Apqpjdqd3_23-Apqpjdqd4_22
     jdqd6 = Apqpjdqd3_33-Apqpjdqd4_32
+    ROjdqd5_42 = S13*S17
+    ROjdqd5_62 = C13*S17
+    ROjdqd5_72 = S13*C17
+    ROjdqd5_92 = C13*C17
+    ROjdqd5_73 = ROjdqd5_72*C18+C13*S18
+    ROjdqd5_83 = -S17*C18
+    ROjdqd5_93 = ROjdqd5_92*C18-S13*S18
+    OMjdqd5_12 = qd[17]*C13
+    OMjdqd5_32 = -qd[17]*S13
+    Ompqpjdqd5_12 = -qd[13]*qd[17]*S13
+    Ompqpjdqd5_32 = -qd[13]*qd[17]*C13
+    OMjdqd5_13 = OMjdqd5_12+ROjdqd5_42*qd[18]
+    OMjdqd5_23 = qd[13]+qd[18]*C17
+    OMjdqd5_33 = OMjdqd5_32+ROjdqd5_62*qd[18]
+    Ompqpjdqd5_13 = Ompqpjdqd5_12+qd[18]*(-OMjdqd5_32*C17+ROjdqd5_62*qd[13])
+    Ompqpjdqd5_23 = qd[18]*(-OMjdqd5_12*ROjdqd5_62+OMjdqd5_32*ROjdqd5_42)
+    Ompqpjdqd5_33 = Ompqpjdqd5_32+qd[18]*(OMjdqd5_12*C17-ROjdqd5_42*qd[13])
+    RLjdqd5_14 = ROjdqd5_73*s.dpt[3,21]
+    RLjdqd5_24 = ROjdqd5_83*s.dpt[3,21]
+    RLjdqd5_34 = ROjdqd5_93*s.dpt[3,21]
+    ORjdqd5_14 = OMjdqd5_23*RLjdqd5_34-OMjdqd5_33*RLjdqd5_24
+    ORjdqd5_24 = -OMjdqd5_13*RLjdqd5_34+OMjdqd5_33*RLjdqd5_14
+    ORjdqd5_34 = OMjdqd5_13*RLjdqd5_24-OMjdqd5_23*RLjdqd5_14
+    Apqpjdqd5_14 = OMjdqd5_23*ORjdqd5_34-OMjdqd5_33*ORjdqd5_24+Ompqpjdqd5_23*RLjdqd5_34-Ompqpjdqd5_33*RLjdqd5_24
+    Apqpjdqd5_24 = -OMjdqd5_13*ORjdqd5_34+OMjdqd5_33*ORjdqd5_14-Ompqpjdqd5_13*RLjdqd5_34+Ompqpjdqd5_33*RLjdqd5_14
+    Apqpjdqd5_34 = OMjdqd5_13*ORjdqd5_24-OMjdqd5_23*ORjdqd5_14+Ompqpjdqd5_13*RLjdqd5_24-Ompqpjdqd5_23*RLjdqd5_14
+    RLjdqd6_22 = s.dpt[2,15]*C10
+    RLjdqd6_32 = s.dpt[2,15]*S10
+    ORjdqd6_22 = -RLjdqd6_32*qd[10]
+    ORjdqd6_32 = RLjdqd6_22*qd[10]
+    Apqpjdqd6_22 = -ORjdqd6_32*qd[10]
+    Apqpjdqd6_32 = ORjdqd6_22*qd[10]
+    jdqd8 = Apqpjdqd5_24-Apqpjdqd6_22
+    jdqd9 = Apqpjdqd5_34-Apqpjdqd6_32
+    ROjdqd7_12 = C13*C14-S13*S14
+    ROjdqd7_32 = -C13*S14-S13*C14
+    ROjdqd7_72 = C13*S14+S13*C14
+    ROjdqd7_92 = C13*C14-S13*S14
+    ROjdqd7_43 = ROjdqd7_72*S15
+    ROjdqd7_63 = ROjdqd7_92*S15
+    ROjdqd7_73 = ROjdqd7_72*C15
+    ROjdqd7_93 = ROjdqd7_92*C15
+    ROjdqd7_74 = ROjdqd7_12*S16+ROjdqd7_73*C16
+    ROjdqd7_84 = -S15*C16
+    ROjdqd7_94 = ROjdqd7_32*S16+ROjdqd7_93*C16
+    OMjdqd7_22 = qd[13]+qd[14]
+    OMjdqd7_13 = ROjdqd7_12*qd[15]
+    OMjdqd7_33 = ROjdqd7_32*qd[15]
+    Ompqpjdqd7_13 = OMjdqd7_22*ROjdqd7_32*qd[15]
+    Ompqpjdqd7_33 = -OMjdqd7_22*ROjdqd7_12*qd[15]
+    OMjdqd7_14 = OMjdqd7_13+ROjdqd7_43*qd[16]
+    OMjdqd7_24 = OMjdqd7_22+qd[16]*C15
+    OMjdqd7_34 = OMjdqd7_33+ROjdqd7_63*qd[16]
+    Ompqpjdqd7_14 = Ompqpjdqd7_13+qd[16]*(OMjdqd7_22*ROjdqd7_63-OMjdqd7_33*C15)
+    Ompqpjdqd7_24 = qd[16]*(-OMjdqd7_13*ROjdqd7_63+OMjdqd7_33*ROjdqd7_43)
+    Ompqpjdqd7_34 = Ompqpjdqd7_33+qd[16]*(OMjdqd7_13*C15-OMjdqd7_22*ROjdqd7_43)
+    RLjdqd7_15 = ROjdqd7_74*s.dpt[3,20]
+    RLjdqd7_25 = ROjdqd7_84*s.dpt[3,20]
+    RLjdqd7_35 = ROjdqd7_94*s.dpt[3,20]
+    ORjdqd7_15 = OMjdqd7_24*RLjdqd7_35-OMjdqd7_34*RLjdqd7_25
+    ORjdqd7_25 = -OMjdqd7_14*RLjdqd7_35+OMjdqd7_34*RLjdqd7_15
+    ORjdqd7_35 = OMjdqd7_14*RLjdqd7_25-OMjdqd7_24*RLjdqd7_15
+    Apqpjdqd7_15 = OMjdqd7_24*ORjdqd7_35-OMjdqd7_34*ORjdqd7_25+Ompqpjdqd7_24*RLjdqd7_35-Ompqpjdqd7_34*RLjdqd7_25
+    Apqpjdqd7_25 = -OMjdqd7_14*ORjdqd7_35+OMjdqd7_34*ORjdqd7_15-Ompqpjdqd7_14*RLjdqd7_35+Ompqpjdqd7_34*RLjdqd7_15
+    Apqpjdqd7_35 = OMjdqd7_14*ORjdqd7_25-OMjdqd7_24*ORjdqd7_15+Ompqpjdqd7_14*RLjdqd7_25-Ompqpjdqd7_24*RLjdqd7_15
+    RLjdqd8_22 = s.dpt[2,10]*C7
+    RLjdqd8_32 = s.dpt[2,10]*S7
+    ORjdqd8_22 = -RLjdqd8_32*qd[7]
+    ORjdqd8_32 = RLjdqd8_22*qd[7]
+    Apqpjdqd8_22 = -ORjdqd8_32*qd[7]
+    Apqpjdqd8_32 = ORjdqd8_22*qd[7]
+    jdqd11 = Apqpjdqd7_25-Apqpjdqd8_22
+    jdqd12 = Apqpjdqd7_35-Apqpjdqd8_32
     Jdqd[1] = jdqd2
     Jdqd[2] = jdqd3
     Jdqd[3] = jdqd5
     Jdqd[4] = jdqd6
+    Jdqd[5] = Apqpjdqd5_14
+    Jdqd[6] = jdqd8
+    Jdqd[7] = jdqd9
+    Jdqd[8] = Apqpjdqd7_15
+    Jdqd[9] = jdqd11
+    Jdqd[10] = jdqd12
 
 # Number of continuation lines = 0
 

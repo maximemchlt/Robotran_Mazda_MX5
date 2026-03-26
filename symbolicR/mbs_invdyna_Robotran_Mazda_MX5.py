@@ -10,12 +10,12 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Thu Mar 26 12:39:45 2026
+#	==> Generation Date: Thu Mar 26 15:25:15 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
 #
-#	==> Number of joints: 12
+#	==> Number of joints: 18
 #
 #	==> Function: F2 - Recursive Inverse Dynamics of tree-like MBS
 #
@@ -51,14 +51,27 @@ def invdyna(phi,s,tsim):
     C11 = cos(q[11])
     S12 = sin(q[12])
     C12 = cos(q[12])
+    S13 = sin(q[13])
+    C13 = cos(q[13])
+    S14 = sin(q[14])
+    C14 = cos(q[14])
+    S15 = sin(q[15])
+    C15 = cos(q[15])
+    S16 = sin(q[16])
+    C16 = cos(q[16])
+    S17 = sin(q[17])
+    C17 = cos(q[17])
+    S18 = sin(q[18])
+    C18 = cos(q[18])
  
 # Augmented Joint Position Vectors
 
  
 # Forward Kinematics
 
-    ALPHA24 = qdd[2]*C4+qdd[3]*S4
-    ALPHA34 = -qdd[2]*S4+qdd[3]*C4
+    ALPHA33 = qdd[3]-s.g[3]
+    ALPHA24 = qdd[2]*C4+ALPHA33*S4
+    ALPHA34 = -qdd[2]*S4+ALPHA33*C4
     OM15 = qd[4]*C5
     OM35 = qd[4]*S5
     OMp15 = -qd[4]*qd[5]*S5+qdd[4]*C5
@@ -128,9 +141,9 @@ def invdyna(phi,s,tsim):
     BS99 = -OM19*OM19-OM29*OM29
     BETA39 = BS39+OMp29
     BETA69 = BS69-OMp19
-    ALPHA19 = ALPHA18+BETA28*s.dpt[2,9]
-    ALPHA29 = C9*(ALPHA28+BS58*s.dpt[2,9])+S9*(ALPHA38+BETA88*s.dpt[2,9])
-    ALPHA39 = C9*(ALPHA38+BETA88*s.dpt[2,9])-S9*(ALPHA28+BS58*s.dpt[2,9])
+    ALPHA19 = ALPHA18+BETA28*s.dpt[2,11]
+    ALPHA29 = C9*(ALPHA28+BS58*s.dpt[2,11])+S9*(ALPHA38+BETA88*s.dpt[2,11])
+    ALPHA39 = C9*(ALPHA38+BETA88*s.dpt[2,11])-S9*(ALPHA28+BS58*s.dpt[2,11])
     OM110 = qd[10]+OM16
     OM210 = OM26*C10+OM36*S10
     OM310 = -OM26*S10+OM36*C10
@@ -174,12 +187,32 @@ def invdyna(phi,s,tsim):
     BS912 = -OM112*OM112-OM212*OM212
     BETA312 = BS312+OMp212
     BETA612 = BS612-OMp112
-    ALPHA112 = ALPHA111+BETA211*s.dpt[2,13]
-    ALPHA212 = C12*(ALPHA211+BS511*s.dpt[2,13])+S12*(ALPHA311+BETA811*s.dpt[2,13])
-    ALPHA312 = C12*(ALPHA311+BETA811*s.dpt[2,13])-S12*(ALPHA211+BS511*s.dpt[2,13])
+    ALPHA112 = ALPHA111+BETA211*s.dpt[2,16]
+    ALPHA212 = C12*(ALPHA211+BS511*s.dpt[2,16])+S12*(ALPHA311+BETA811*s.dpt[2,16])
+    ALPHA312 = C12*(ALPHA311+BETA811*s.dpt[2,16])-S12*(ALPHA211+BS511*s.dpt[2,16])
  
 # Backward Dynamics
 
+    Fq117 = -s.frc[1,18]*C18-s.frc[3,18]*S18
+    Fq317 = s.frc[1,18]*S18-s.frc[3,18]*C18
+    Cq117 = -s.trq[1,18]*C18-s.trq[3,18]*S18
+    Cq317 = s.trq[1,18]*S18-s.trq[3,18]*C18
+    Fq115 = -s.frc[1,16]*C16-s.frc[3,16]*S16
+    Fq315 = s.frc[1,16]*S16-s.frc[3,16]*C16
+    Cq115 = -s.trq[1,16]*C16-s.trq[3,16]*S16
+    Cq315 = s.trq[1,16]*S16-s.trq[3,16]*C16
+    Fq114 = -s.frc[1,14]+Fq115
+    Fq214 = -s.frc[2,14]-s.frc[2,16]*C15-Fq315*S15
+    Fq314 = -s.frc[3,14]-s.frc[2,16]*S15+Fq315*C15
+    Cq114 = -s.trq[1,14]+Cq115+s.dpt[2,19]*(-s.frc[2,16]*S15+Fq315*C15)
+    Cq214 = -s.trq[2,14]-s.trq[2,16]*C15-Cq315*S15
+    Cq314 = -s.trq[3,14]-s.trq[2,16]*S15+Cq315*C15-Fq115*s.dpt[2,19]
+    Fq113 = -s.frc[1,13]+Fq117+Fq114*C14+Fq314*S14
+    Fq213 = -s.frc[2,13]+Fq214-s.frc[2,18]*C17-Fq317*S17
+    Fq313 = -s.frc[3,13]-s.frc[2,18]*S17-Fq114*S14+Fq314*C14+Fq317*C17
+    Cq113 = -s.trq[1,13]+Cq117+Cq114*C14+Cq314*S14+s.dpt[2,18]*(-s.frc[2,18]*S17+Fq317*C17)
+    Cq213 = -s.trq[2,13]+Cq214-s.trq[2,18]*C17-Cq317*S17
+    Cq313 = -s.trq[3,13]-s.trq[2,18]*S17-Cq114*S14+Cq314*C14+Cq317*C17-Fq117*s.dpt[2,18]
     Fs112 = -s.frc[1,12]+s.m[12]*(ALPHA112+BETA312*s.l[3,12])
     Fs212 = -s.frc[2,12]+s.m[12]*(ALPHA212+BETA612*s.l[3,12])
     Fs312 = -s.frc[3,12]+s.m[12]*(ALPHA312+BS912*s.l[3,12])
@@ -193,10 +226,10 @@ def invdyna(phi,s,tsim):
     Fq211 = Fs211+Fs212*C12-Fs312*S12
     Fq311 = Fs311+Fs212*S12+Fs312*C12
     Cq111 = -s.trq[1,11]+Cq112+s.In[1,11]*OMp111-s.In[5,11]*OM211*OM311+s.In[9,11]*OM211*OM311+Fs311*s.l[2,11]+ \
- 	  s.dpt[2,13]*(Fs212*S12+Fs312*C12)
+ 	  s.dpt[2,16]*(Fs212*S12+Fs312*C12)
     Cq211 = -s.trq[2,11]+s.In[1,11]*OM111*OM311+s.In[5,11]*OMp211-s.In[9,11]*OM111*OM311+Cq212*C12-Cq312*S12
     Cq311 = -s.trq[3,11]-s.In[1,11]*OM111*OM211+s.In[5,11]*OM111*OM211+s.In[9,11]*OMp311+Cq212*S12+Cq312*C12-Fs111* \
- 	  s.l[2,11]-Fs112*s.dpt[2,13]
+ 	  s.l[2,11]-Fs112*s.dpt[2,16]
     Fs110 = -s.frc[1,10]+s.m[10]*(ALPHA110+BETA210*s.l[2,10])
     Fs210 = -s.frc[2,10]+s.m[10]*(ALPHA210+BS510*s.l[2,10])
     Fs310 = -s.frc[3,10]+s.m[10]*(ALPHA310+BETA810*s.l[2,10])
@@ -215,32 +248,35 @@ def invdyna(phi,s,tsim):
     Fq18 = Fs18+Fs19
     Fq28 = Fs28+Fs29*C9-Fs39*S9
     Fq38 = Fs38+Fs29*S9+Fs39*C9
-    Cq18 = -s.trq[1,8]+Cq19+s.In[1,8]*OMp18-s.In[5,8]*OM28*OM38+s.In[9,8]*OM28*OM38+Fs38*s.l[2,8]+s.dpt[2,9]*(Fs29*S9 \
- 	  +Fs39*C9)
+    Cq18 = -s.trq[1,8]+Cq19+s.In[1,8]*OMp18-s.In[5,8]*OM28*OM38+s.In[9,8]*OM28*OM38+Fs38*s.l[2,8]+s.dpt[2,11]*(Fs29* \
+ 	  S9+Fs39*C9)
     Cq28 = -s.trq[2,8]+s.In[1,8]*OM18*OM38+s.In[5,8]*OMp28-s.In[9,8]*OM18*OM38+Cq29*C9-Cq39*S9
     Cq38 = -s.trq[3,8]-s.In[1,8]*OM18*OM28+s.In[5,8]*OM18*OM28+s.In[9,8]*OMp38+Cq29*S9+Cq39*C9-Fs18*s.l[2,8]-Fs19* \
- 	  s.dpt[2,9]
+ 	  s.dpt[2,11]
     Fs17 = -s.frc[1,7]+s.m[7]*(ALPHA17+BETA27*s.l[2,7])
     Fs27 = -s.frc[2,7]+s.m[7]*(ALPHA27+BS57*s.l[2,7])
     Fs37 = -s.frc[3,7]+s.m[7]*(ALPHA37+BETA87*s.l[2,7])
     Cq17 = -s.trq[1,7]+s.In[1,7]*OMp17-s.In[5,7]*OM27*OM37+s.In[9,7]*OM27*OM37+Fs37*s.l[2,7]
     Cq27 = -s.trq[2,7]+s.In[1,7]*OM17*OM37+s.In[5,7]*OMp27-s.In[9,7]*OM17*OM37
     Cq37 = -s.trq[3,7]-s.In[1,7]*OM17*OM27+s.In[5,7]*OM17*OM27+s.In[9,7]*OMp37-Fs17*s.l[2,7]
-    Fs16 = -s.frc[1,6]+s.m[6]*ALPHA16
-    Fs26 = -s.frc[2,6]+s.m[6]*ALPHA26
-    Fs36 = -s.frc[3,6]+s.m[6]*ALPHA35
-    Fq16 = Fq111+Fq18+Fs110+Fs16+Fs17
-    Fq26 = Fs26+Fq211*C11+Fq28*C8-Fq311*S11-Fq38*S8+Fs210*C10+Fs27*C7-Fs310*S10-Fs37*S7
-    Fq36 = Fs36+Fq211*S11+Fq28*S8+Fq311*C11+Fq38*C8+Fs210*S10+Fs27*S7+Fs310*C10+Fs37*C7
-    Cq16 = -s.trq[1,6]+Cq110+Cq111+Cq17+Cq18+s.In[1,6]*OMp16-s.In[5,6]*OM26*OM36+s.In[9,6]*OM26*OM36+s.dpt[2,1]*(Fs27 \
- 	  *S7+Fs37*C7)+s.dpt[2,2]*(Fq28*S8+Fq38*C8)+s.dpt[2,4]*(Fs210*S10+Fs310*C10)+s.dpt[2,5]*(Fq211*S11+Fq311*C11)-s.dpt[3,1] \
- 	  *(Fs27*C7-Fs37*S7)-s.dpt[3,2]*(Fq28*C8-Fq38*S8)-s.dpt[3,4]*(Fs210*C10-Fs310*S10)-s.dpt[3,5]*(Fq211*C11-Fq311*S11)
-    Cq26 = -s.trq[2,6]+s.In[1,6]*OM16*OM36+s.In[5,6]*OMp26-s.In[9,6]*OM16*OM36+Cq210*C10+Cq211*C11+Cq27*C7+Cq28*C8- \
- 	  Cq310*S10-Cq311*S11-Cq37*S7-Cq38*S8+Fq111*s.dpt[3,5]+Fq18*s.dpt[3,2]+Fs110*s.dpt[3,4]+Fs17*s.dpt[3,1]-s.dpt[1,1]*(Fs27 \
- 	  *S7+Fs37*C7)-s.dpt[1,2]*(Fq28*S8+Fq38*C8)-s.dpt[1,4]*(Fs210*S10+Fs310*C10)-s.dpt[1,5]*(Fq211*S11+Fq311*C11)
-    Cq36 = -s.trq[3,6]-s.In[1,6]*OM16*OM26+s.In[5,6]*OM16*OM26+s.In[9,6]*OMp36+Cq210*S10+Cq211*S11+Cq27*S7+Cq28*S8+ \
- 	  Cq310*C10+Cq311*C11+Cq37*C7+Cq38*C8-Fq111*s.dpt[2,5]-Fq18*s.dpt[2,2]-Fs110*s.dpt[2,4]-Fs17*s.dpt[2,1]+s.dpt[1,1]*(Fs27 \
- 	  *C7-Fs37*S7)+s.dpt[1,2]*(Fq28*C8-Fq38*S8)+s.dpt[1,4]*(Fs210*C10-Fs310*S10)+s.dpt[1,5]*(Fq211*C11-Fq311*S11)
+    Fs16 = -s.frc[1,6]+s.m[6]*(ALPHA16+BETA36*s.l[3,6])
+    Fs26 = -s.frc[2,6]+s.m[6]*(ALPHA26+BETA66*s.l[3,6])
+    Fs36 = -s.frc[3,6]+s.m[6]*(ALPHA35+BS96*s.l[3,6])
+    Fq16 = Fq111+Fq18+Fs110+Fs16+Fs17+Fq113*C13+Fq313*S13
+    Fq26 = Fq213+Fs26+Fq211*C11+Fq28*C8-Fq311*S11-Fq38*S8+Fs210*C10+Fs27*C7-Fs310*S10-Fs37*S7
+    Fq36 = Fs36-Fq113*S13+Fq211*S11+Fq28*S8+Fq311*C11+Fq313*C13+Fq38*C8+Fs210*S10+Fs27*S7+Fs310*C10+Fs37*C7
+    Cq16 = -s.trq[1,6]+Cq110+Cq111+Cq17+Cq18+s.In[1,6]*OMp16-s.In[5,6]*OM26*OM36+s.In[9,6]*OM26*OM36+Cq113*C13+Cq313* \
+ 	  S13-Fq213*s.dpt[3,7]-Fs26*s.l[3,6]+s.dpt[2,1]*(Fs27*S7+Fs37*C7)+s.dpt[2,2]*(Fq28*S8+Fq38*C8)+s.dpt[2,4]*(Fs210*S10+ \
+ 	  Fs310*C10)+s.dpt[2,5]*(Fq211*S11+Fq311*C11)-s.dpt[3,1]*(Fs27*C7-Fs37*S7)-s.dpt[3,2]*(Fq28*C8-Fq38*S8)-s.dpt[3,4]*( \
+ 	  Fs210*C10-Fs310*S10)-s.dpt[3,5]*(Fq211*C11-Fq311*S11)
+    Cq26 = -s.trq[2,6]+Cq213+s.In[1,6]*OM16*OM36+s.In[5,6]*OMp26-s.In[9,6]*OM16*OM36+Cq210*C10+Cq211*C11+Cq27*C7+Cq28 \
+ 	  *C8-Cq310*S10-Cq311*S11-Cq37*S7-Cq38*S8+Fq111*s.dpt[3,5]+Fq18*s.dpt[3,2]+Fs110*s.dpt[3,4]+Fs16*s.l[3,6]+Fs17* \
+ 	  s.dpt[3,1]-s.dpt[1,1]*(Fs27*S7+Fs37*C7)-s.dpt[1,2]*(Fq28*S8+Fq38*C8)-s.dpt[1,4]*(Fs210*S10+Fs310*C10)-s.dpt[1,5]*( \
+ 	  Fq211*S11+Fq311*C11)-s.dpt[1,7]*(-Fq113*S13+Fq313*C13)+s.dpt[3,7]*(Fq113*C13+Fq313*S13)
+    Cq36 = -s.trq[3,6]-s.In[1,6]*OM16*OM26+s.In[5,6]*OM16*OM26+s.In[9,6]*OMp36-Cq113*S13+Cq210*S10+Cq211*S11+Cq27*S7+ \
+ 	  Cq28*S8+Cq310*C10+Cq311*C11+Cq313*C13+Cq37*C7+Cq38*C8-Fq111*s.dpt[2,5]-Fq18*s.dpt[2,2]+Fq213*s.dpt[1,7]-Fs110* \
+ 	  s.dpt[2,4]-Fs17*s.dpt[2,1]+s.dpt[1,1]*(Fs27*C7-Fs37*S7)+s.dpt[1,2]*(Fq28*C8-Fq38*S8)+s.dpt[1,4]*(Fs210*C10-Fs310*S10)+ \
+ 	  s.dpt[1,5]*(Fq211*C11-Fq311*S11)
     Fq15 = Fq16*C6-Fq26*S6
     Fq25 = Fq16*S6+Fq26*C6
     Cq15 = Cq16*C6-Cq26*S6
@@ -265,7 +301,13 @@ def invdyna(phi,s,tsim):
     Qq[10] = Cq110
     Qq[11] = Cq111
     Qq[12] = Cq112
+    Qq[13] = Cq213
+    Qq[14] = Cq214
+    Qq[15] = Cq115
+    Qq[16] = -s.trq[2,16]
+    Qq[17] = Cq117
+    Qq[18] = -s.trq[2,18]
 
-# Number of continuation lines = 2
+# Number of continuation lines = 3
 
 

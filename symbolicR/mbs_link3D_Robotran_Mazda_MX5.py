@@ -10,12 +10,12 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Thu Mar 26 12:39:45 2026
+#	==> Generation Date: Thu Mar 26 15:25:15 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
 #
-#	==> Number of joints: 12
+#	==> Number of joints: 18
 #
 #	==> Function: F27 - Link Forces (3D)
 #
