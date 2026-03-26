@@ -60,7 +60,7 @@ Robotran_Mazda_MX5/
 ├── workR/                      # Fichier main contenu dedans
 │
 ├── README.md
-└── requirements.txt
+└── requirements.md
 ```
 
 ---
@@ -186,16 +186,15 @@ robotran_open('MX5.mbs')
 
 ## 👥 Équipe
 
-Projet réalisé dans le cadre du cours **MECA2802 — Dynamique des véhicules**, UCLouvain.
+Projet réalisé dans le cadre du cours **LEPL1504 - Projet 4 en Mécanique**, UCLouvain.
 
 | Nom | GitHub |
 |---|---|
-| [Prénom NOM] | [@username](https://github.com) |
-| [Prénom NOM] | [@username](https://github.com) |
-| [Prénom NOM] | [@username](https://github.com) |
-
-**Encadrant** : [Nom du tuteur], Département MECA, EPL.
-
+| [Michelet Maxime] | [@username](https://github.com) |
+| [Martin Mouton] | [@username](https://github.com) |
+| [Brieuc Paquet] | [@username](https://github.com) |
+| [Cyril Mortier] | [@username](https://github.com) |
+| [Louis Robin] | [@username](https://github.com) |
 ---
 
 ## 📚 Références
@@ -208,6 +207,6 @@ Projet réalisé dans le cadre du cours **MECA2802 — Dynamique des véhicules*
 ---
 
 <p align="center">
-  <sub>École Polytechnique de Louvain · UCLouvain · 2024–2025</sub>
+  <sub>École Polytechnique de Louvain · UCLouvain · 2025–2026</sub>
 </p>
 
