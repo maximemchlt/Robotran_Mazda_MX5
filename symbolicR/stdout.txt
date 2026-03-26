@@ -1,0 +1,8 @@
+
+##############################################################
+#	file0.gen 26/03/2026 12:00:04    messages
+##############################################################
+    Old current.gen /usr/local/robotran/users/LEPL1504/upload/file0.gen loading
+Symbolic generation file : /usr/local/robotran/users/LEPL1504/upload/file0.gen
+Project: /usr/local/robotran/users/LEPL1504/upload/upload.mbs
+F1 - Recursive Direct Dynamics of tree-like MBS
