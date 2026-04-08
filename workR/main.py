@@ -45,10 +45,11 @@ mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5.mbs")
 # INITIALISATION DU USER MODEL
 # =========================================================
 um = {}
-um['FrontTire']       = {'R': 0.295, 'K': 200000.0}
-um['RearTire']        = {'R': 0.295, 'K': 200000.0}
-um['FrontSuspension'] = {'K': 33300.0, 'C': 9160.0, 'C_bar': 4000.0, 'Z0': 0.66}
-um['RearSuspension']  = {'K': 33300.0, 'C': 9160.0, 'C_bar': 1100.0, 'Z0': 0.66}
+um['FrontTire']       = {'R': 0.288, 'K': 180000.0}
+um['RearTire']        = {'R': 0.288, 'K': 180000.0}
+
+um['FrontSuspension'] = {'K': 27000.0, 'C': 2200.0, 'C_bar': 2500.0, 'Z0': 0.40}
+um['RearSuspension']  = {'K': 17000.0, 'C': 1800.0, 'C_bar': 1800.0, 'Z0': 0.40}
 mbs_data.user_model = um
 
 # ===========================================================================
@@ -74,12 +75,12 @@ print ("Equilibrium done.")
 # ============================================================================
 # Modal Analysis
 # =============================================================================
-# print ("Modal analysis...")
-# mbs_data.process = 4
-# mbs_modal = Robotran.MbsModal(mbs_data)
-# mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
-# mbs_modal.run()
-# print ("Modal analysis done.")
+#print ("Modal analysis...")
+#mbs_data.process = 4
+#mbs_modal = Robotran.MbsModal(mbs_data)
+#mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
+#mbs_modal.run()
+#print ("Modal analysis done.")
 
 # =============================================================================
 # Direct Dynamics
@@ -87,21 +88,21 @@ print ("Equilibrium done.")
 print ("Direct dynamics...")
 mbs_data.process = 3
 mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=1)
+mbs_dirdyn.set_options(dt0=1e-2, tf=5, save2file=1)
 mbs_dirdyn.run()
 print ("Direct dynamics done.")
 
 # =============================================================================
 # Inverse Kinematics
 # =============================================================================
-mbs_data.process = 5
-mbs_solvekin = Robotran.MbsSolvekin(mbs_data)
-mbs_solvekin.set_options(trajectoryqname="../resultsR/dirdyn_q.res")
-mbs_solvekin.set_options(trajectoryqdname="../resultsR/dirdyn_qd.res")
-mbs_solvekin.set_options(trajectoryqddname="../resultsR/dirdyn_qdd.res")
-mbs_solvekin.set_options(t0=1.3333, tf=1.4, dt=1e-4, framerate=10000)
-mbs_solvekin.set_options(motion="trajectory")
-mbs_solvekin.run()
+# mbs_data.process = 5
+# mbs_solvekin = Robotran.MbsSolvekin(mbs_data)
+# mbs_solvekin.set_options(trajectoryqname="../resultsR/dirdyn_q.res")
+# mbs_solvekin.set_options(trajectoryqdname="../resultsR/dirdyn_qd.res")
+# mbs_solvekin.set_options(trajectoryqddname="../resultsR/dirdyn_qdd.res")
+# mbs_solvekin.set_options(t0=1.3333, tf=1.4, dt=1e-4, framerate=10000)
+# mbs_solvekin.set_options(motion="trajectory")
+# mbs_solvekin.run()
 
 # =============================================================================
 # Inverse Dynamics

@@ -199,10 +199,11 @@ def run_equilibrium_debug(mbs_data):
 mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5.mbs")
 
 um = {}
-um["FrontTire"]       = {"R": 0.295, "K": 200000.0}
-um["RearTire"]        = {"R": 0.295, "K": 200000.0}
-um['FrontSuspension'] = {'K': 33300.0, 'C': 9160.0, 'C_bar': 4000.0, 'Z0': 0.66}
-um['RearSuspension']  = {'K': 33300.0, 'C': 9160.0, 'C_bar': 1100.0, 'Z0': 0.66}
+um['FrontTire']       = {'R': 0.288, 'K': 180000.0}
+um['RearTire']        = {'R': 0.288, 'K': 180000.0}
+
+um['FrontSuspension'] = {'K': 27000.0, 'C': 2200.0, 'C_bar': 2500.0, 'Z0': 0.40}
+um['RearSuspension']  = {'K': 17000.0, 'C': 1800.0, 'C_bar': 1800.0, 'Z0': 0.40}
 mbs_data.user_model = um
 
 

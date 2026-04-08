@@ -63,11 +63,12 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
 
     # point d'application BODY-FIXED
     idpt = mbs_data.xfidpt[ixF]
-    dxF = np.zeros(4)   # on reste en indexation Robotran 1..3
+    dxF = np.zeros(4)   # indexation Robotran 1..3
     dxF[1] = mbs_data.dpt[1, idpt]
     dxF[2] = mbs_data.dpt[2, idpt]
     dxF[3] = mbs_data.dpt[3, idpt]
 
+    # noms des forces extérieures des roues
     back_wheel_names = ['F_pneu_ar_g', 'F_pneu_ar_d']
     front_wheel_names = ['F_pneu_av_g', 'F_pneu_av_d']
 
@@ -76,6 +77,7 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
 
     if ixF in front_wheel_ids or ixF in back_wheel_ids:
 
+        # choix du pneu avant / arrière
         if ixF in front_wheel_ids:
             K_tire = mbs_data.user_model["FrontTire"]["K"]
             R_tire = mbs_data.user_model["FrontTire"]["R"]
@@ -89,16 +91,20 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
         )
 
         # tableaux locaux 1..3
-        Fwhl_T = np.zeros(4)
+        Fwhl_T = np.zeros(4) # forces et moments dans repère [T]
         Mwhl_T = np.zeros(4)
-        Fwhl_I = np.zeros(4)
+        Fwhl_I = np.zeros(4) # forces et moments dans repère inertiel
         Mwhl_I = np.zeros(4)
+
+        # Correction d'indice (annonce profs du 4 mars)
+        dxF_tgc[0:3] = dxF_tgc[1:4]
+        dxF = dxF_tgc[0:3]
 
         # équilibre statique
         if mbs_data.process == 1:
             Fwhl_T[1] = 0.0
             Fwhl_T[2] = 0.0
-            Fwhl_T[3] = K_tire * max(pen, 0.0)
+            Fwhl_T[3] = K_tire * pen
 
             Mwhl_T[1] = 0.0
             Mwhl_T[2] = 0.0
@@ -107,16 +113,22 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
         # dynamique
         elif mbs_data.process == 2:
             if pen > 0.0:
+                Fwhl_T[1] = 0.0
+                Fwhl_T[2] = 0.0
                 Fwhl_T[3] = K_tire * pen
-                Fwhl_T, Mwhl_T = tgc_bakker_contact(Fwhl_T, Mwhl_T, angslip, angcamb, slip)
+
+                tgc_bakker_contact(
+                    Fwhl_T, Mwhl_T, angslip, angcamb, slip
+                )
             else:
                 Fwhl_T[:] = 0.0
                 Mwhl_T[:] = 0.0
 
         # projection dans l'inertiel
-        Fwhl_I[1:4] = Rt_ground[1:4, 1:4] @ Fwhl_T[1:4]
-        Mwhl_I[1:4] = Rt_ground[1:4, 1:4] @ Mwhl_T[1:4]
+        Fwhl_I = matrix_vector_product(Rt_ground, Fwhl_T)
+        Mwhl_I = matrix_vector_product(Rt_ground, Mwhl_T)
 
+        # remplissage de Swr
         Swr[1] = Fwhl_I[1]
         Swr[2] = Fwhl_I[2]
         Swr[3] = Fwhl_I[3]
@@ -124,10 +136,12 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
         Swr[5] = Mwhl_I[2]
         Swr[6] = Mwhl_I[3]
 
-        # tu peux garder dxF du point sensor,
-        # ou remplacer par dxF_tgc si tu veux le vrai point de contact
+        # point d'application
+        # soit dxF (point d'ancrage),
+        # soit dxF_tgc si tu veux le vrai point de contact roue-sol
         Swr[7] = dxF[1]
         Swr[8] = dxF[2]
         Swr[9] = dxF[3]
+        print(Swr)
 
     return Swr

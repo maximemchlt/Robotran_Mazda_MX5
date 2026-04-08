@@ -3949,7 +3949,7 @@
       </viewpoint>
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>R1_Barredir_G</joint>
+        <joint>R3_fusee_AV_D</joint>
         <position>
           <x>0.5</x>
           <y>0.55</y>
