@@ -77,31 +77,31 @@ print ("Equilibrium done.")
 # print ("Modal analysis...")
 # mbs_data.process = 4
 # mbs_modal = Robotran.MbsModal(mbs_data)
-# mbs_modal.set_options(=save_result=1, save_anim=1, mode_ampl=0.2)
+# mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
 # mbs_modal.run()
 # print ("Modal analysis done.")
 
 # =============================================================================
 # Direct Dynamics
 # =============================================================================
-# print ("Direct dynamics...")
-# mbs_data.process = 3
-# mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-# mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=1)
-# mbs_dirdyn.run()
-# print ("Direct dynamics done.")
+print ("Direct dynamics...")
+mbs_data.process = 3
+mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
+mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=1)
+mbs_dirdyn.run()
+print ("Direct dynamics done.")
 
 # =============================================================================
 # Inverse Kinematics
 # =============================================================================
-# mbs_data.process = 5
-# mbs_solvekin = Robotran.MbsSolvekin(mbs_data)
-# mbs_solvekin.set_options(trajectoryqname="../resultsR/dirdyn_q.res")
-# mbs_solvekin.set_options(trajectoryqdname="../resultsR/dirdyn_qd.res")
-# mbs_solvekin.set_options(trajectoryqddname="../resultsR/dirdyn_qdd.res")
-# mbs_solvekin.set_options(t0=1.3333, tf=1.4, dt=1e-4, framerate=10000)
-# mbs_solvekin.set_options(motion="trajectory")
-# mbs_solvekin.run()
+mbs_data.process = 5
+mbs_solvekin = Robotran.MbsSolvekin(mbs_data)
+mbs_solvekin.set_options(trajectoryqname="../resultsR/dirdyn_q.res")
+mbs_solvekin.set_options(trajectoryqdname="../resultsR/dirdyn_qd.res")
+mbs_solvekin.set_options(trajectoryqddname="../resultsR/dirdyn_qdd.res")
+mbs_solvekin.set_options(t0=1.3333, tf=1.4, dt=1e-4, framerate=10000)
+mbs_solvekin.set_options(motion="trajectory")
+mbs_solvekin.run()
 
 # =============================================================================
 # Inverse Dynamics

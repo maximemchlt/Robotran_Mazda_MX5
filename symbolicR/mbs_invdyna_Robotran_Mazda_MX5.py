@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr  8 18:07:17 2026
+#	==> Generation Date: Wed Apr  8 19:09:58 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -661,18 +661,12 @@ def invdyna(phi,s,tsim):
     Fq240 = Fs141*S41+Fs241*C41
     Cq140 = Cq141*C41-Cq241*S41
     Cq240 = Cq141*S41+Cq241*C41
-    Fs139 = -s.frc[1,39]+s.m[39]*ALPHA139
-    Fs239 = -s.frc[2,39]+s.m[39]*ALPHA239
-    Fs339 = -s.frc[3,39]+s.m[39]*ALPHA339
-    Fq139 = Fq140+Fq142+Fs139
-    Fq239 = Fs239+Fq240*C40+Fq242*C42-Fs341*S40-Fs343*S42
-    Fq339 = Fs339+Fq240*S40+Fq242*S42+Fs341*C40+Fs343*C42
-    Cq139 = -s.trq[1,39]+Cq140+Cq142+s.In[1,39]*OMp16-s.In[5,39]*OM26*OM36+s.In[9,39]*OM26*OM36+s.dpt[2,54]*(Fq240* \
- 	  S40+Fs341*C40)+s.dpt[2,55]*(Fq242*S42+Fs343*C42)
-    Cq239 = -s.trq[2,39]+s.In[1,39]*OM16*OM36+s.In[5,39]*OMp26-s.In[9,39]*OM16*OM36+Cq240*C40+Cq242*C42-Cq341*S40- \
- 	  Cq343*S42
-    Cq339 = -s.trq[3,39]-s.In[1,39]*OM16*OM26+s.In[5,39]*OM16*OM26+s.In[9,39]*OMp36+Cq240*S40+Cq242*S42+Cq341*C40+ \
- 	  Cq343*C42-Fq140*s.dpt[2,54]-Fq142*s.dpt[2,55]
+    Fq139 = -s.frc[1,39]+Fq140+Fq142
+    Fq239 = -s.frc[2,39]+Fq240*C40+Fq242*C42-Fs341*S40-Fs343*S42
+    Fq339 = -s.frc[3,39]+Fq240*S40+Fq242*S42+Fs341*C40+Fs343*C42
+    Cq139 = -s.trq[1,39]+Cq140+Cq142+s.dpt[2,54]*(Fq240*S40+Fs341*C40)+s.dpt[2,55]*(Fq242*S42+Fs343*C42)
+    Cq239 = -s.trq[2,39]+Cq240*C40+Cq242*C42-Cq341*S40-Cq343*S42
+    Cq339 = -s.trq[3,39]+Cq240*S40+Cq242*S42+Cq341*C40+Cq343*C42-Fq140*s.dpt[2,54]-Fq142*s.dpt[2,55]
     Fs138 = -s.frc[1,38]+s.m[38]*(ALPHA138+BETA338*s.l[3,38])
     Fs238 = -s.frc[2,38]+s.m[38]*(ALPHA237+BETA638*s.l[3,38])
     Fs338 = -s.frc[3,38]+s.m[38]*(ALPHA338+BS938*s.l[3,38])

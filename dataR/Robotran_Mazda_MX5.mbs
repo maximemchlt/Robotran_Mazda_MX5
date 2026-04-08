@@ -106,7 +106,7 @@
         <type>T3</type>
         <nature>independent</nature>
         <initialvalue>
-          <q>0.15</q>
+          <q>0.5</q>
         </initialvalue>
         <graphics>
           <x2D>
@@ -914,6 +914,31 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <inline>
+              <name>New_Shape</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>0.1</x>
+                <y>0.1</y>
+                <z>0.1</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="0" G="0" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.5</transparency>
+              <url>PRJPATH/animationR/vrml/rim-tire.wrl</url>
+            </inline>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -1375,6 +1400,31 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <inline>
+              <name>New_Shape</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>0.1</x>
+                <y>0.1</y>
+                <z>0.1</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="0" G="0" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.5</transparency>
+              <url>PRJPATH/animationR/vrml/rim-tire.wrl</url>
+            </inline>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -2197,6 +2247,31 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <inline>
+              <name>New_Shape</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>0.1</x>
+                <y>0.1</y>
+                <z>0.1</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="0" G="0" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.5</transparency>
+              <url>PRJPATH/animationR/vrml/rim-tire.wrl</url>
+            </inline>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -2539,7 +2614,7 @@
           <x2D>
             <position>
               <x>1332.0</x>
-              <y>81.0</y>
+              <y>82.0</y>
             </position>
           </x2D>
           <x3D />
@@ -2683,6 +2758,31 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <inline>
+              <name>New_Shape</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>0.1</x>
+                <y>0.1</y>
+                <z>0.1</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="0" G="0" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>1.0</transparency>
+              <url>PRJPATH/animationR/vrml/rim-tire.wrl</url>
+            </inline>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -3252,12 +3352,6 @@
           </x3D>
         </graphics>
       </joint>
-      <mass>3.0</mass>
-      <inertia>
-        <Ixx>0.05</Ixx>
-        <Iyy>0.05</Iyy>
-        <Izz>0.05</Izz>
-      </inertia>
       <point>
         <pointname>Bras_Direction_D</pointname>
         <coordinates>
@@ -3391,13 +3485,13 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>0.43</y>
-          <z>0.302</z>
+          <y>0.41</y>
+          <z>0.28</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
-              <x>1255.0</x>
+              <x>1254.0</x>
               <y>61.0</y>
             </position>
           </x2D>
@@ -3503,8 +3597,8 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>-0.43</y>
-          <z>0.302</z>
+          <y>-0.41</y>
+          <z>0.28</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -3807,7 +3901,7 @@
       <!--This is the viewpoint list-->
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>T1_chassis</joint>
+        <joint>R1_Barredir_G</joint>
         <position>
           <x>-0.25</x>
           <y>-1.0</y>
@@ -3831,7 +3925,7 @@
       </viewpoint>
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>R2_chassis</joint>
+        <joint>base</joint>
         <position>
           <x>-4.0</x>
           <y>1.0</y>
@@ -3855,11 +3949,11 @@
       </viewpoint>
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>R1_barre_bielle_AR_G</joint>
+        <joint>R1_Barredir_G</joint>
         <position>
-          <x>0.25</x>
-          <y>0.25</y>
-          <z>0.251</z>
+          <x>0.5</x>
+          <y>0.55</y>
+          <z>-0.251</z>
         </position>
         <target>
           <x>0.0</x>
