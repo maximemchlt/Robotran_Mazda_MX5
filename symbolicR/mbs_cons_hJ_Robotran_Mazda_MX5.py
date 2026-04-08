@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Tue Mar 31 16:42:25 2026
+#	==> Generation Date: Tue Mar 31 18:21:50 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -378,8 +378,8 @@ def cons_hJ(h, Jac, s):
     ROlp18_63 = S42*C43
     POlp18_22 = q[39]+s.dpt[2,55]
     RLlp18_14 = -s.dpt[2,57]*S43
-    RLlp18_24 = ROlp18_53*s.dpt[2,57]
-    RLlp18_34 = ROlp18_63*s.dpt[2,57]
+    RLlp18_24 = ROlp18_53*s.dpt[2,57]-s.dpt[3,57]*S42
+    RLlp18_34 = ROlp18_63*s.dpt[2,57]+s.dpt[3,57]*C42
     POlp18_14 = RLlp18_14+s.dpt[1,15]
     POlp18_24 = POlp18_22+RLlp18_24
     POlp18_34 = RLlp18_34+s.dpt[3,15]
@@ -393,8 +393,8 @@ def cons_hJ(h, Jac, s):
     ROlp19_63 = S40*C41
     POlp19_22 = q[39]+s.dpt[2,54]
     RLlp19_14 = -s.dpt[2,56]*S41
-    RLlp19_24 = ROlp19_53*s.dpt[2,56]
-    RLlp19_34 = ROlp19_63*s.dpt[2,56]
+    RLlp19_24 = ROlp19_53*s.dpt[2,56]-s.dpt[3,56]*S40
+    RLlp19_34 = ROlp19_63*s.dpt[2,56]+s.dpt[3,56]*C40
     POlp19_14 = RLlp19_14+s.dpt[1,15]
     POlp19_24 = POlp19_22+RLlp19_24
     POlp19_34 = RLlp19_34+s.dpt[3,15]

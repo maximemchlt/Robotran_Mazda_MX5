@@ -67,17 +67,28 @@ print ("Partitionning done.")
 print ("Equilibrium...")
 mbs_data.process = 2
 mbs_equil = Robotran.MbsEquil(mbs_data)
-mbs_equil.set_options(method=1, senstol=1e-2, verbose=1)
+mbs_equil.set_options(method=1, senstol=1e-4, verbose=1)
 mbs_equil.run()
 print ("Equilibrium done.")
 
-# =============================================================================
+print("\n=== Mapping des coordonnées q ===")
+for name, idx in sorted(mbs_data.joint_id.items(), key=lambda it: it[1]):
+    print(f"q{idx:2d} -> {name}")
+
+print("\n=== Coordonnées indépendantes qu (donc x) ===")
+for i, q_idx in enumerate(mbs_data.qu, start=1):
+    q_name = next(name for name, idx in mbs_data.joint_id.items() if idx == q_idx)
+    print(f"x{i:2d} = qu[{i}] = q{q_idx:2d} -> {q_name}")
+
+print(dir(mbs_data))
+
+# ============================================================================
 # Modal Analysis
 # =============================================================================
 # print ("Modal analysis...")
 # mbs_data.process = 4
 # mbs_modal = Robotran.MbsModal(mbs_data)
-# mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
+# mbs_modal.set_options(=save_result=1, save_anim=1, mode_ampl=0.2)
 # mbs_modal.run()
 # print ("Modal analysis done.")
 
