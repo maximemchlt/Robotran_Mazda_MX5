@@ -39,7 +39,7 @@ except:
 # ===========================================================================
 # Project loading
 # =============================================================================
-mbs_data = Robotran.MbsData("../dataR/Robotran_Mazda_MX5.mbs")
+mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5_avec_barre_antis_roulis_et_dir.mbs")
 
 # =========================================================
 # INITIALISATION DU USER MODEL
@@ -47,8 +47,8 @@ mbs_data = Robotran.MbsData("../dataR/Robotran_Mazda_MX5.mbs")
 um = {}
 um['FrontTire']       = {'R': 0.295, 'K': 200000.0}
 um['RearTire']        = {'R': 0.295, 'K': 200000.0}
-um['FrontSuspension'] = {'K': 25000.0, 'C': 2000.0, 'C_bar': 1200.0}
-um['RearSuspension']  = {'K': 22000.0, 'C': 2000.0, 'C_bar':  800.0}
+um['FrontSuspension'] = {'K': 33300.0, 'C': 9160.0, 'C_bar': 4000.0, 'Z0': 0.66}
+um['RearSuspension']  = {'K': 33300.0, 'C': 9160.0, 'C_bar': 1100.0, 'Z0': 0.66}
 mbs_data.user_model = um
 
 # ===========================================================================
@@ -67,20 +67,9 @@ print ("Partitionning done.")
 print ("Equilibrium...")
 mbs_data.process = 2
 mbs_equil = Robotran.MbsEquil(mbs_data)
-mbs_equil.set_options(method=1, senstol=1e-4, verbose=1)
+mbs_equil.set_options(method=1, senstol=1e-8, verbose=1)
 mbs_equil.run()
 print ("Equilibrium done.")
-
-print("\n=== Mapping des coordonnées q ===")
-for name, idx in sorted(mbs_data.joint_id.items(), key=lambda it: it[1]):
-    print(f"q{idx:2d} -> {name}")
-
-print("\n=== Coordonnées indépendantes qu (donc x) ===")
-for i, q_idx in enumerate(mbs_data.qu, start=1):
-    q_name = next(name for name, idx in mbs_data.joint_id.items() if idx == q_idx)
-    print(f"x{i:2d} = qu[{i}] = q{q_idx:2d} -> {q_name}")
-
-print(dir(mbs_data))
 
 # ============================================================================
 # Modal Analysis

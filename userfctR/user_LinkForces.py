@@ -32,7 +32,7 @@ def user_LinkForces(Z, Zd, mbs_data, tsim, identity):
         um = mbs_data.user_model
         K = um['RearSuspension']['K']    # 22000 N/m
         C = um['RearSuspension']['C']    # 2000 N.s/m
-        Z0 = 0.650000  # à activer quand MRU / Accélération / Freinage : ressort ARRIÈRE allongé artificiellement
+        Z0 = um['RearSuspension']['Z0']  # à activer quand MRU / Accélération / Freinage : ressort ARRIÈRE allongé artificiellement
 
         Flink = K * (Z - Z0) + C * Zd
     
@@ -40,7 +40,7 @@ def user_LinkForces(Z, Zd, mbs_data, tsim, identity):
         um = mbs_data.user_model
         K = um['FrontSuspension']['K']   # 25000 N/m
         C = um['FrontSuspension']['C']   # 2000 N.s/m
-        Z0 = 0.510000  # longueur naturelle [m] pour l'AVANT (on ne touche pas)
+        Z0 = um['FrontSuspension']['Z0']  # longueur naturelle [m] pour l'AVANT (on ne touche pas)
 
         Flink = K * (Z - Z0) + C * Zd
 

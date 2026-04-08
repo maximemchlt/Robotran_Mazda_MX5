@@ -10,10 +10,10 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr  8 15:37:05 2026
+#	==> Generation Date: Wed Apr  8 16:14:13 2026
 #	==> using automatic loading with extension .mbs 
 #
-#	==> Project name: Robotran_Mazda_MX5
+#	==> Project name: car
 #
 #	==> Number of joints: 43
 #

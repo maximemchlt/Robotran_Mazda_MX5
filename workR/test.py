@@ -207,7 +207,7 @@ def run_equilibrium_debug(mbs_data):
 # =========================================================
 # CHARGEMENT DU PROJET
 # =========================================================
-mbs_data = Robotran.MbsData("../dataR/Robotran_Mazda_MX5.mbs")
+mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5_avec_barre_antis_roulis_et_dir.mbs")
 
 um = {}
 um["FrontTire"]       = {"R": 0.295, "K": 200000.0}
