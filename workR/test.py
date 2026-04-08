@@ -18,13 +18,11 @@ def title(txt):
     print(txt)
     print("=" * 90)
 
-
 def safe_get(obj, name, default=None):
     try:
         return getattr(obj, name)
     except Exception:
         return default
-
 
 def vec_to_list(vec):
     """Convertit un vecteur MBsysPy/list/numpy en liste Python lisible."""
@@ -34,7 +32,6 @@ def vec_to_list(vec):
         return list(vec)
     except Exception:
         return vec
-
 
 def print_vector_with_indices(name, vec, one_based=True, max_len=None):
     title(f"Vecteur : {name}")
@@ -56,7 +53,6 @@ def print_vector_with_indices(name, vec, one_based=True, max_len=None):
     for i, v in enumerate(values, start=start):
         print(f"{name}[{i}] = {v}")
 
-
 def print_object_attrs(obj, obj_name, max_items=300):
     title(f"Attributs disponibles dans {obj_name}")
     names = [n for n in dir(obj) if not n.startswith("__")]
@@ -65,7 +61,6 @@ def print_object_attrs(obj, obj_name, max_items=300):
     if len(names) > max_items:
         print(f"... {len(names) - max_items} attributs supplémentaires non affichés")
 
-
 def build_joint_reverse_map(mbs_data):
     joint_id = safe_get(mbs_data, "joint_id", {})
     reverse_map = {}
@@ -73,7 +68,6 @@ def build_joint_reverse_map(mbs_data):
         for name, idx in joint_id.items():
             reverse_map[idx] = name
     return reverse_map
-
 
 def print_joint_mapping(mbs_data):
     title("Mapping complet des joints q")
@@ -85,7 +79,6 @@ def print_joint_mapping(mbs_data):
 
     for name, idx in sorted(joint_id.items(), key=lambda kv: kv[1]):
         print(f"q{idx:2d} -> {name}")
-
 
 def print_q_values(mbs_data):
     title("Valeurs initiales des coordonnées q")
@@ -115,7 +108,6 @@ def print_q_values(mbs_data):
     else:
         for i, val in enumerate(q_list, start=1):
             print(f"q{i:2d} = {val}")
-
 
 def print_partition_mapping(mbs_data):
     title("Mapping des coordonnées indépendantes / dépendantes")
@@ -155,7 +147,6 @@ def print_partition_mapping(mbs_data):
         except Exception:
             print("Impossible de lire mbs_data.qv :", qv)
 
-
 def print_known_counts(mbs_data):
     title("Compteurs utiles exposés par mbs_data")
     interesting = [
@@ -167,14 +158,12 @@ def print_known_counts(mbs_data):
         if val is not None:
             print(f"{name:10s} = {val}")
 
-
 def try_print_constraints(mbs_data):
     title("Infos contraintes / boucles si exposées")
     for attr in ["lrod_id", "rod_id", "ball_id", "loop_id", "loopc", "cstr_id", "cons_id"]:
         val = safe_get(mbs_data, attr, None)
         if val is not None:
             print(f"\n{attr} = {val}")
-
 
 def run_equilibrium_debug(mbs_data):
     title("Lancement équilibre avec debug")
@@ -207,13 +196,13 @@ def run_equilibrium_debug(mbs_data):
 # =========================================================
 # CHARGEMENT DU PROJET
 # =========================================================
-mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5_avec_barre_antis_roulis_et_dir.mbs")
+mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5.mbs")
 
 um = {}
 um["FrontTire"]       = {"R": 0.295, "K": 200000.0}
 um["RearTire"]        = {"R": 0.295, "K": 200000.0}
-um["FrontSuspension"] = {"K": 25000.0, "C": 2000.0, "C_bar": 1200.0}
-um["RearSuspension"]  = {"K": 22000.0, "C": 2000.0, "C_bar": 800.0}
+um['FrontSuspension'] = {'K': 33300.0, 'C': 9160.0, 'C_bar': 4000.0, 'Z0': 0.66}
+um['RearSuspension']  = {'K': 33300.0, 'C': 9160.0, 'C_bar': 1100.0, 'Z0': 0.66}
 mbs_data.user_model = um
 
 
@@ -221,8 +210,6 @@ mbs_data.user_model = um
 # DEBUG AVANT PARTITIONNEMENT
 # =========================================================
 title("DEBUG AVANT PARTITIONNEMENT")
-print_object_attrs(mbs_data, "mbs_data", max_items=250)
-print_known_counts(mbs_data)
 print_joint_mapping(mbs_data)
 print_q_values(mbs_data)
 try_print_constraints(mbs_data)

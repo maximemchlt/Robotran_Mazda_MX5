@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr  8 15:37:05 2026
+#	==> Generation Date: Wed Apr  8 18:07:17 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -388,13 +388,28 @@ def invdyna(phi,s,tsim):
     OMp124 = C24*(OMp123+qd[24]*OM223)+S24*(OMp223-qd[24]*OM123)
     OMp224 = C24*(OMp223-qd[24]*OM123)-S24*(OMp123+qd[24]*OM223)
     OMp324 = qdd[24]+OMp323
+    BS224 = OM124*OM224
     BS324 = OM124*OM324
+    BS524 = -OM124*OM124-OM324*OM324
     BS624 = OM224*OM324
     BS924 = -OM124*OM124-OM224*OM224
+    BETA224 = BS224-OMp324
     BETA324 = BS324+OMp224
     BETA624 = BS624-OMp124
+    BETA824 = BS624+OMp124
     ALPHA124 = ALPHA123*C24+ALPHA222*S24
     ALPHA224 = -ALPHA123*S24+ALPHA222*C24
+    OM125 = OM124*C25-OM324*S25
+    OM225 = qd[25]+OM224
+    OM325 = OM124*S25+OM324*C25
+    OMp125 = C25*(OMp124-qd[25]*OM324)-S25*(OMp324+qd[25]*OM124)
+    OMp225 = qdd[25]+OMp224
+    OMp325 = C25*(OMp324+qd[25]*OM124)+S25*(OMp124-qd[25]*OM324)
+    ALPHA125 = C25*(ALPHA124+BETA224*s.dpt[2,36]+BETA324*s.dpt[3,36])-S25*(ALPHA323+BETA824*s.dpt[2,36]+BS924* \
+ 	  s.dpt[3,36])
+    ALPHA225 = ALPHA224+BETA624*s.dpt[3,36]+BS524*s.dpt[2,36]
+    ALPHA325 = C25*(ALPHA323+BETA824*s.dpt[2,36]+BS924*s.dpt[3,36])+S25*(ALPHA124+BETA224*s.dpt[2,36]+BETA324* \
+ 	  s.dpt[3,36])
     OM126 = qd[26]+OM16
     OM226 = OM26*C26+OM36*S26
     OM326 = -OM26*S26+OM36*C26
@@ -450,13 +465,28 @@ def invdyna(phi,s,tsim):
     OMp130 = C30*(OMp129+qd[30]*OM229)+S30*(OMp229-qd[30]*OM129)
     OMp230 = C30*(OMp229-qd[30]*OM129)-S30*(OMp129+qd[30]*OM229)
     OMp330 = qdd[30]+OMp329
+    BS230 = OM130*OM230
     BS330 = OM130*OM330
+    BS530 = -OM130*OM130-OM330*OM330
     BS630 = OM230*OM330
     BS930 = -OM130*OM130-OM230*OM230
+    BETA230 = BS230-OMp330
     BETA330 = BS330+OMp230
     BETA630 = BS630-OMp130
+    BETA830 = BS630+OMp130
     ALPHA130 = ALPHA129*C30+ALPHA228*S30
     ALPHA230 = -ALPHA129*S30+ALPHA228*C30
+    OM131 = OM130*C31-OM330*S31
+    OM231 = qd[31]+OM230
+    OM331 = OM130*S31+OM330*C31
+    OMp131 = C31*(OMp130-qd[31]*OM330)-S31*(OMp330+qd[31]*OM130)
+    OMp231 = qdd[31]+OMp230
+    OMp331 = C31*(OMp330+qd[31]*OM130)+S31*(OMp130-qd[31]*OM330)
+    ALPHA131 = C31*(ALPHA130+BETA230*s.dpt[2,44]+BETA330*s.dpt[3,44])-S31*(ALPHA329+BETA830*s.dpt[2,44]+BS930* \
+ 	  s.dpt[3,44])
+    ALPHA231 = ALPHA230+BETA630*s.dpt[3,44]+BS530*s.dpt[2,44]
+    ALPHA331 = C31*(ALPHA329+BETA830*s.dpt[2,44]+BS930*s.dpt[3,44])+S31*(ALPHA130+BETA230*s.dpt[2,44]+BETA330* \
+ 	  s.dpt[3,44])
     OM132 = qd[32]+OM16
     OM232 = OM26*C32+OM36*S32
     OM332 = -OM26*S32+OM36*C32
@@ -693,18 +723,24 @@ def invdyna(phi,s,tsim):
     Cq132 = -s.trq[1,32]+s.In[1,32]*OMp132-s.In[5,32]*OM232*OM332+s.In[9,32]*OM232*OM332+Fs332*s.l[2,32]
     Cq232 = -s.trq[2,32]+s.In[1,32]*OM132*OM332+s.In[5,32]*OMp232-s.In[9,32]*OM132*OM332
     Cq332 = -s.trq[3,32]-s.In[1,32]*OM132*OM232+s.In[5,32]*OM132*OM232+s.In[9,32]*OMp332-Fs132*s.l[2,32]
+    Fs131 = -s.frc[1,31]+s.m[31]*ALPHA131
+    Fs231 = -s.frc[2,31]+s.m[31]*ALPHA231
+    Fs331 = -s.frc[3,31]+s.m[31]*ALPHA331
+    Cq131 = -s.trq[1,31]+s.In[1,31]*OMp131-s.In[5,31]*OM231*OM331+s.In[9,31]*OM231*OM331
+    Cq231 = -s.trq[2,31]+s.In[1,31]*OM131*OM331+s.In[5,31]*OMp231-s.In[9,31]*OM131*OM331
+    Cq331 = -s.trq[3,31]-s.In[1,31]*OM131*OM231+s.In[5,31]*OM131*OM231+s.In[9,31]*OMp331
     Fs130 = -s.frc[1,30]+s.m[30]*(ALPHA130+BETA330*s.l[3,30])
     Fs230 = -s.frc[2,30]+s.m[30]*(ALPHA230+BETA630*s.l[3,30])
     Fs330 = -s.frc[3,30]+s.m[30]*(ALPHA329+BS930*s.l[3,30])
-    Fq130 = Fs130-s.frc[1,31]*C31-s.frc[3,31]*S31
-    Fq230 = -s.frc[2,31]+Fs230
-    Fq330 = Fs330+s.frc[1,31]*S31-s.frc[3,31]*C31
-    Cq130 = -s.trq[1,30]+s.In[1,30]*OMp130-s.In[5,30]*OM230*OM330+s.In[9,30]*OM230*OM330+s.frc[2,31]*s.dpt[3,44]- \
- 	  s.trq[1,31]*C31-s.trq[3,31]*S31-Fs230*s.l[3,30]+s.dpt[2,44]*(s.frc[1,31]*S31-s.frc[3,31]*C31)
-    Cq230 = -s.trq[2,30]-s.trq[2,31]+s.In[1,30]*OM130*OM330+s.In[5,30]*OMp230-s.In[9,30]*OM130*OM330+Fs130*s.l[3,30]+ \
- 	  s.dpt[3,44]*(-s.frc[1,31]*C31-s.frc[3,31]*S31)
-    Cq330 = -s.trq[3,30]-s.In[1,30]*OM130*OM230+s.In[5,30]*OM130*OM230+s.In[9,30]*OMp330+s.trq[1,31]*S31-s.trq[3,31]* \
- 	  C31-s.dpt[2,44]*(-s.frc[1,31]*C31-s.frc[3,31]*S31)
+    Fq130 = Fs130+Fs131*C31+Fs331*S31
+    Fq230 = Fs230+Fs231
+    Fq330 = Fs330-Fs131*S31+Fs331*C31
+    Cq130 = -s.trq[1,30]+s.In[1,30]*OMp130-s.In[5,30]*OM230*OM330+s.In[9,30]*OM230*OM330+Cq131*C31+Cq331*S31-Fs230* \
+ 	  s.l[3,30]-Fs231*s.dpt[3,44]+s.dpt[2,44]*(-Fs131*S31+Fs331*C31)
+    Cq230 = -s.trq[2,30]+Cq231+s.In[1,30]*OM130*OM330+s.In[5,30]*OMp230-s.In[9,30]*OM130*OM330+Fs130*s.l[3,30]+ \
+ 	  s.dpt[3,44]*(Fs131*C31+Fs331*S31)
+    Cq330 = -s.trq[3,30]-s.In[1,30]*OM130*OM230+s.In[5,30]*OM130*OM230+s.In[9,30]*OMp330-Cq131*S31+Cq331*C31- \
+ 	  s.dpt[2,44]*(Fs131*C31+Fs331*S31)
     Fq129 = Fq130*C30-Fq230*S30
     Fq229 = Fq130*S30+Fq230*C30
     Cq129 = Cq130*C30-Cq230*S30
@@ -730,18 +766,24 @@ def invdyna(phi,s,tsim):
     Cq126 = -s.trq[1,26]+s.In[1,26]*OMp126-s.In[5,26]*OM226*OM326+s.In[9,26]*OM226*OM326+Fs326*s.l[2,26]
     Cq226 = -s.trq[2,26]+s.In[1,26]*OM126*OM326+s.In[5,26]*OMp226-s.In[9,26]*OM126*OM326
     Cq326 = -s.trq[3,26]-s.In[1,26]*OM126*OM226+s.In[5,26]*OM126*OM226+s.In[9,26]*OMp326-Fs126*s.l[2,26]
+    Fs125 = -s.frc[1,25]+s.m[25]*ALPHA125
+    Fs225 = -s.frc[2,25]+s.m[25]*ALPHA225
+    Fs325 = -s.frc[3,25]+s.m[25]*ALPHA325
+    Cq125 = -s.trq[1,25]+s.In[1,25]*OMp125-s.In[5,25]*OM225*OM325+s.In[9,25]*OM225*OM325
+    Cq225 = -s.trq[2,25]+s.In[1,25]*OM125*OM325+s.In[5,25]*OMp225-s.In[9,25]*OM125*OM325
+    Cq325 = -s.trq[3,25]-s.In[1,25]*OM125*OM225+s.In[5,25]*OM125*OM225+s.In[9,25]*OMp325
     Fs124 = -s.frc[1,24]+s.m[24]*(ALPHA124+BETA324*s.l[3,24])
     Fs224 = -s.frc[2,24]+s.m[24]*(ALPHA224+BETA624*s.l[3,24])
     Fs324 = -s.frc[3,24]+s.m[24]*(ALPHA323+BS924*s.l[3,24])
-    Fq124 = Fs124-s.frc[1,25]*C25-s.frc[3,25]*S25
-    Fq224 = -s.frc[2,25]+Fs224
-    Fq324 = Fs324+s.frc[1,25]*S25-s.frc[3,25]*C25
-    Cq124 = -s.trq[1,24]+s.In[1,24]*OMp124-s.In[5,24]*OM224*OM324+s.In[9,24]*OM224*OM324+s.frc[2,25]*s.dpt[3,36]- \
- 	  s.trq[1,25]*C25-s.trq[3,25]*S25-Fs224*s.l[3,24]+s.dpt[2,36]*(s.frc[1,25]*S25-s.frc[3,25]*C25)
-    Cq224 = -s.trq[2,24]-s.trq[2,25]+s.In[1,24]*OM124*OM324+s.In[5,24]*OMp224-s.In[9,24]*OM124*OM324+Fs124*s.l[3,24]+ \
- 	  s.dpt[3,36]*(-s.frc[1,25]*C25-s.frc[3,25]*S25)
-    Cq324 = -s.trq[3,24]-s.In[1,24]*OM124*OM224+s.In[5,24]*OM124*OM224+s.In[9,24]*OMp324+s.trq[1,25]*S25-s.trq[3,25]* \
- 	  C25-s.dpt[2,36]*(-s.frc[1,25]*C25-s.frc[3,25]*S25)
+    Fq124 = Fs124+Fs125*C25+Fs325*S25
+    Fq224 = Fs224+Fs225
+    Fq324 = Fs324-Fs125*S25+Fs325*C25
+    Cq124 = -s.trq[1,24]+s.In[1,24]*OMp124-s.In[5,24]*OM224*OM324+s.In[9,24]*OM224*OM324+Cq125*C25+Cq325*S25-Fs224* \
+ 	  s.l[3,24]-Fs225*s.dpt[3,36]+s.dpt[2,36]*(-Fs125*S25+Fs325*C25)
+    Cq224 = -s.trq[2,24]+Cq225+s.In[1,24]*OM124*OM324+s.In[5,24]*OMp224-s.In[9,24]*OM124*OM324+Fs124*s.l[3,24]+ \
+ 	  s.dpt[3,36]*(Fs125*C25+Fs325*S25)
+    Cq324 = -s.trq[3,24]-s.In[1,24]*OM124*OM224+s.In[5,24]*OM124*OM224+s.In[9,24]*OMp324-Cq125*S25+Cq325*C25- \
+ 	  s.dpt[2,36]*(Fs125*C25+Fs325*S25)
     Fq123 = Fq124*C24-Fq224*S24
     Fq223 = Fq124*S24+Fq224*C24
     Cq123 = Cq124*C24-Cq224*S24
@@ -941,13 +983,13 @@ def invdyna(phi,s,tsim):
     Qq[22] = Cq122
     Qq[23] = Cq223
     Qq[24] = Cq324
-    Qq[25] = -s.trq[2,25]
+    Qq[25] = Cq225
     Qq[26] = Cq126
     Qq[27] = Cq127
     Qq[28] = Cq128
     Qq[29] = Cq229
     Qq[30] = Cq330
-    Qq[31] = -s.trq[2,31]
+    Qq[31] = Cq231
     Qq[32] = Cq132
     Qq[33] = Cq233
     Qq[34] = Cq234

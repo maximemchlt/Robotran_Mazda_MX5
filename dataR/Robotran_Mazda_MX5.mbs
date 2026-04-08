@@ -491,7 +491,7 @@
       <joint>
         <jointname>R1_Bras_inf_AR_D</jointname>
         <type>R1</type>
-        <nature>dependent</nature>
+        <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
@@ -555,9 +555,9 @@
       <point>
         <pointname>Bras_inf_bielle_D</pointname>
         <coordinates>
-          <x>0.12</x>
+          <x>0.2</x>
           <y>0.1</y>
-          <z>0.0</z>
+          <z>0.28</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -926,7 +926,7 @@
       <joint>
         <jointname>R1_Bras_inf_AR_G</jointname>
         <type>R1</type>
-        <nature>dependent</nature>
+        <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
@@ -990,14 +990,14 @@
       <point>
         <pointname>Bras_inf_bielle_G</pointname>
         <coordinates>
-          <x>0.12</x>
+          <x>0.2</x>
           <y>-0.1</y>
-          <z>0.0</z>
+          <z>0.28</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
-              <x>586.0</x>
+              <x>585.0</x>
               <y>717.0</y>
             </position>
           </x2D>
@@ -1339,7 +1339,7 @@
       <graphics>
         <x2D>
           <position>
-            <x>1.0</x>
+            <x>0.0</x>
             <y>4.0</y>
           </position>
           <name_pos>
@@ -1353,19 +1353,19 @@
           </size>
           <control_points>
             <control_point>
-              <x>34.0</x>
+              <x>33.0</x>
               <y>4.0</y>
             </control_point>
             <control_point>
-              <x>1.0</x>
+              <x>0.0</x>
               <y>72.0</y>
             </control_point>
             <control_point>
-              <x>-32.0</x>
+              <x>-33.0</x>
               <y>4.0</y>
             </control_point>
             <control_point>
-              <x>1.0</x>
+              <x>0.0</x>
               <y>-64.0</y>
             </control_point>
           </control_points>
@@ -1417,7 +1417,7 @@
       <point>
         <pointname>Barre_antisroulis_bielle_G</pointname>
         <coordinates>
-          <x>0.02</x>
+          <x>0.1</x>
           <y>-0.45</y>
           <z>0.0</z>
         </coordinates>
@@ -1539,7 +1539,7 @@
       <point>
         <pointname>Barre_antisroulis_bielle_D</pointname>
         <coordinates>
-          <x>0.02</x>
+          <x>0.1</x>
           <y>0.45</y>
           <z>0.0</z>
         </coordinates>
@@ -1625,7 +1625,7 @@
         <graphics>
           <x2D>
             <position>
-              <x>1179.0</x>
+              <x>1178.0</x>
               <y>492.0</y>
             </position>
           </x2D>
@@ -1658,7 +1658,7 @@
         <graphics>
           <x2D>
             <position>
-              <x>1180.0</x>
+              <x>1179.0</x>
               <y>544.0</y>
             </position>
           </x2D>
@@ -1813,17 +1813,14 @@
           <angle>0.0</angle>
         </x2D>
         <x3D>
-          <x3D_com />
           <x3D_points />
-          <x3D_lines />
           <x3D_shapes>
             <cylinder>
               <name>New_Shape</name>
-              <hide />
               <position>
                 <x>0.0</x>
                 <y>0.0</y>
-                <z>0.0775</z>
+                <z>0.0707</z>
               </position>
               <scale>
                 <x>1.0</x>
@@ -1839,8 +1836,8 @@
               <specularColor R="255" G="255" B="255" />
               <shininess>250.0</shininess>
               <transparency>0.5</transparency>
-              <radius>0.025</radius>
-              <height>0.15</height>
+              <radius>0.01</radius>
+              <height>0.1414</height>
             </cylinder>
           </x3D_shapes>
         </x3D>
@@ -2127,6 +2124,12 @@
           </x3D>
         </graphics>
       </joint>
+      <mass>15.0</mass>
+      <inertia>
+        <Ixx>0.1</Ixx>
+        <Iyy>0.8</Iyy>
+        <Izz>0.1</Izz>
+      </inertia>
       <point>
         <pointname>origin</pointname>
         <coordinates>
@@ -2270,14 +2273,14 @@
       <point>
         <pointname>Bras_inf_bielle_G</pointname>
         <coordinates>
-          <x>-0.12</x>
+          <x>-0.2</x>
           <y>-0.1</y>
-          <z>0.0</z>
+          <z>0.28</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
-              <x>585.0</x>
+              <x>586.0</x>
               <y>77.0</y>
             </position>
           </x2D>
@@ -2607,6 +2610,12 @@
           </x3D>
         </graphics>
       </joint>
+      <mass>15.0</mass>
+      <inertia>
+        <Ixx>0.1</Ixx>
+        <Iyy>0.8</Iyy>
+        <Izz>0.1</Izz>
+      </inertia>
       <point>
         <pointname>origin</pointname>
         <coordinates>
@@ -2638,7 +2647,7 @@
       <graphics>
         <x2D>
           <position>
-            <x>6.0</x>
+            <x>5.0</x>
             <y>-6.0</y>
           </position>
           <name_pos>
@@ -2652,19 +2661,19 @@
           </size>
           <control_points>
             <control_point>
-              <x>34.0</x>
+              <x>33.0</x>
               <y>-6.0</y>
             </control_point>
             <control_point>
-              <x>6.0</x>
+              <x>5.0</x>
               <y>57.0</y>
             </control_point>
             <control_point>
-              <x>-22.0</x>
+              <x>-23.0</x>
               <y>-6.0</y>
             </control_point>
             <control_point>
-              <x>6.0</x>
+              <x>5.0</x>
               <y>-69.0</y>
             </control_point>
           </control_points>
@@ -2750,9 +2759,9 @@
       <point>
         <pointname>Bras_inf_bielle_D</pointname>
         <coordinates>
-          <x>-0.12</x>
+          <x>-0.2</x>
           <y>0.1</y>
-          <z>0.0</z>
+          <z>0.28</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -2845,7 +2854,7 @@
       <point>
         <pointname>Barre_antisroulis_bielle_G</pointname>
         <coordinates>
-          <x>-0.02</x>
+          <x>-0.1</x>
           <y>-0.45</y>
           <z>0.0</z>
         </coordinates>
@@ -2940,7 +2949,7 @@
       <point>
         <pointname>Barre_antisroulis_bielle_D</pointname>
         <coordinates>
-          <x>-0.02</x>
+          <x>-0.1</x>
           <y>0.45</y>
           <z>0.0</z>
         </coordinates>
@@ -3798,9 +3807,33 @@
       <!--This is the viewpoint list-->
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>R2_barre_bielle_AR_G</joint>
+        <joint>T1_chassis</joint>
         <position>
-          <x>1.0</x>
+          <x>-0.25</x>
+          <y>-1.0</y>
+          <z>1.0</z>
+        </position>
+        <target>
+          <x>-1.25</x>
+          <y>-0.5</y>
+          <z>0.0</z>
+        </target>
+        <up>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </up>
+        <projection>perspective</projection>
+        <scale>1.0</scale>
+        <fieldOfView>0.785</fieldOfView>
+        <frontClipDst>0.01</frontClipDst>
+        <backClipDst>50.0</backClipDst>
+      </viewpoint>
+      <viewpoint>
+        <name>New_Viewpoint</name>
+        <joint>R2_chassis</joint>
+        <position>
+          <x>-4.0</x>
           <y>1.0</y>
           <z>1.0</z>
         </position>
@@ -3822,11 +3855,11 @@
       </viewpoint>
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>R2_chassis</joint>
+        <joint>R1_barre_bielle_AR_G</joint>
         <position>
-          <x>-4.0</x>
-          <y>1.0</y>
-          <z>1.0</z>
+          <x>0.25</x>
+          <y>0.25</y>
+          <z>0.251</z>
         </position>
         <target>
           <x>0.0</x>

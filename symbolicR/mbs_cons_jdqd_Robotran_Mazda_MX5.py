@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr  8 15:37:05 2026
+#	==> Generation Date: Wed Apr  8 18:07:17 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -184,8 +184,8 @@ def cons_jdqd(Jdqd, s):
     Apqpjdqd5_24 = -OMjdqd5_13*ORjdqd5_34+OMjdqd5_33*ORjdqd5_14-Ompqpjdqd5_13*RLjdqd5_34+Ompqpjdqd5_33*RLjdqd5_14
     Apqpjdqd5_34 = Apqpjdqd5_32+OMjdqd5_13*ORjdqd5_24-OMjdqd5_23*ORjdqd5_14+Ompqpjdqd5_13*RLjdqd5_24-Ompqpjdqd5_23* \
  	  RLjdqd5_14
-    RLjdqd6_22 = s.dpt[2,25]*C11
-    RLjdqd6_32 = s.dpt[2,25]*S11
+    RLjdqd6_22 = s.dpt[2,25]*C11-s.dpt[3,25]*S11
+    RLjdqd6_32 = s.dpt[2,25]*S11+s.dpt[3,25]*C11
     ORjdqd6_22 = -RLjdqd6_32*qd[11]
     ORjdqd6_32 = RLjdqd6_22*qd[11]
     Apqpjdqd6_22 = -ORjdqd6_32*qd[11]
@@ -231,8 +231,8 @@ def cons_jdqd(Jdqd, s):
     Apqpjdqd7_25 = -OMjdqd7_14*ORjdqd7_35+OMjdqd7_34*ORjdqd7_15-Ompqpjdqd7_14*RLjdqd7_35+Ompqpjdqd7_34*RLjdqd7_15
     Apqpjdqd7_35 = Apqpjdqd7_33+OMjdqd7_14*ORjdqd7_25-OMjdqd7_24*ORjdqd7_15+Ompqpjdqd7_14*RLjdqd7_25-Ompqpjdqd7_24* \
  	  RLjdqd7_15
-    RLjdqd8_22 = s.dpt[2,18]*C7
-    RLjdqd8_32 = s.dpt[2,18]*S7
+    RLjdqd8_22 = s.dpt[2,18]*C7-s.dpt[3,18]*S7
+    RLjdqd8_32 = s.dpt[2,18]*S7+s.dpt[3,18]*C7
     ORjdqd8_22 = -RLjdqd8_32*qd[7]
     ORjdqd8_32 = RLjdqd8_22*qd[7]
     Apqpjdqd8_22 = -ORjdqd8_32*qd[7]
@@ -359,8 +359,8 @@ def cons_jdqd(Jdqd, s):
  	  RLjdqd13_14
     Apqpjdqd13_34 = Apqpjdqd13_32+OMjdqd13_13*ORjdqd13_24-OMjdqd13_23*ORjdqd13_14+Ompqpjdqd13_13*RLjdqd13_24- \
  	  Ompqpjdqd13_23*RLjdqd13_14
-    RLjdqd14_22 = s.dpt[2,41]*C26
-    RLjdqd14_32 = s.dpt[2,41]*S26
+    RLjdqd14_22 = s.dpt[2,41]*C26-s.dpt[3,41]*S26
+    RLjdqd14_32 = s.dpt[2,41]*S26+s.dpt[3,41]*C26
     ORjdqd14_22 = -RLjdqd14_32*qd[26]
     ORjdqd14_32 = RLjdqd14_22*qd[26]
     Apqpjdqd14_22 = -ORjdqd14_32*qd[26]
@@ -407,8 +407,8 @@ def cons_jdqd(Jdqd, s):
  	  RLjdqd15_15
     Apqpjdqd15_35 = Apqpjdqd15_33+OMjdqd15_14*ORjdqd15_25-OMjdqd15_24*ORjdqd15_15+Ompqpjdqd15_14*RLjdqd15_25- \
  	  Ompqpjdqd15_24*RLjdqd15_15
-    RLjdqd16_22 = s.dpt[2,49]*C32
-    RLjdqd16_32 = s.dpt[2,49]*S32
+    RLjdqd16_22 = s.dpt[2,49]*C32-s.dpt[3,49]*S32
+    RLjdqd16_32 = s.dpt[2,49]*S32+s.dpt[3,49]*C32
     ORjdqd16_22 = -RLjdqd16_32*qd[32]
     ORjdqd16_32 = RLjdqd16_22*qd[32]
     Apqpjdqd16_22 = -ORjdqd16_32*qd[32]

@@ -39,7 +39,7 @@ except:
 # ===========================================================================
 # Project loading
 # =============================================================================
-mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5_avec_barre_antis_roulis_et_dir.mbs")
+mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5.mbs")
 
 # =========================================================
 # INITIALISATION DU USER MODEL

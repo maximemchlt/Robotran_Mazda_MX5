@@ -56,68 +56,78 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
         This array is a specific line of MbsData.SWr.
     """
     Swr = np.zeros(10)
-    Fx = Fy = Fz = 0.0             # forces dans le repère inertiel
-    Mx = My = Mz = 0.0             # moments dans le repère inertiel
-    idpt = mbs_data.xfidpt[ixF]    # point d'application de la force dans le repère inertiel
-    dxF = np.zeros(3)               # position du point d'application de la force dans le repère BODY-FIXED
-    dxF[0] = mbs_data.dpt[1, idpt]  # x
-    dxF[1] = mbs_data.dpt[2, idpt]  # y
-    dxF[2] = mbs_data.dpt[3, idpt]  # z
+
+    # efforts et moments inertiels
+    Fx = Fy = Fz = 0.0
+    Mx = My = Mz = 0.0
+
+    # point d'application BODY-FIXED
+    idpt = mbs_data.xfidpt[ixF]
+    dxF = np.zeros(4)   # on reste en indexation Robotran 1..3
+    dxF[1] = mbs_data.dpt[1, idpt]
+    dxF[2] = mbs_data.dpt[2, idpt]
+    dxF[3] = mbs_data.dpt[3, idpt]
 
     back_wheel_names = ['F_pneu_ar_g', 'F_pneu_ar_d']
-    
-    back_wheel_ids = [mbs_data.extforce_id.get(n) for n in back_wheel_names]
-
     front_wheel_names = ['F_pneu_av_g', 'F_pneu_av_d']
-    
+
+    back_wheel_ids = [mbs_data.extforce_id.get(n) for n in back_wheel_names]
     front_wheel_ids = [mbs_data.extforce_id.get(n) for n in front_wheel_names]
 
     if ixF in front_wheel_ids or ixF in back_wheel_ids:
+
         if ixF in front_wheel_ids:
-            K_tire = mbs_data.user_model["FrontTire"]["K"]  # [N/m] raideur verticale pneu
-            R_tire = mbs_data.user_model["FrontTire"]["R"]  # [m]   rayon nominal pneu MX-5
+            K_tire = mbs_data.user_model["FrontTire"]["K"]
+            R_tire = mbs_data.user_model["FrontTire"]["R"]
         else:
-            K_tire = mbs_data.user_model["RearTire"]["K"]  # [N/m] raideur verticale pneu
-            R_tire = mbs_data.user_model["RearTire"]["R"]     # [m]   rayon nominal pneu MX-5
+            K_tire = mbs_data.user_model["RearTire"]["K"]
+            R_tire = mbs_data.user_model["RearTire"]["R"]
 
-        # --- ETAPE 1 : Cinématique du contact ---
-        pen, rz, angslip, angcamb, slip, Pct, Vmct, Rt_ground, dxF_tgc = tgc_car_kine_wheel(PxF, RxF, VxF, OMxF, R_tire)
+        # cinématique roue-sol
+        pen, rz, angslip, angcamb, slip, Pct, Vmct, Rt_ground, dxF_tgc = tgc_car_kine_wheel(
+            PxF, RxF, VxF, OMxF, R_tire
+        )
 
+        # tableaux locaux 1..3
+        Fwhl_T = np.zeros(4)
+        Mwhl_T = np.zeros(4)
+        Fwhl_I = np.zeros(4)
+        Mwhl_I = np.zeros(4)
+
+        # équilibre statique
         if mbs_data.process == 1:
-            Fx = 0.0
-            Fy = 0.0
-            Fz = mbs_data.user_model["FrontTire"]["K"] * pen
-            Mx = 0.0
-            My = 0.0
-            Mz = 0.0
+            Fwhl_T[1] = 0.0
+            Fwhl_T[2] = 0.0
+            Fwhl_T[3] = K_tire * max(pen, 0.0)
 
-        # --- Dynamique ---
+            Mwhl_T[1] = 0.0
+            Mwhl_T[2] = 0.0
+            Mwhl_T[3] = 0.0
+
+        # dynamique
         elif mbs_data.process == 2:
             if pen > 0.0:
-                Fwhl_T[3] = mbs_data.user_model["FrontTire"]["K"] * pen # Force verticale du pneu
-
-                # A adapter à ta fonction Bakker Python existante
-                Fwhl_T, Mwhl_T = tgc_bakker_contact(
-                    Fwhl_T, Mwhl_T, angslip, angcamb, slip
-                )
+                Fwhl_T[3] = K_tire * pen
+                Fwhl_T, Mwhl_T = tgc_bakker_contact(Fwhl_T, Mwhl_T, angslip, angcamb, slip)
             else:
                 Fwhl_T[:] = 0.0
                 Mwhl_T[:] = 0.0
-            
-        # --- Transformation des forces et moments du repère de contact vers le repère inertiel ---
-        Fwhl_I = Rt_ground @ Fwhl_T
-        Mwhl_I = Rt_ground @ Mwhl_T
-        
-    # Remplissage de SWr
-    Swr = mbs_data.SWr[ixF]
-    Swr[1] = Fwhl_I[1]
-    Swr[2] = Fwhl_I[2]
-    Swr[3] = Fwhl_I[3]
-    Swr[4] = Mwhl_I[1]
-    Swr[5] = Mwhl_I[2]
-    Swr[6] = Mwhl_I[3]
-    Swr[7] = dxF[1]
-    Swr[8] = dxF[2]
-    Swr[9] = dxF[3]
-    
+
+        # projection dans l'inertiel
+        Fwhl_I[1:4] = Rt_ground[1:4, 1:4] @ Fwhl_T[1:4]
+        Mwhl_I[1:4] = Rt_ground[1:4, 1:4] @ Mwhl_T[1:4]
+
+        Swr[1] = Fwhl_I[1]
+        Swr[2] = Fwhl_I[2]
+        Swr[3] = Fwhl_I[3]
+        Swr[4] = Mwhl_I[1]
+        Swr[5] = Mwhl_I[2]
+        Swr[6] = Mwhl_I[3]
+
+        # tu peux garder dxF du point sensor,
+        # ou remplacer par dxF_tgc si tu veux le vrai point de contact
+        Swr[7] = dxF[1]
+        Swr[8] = dxF[2]
+        Swr[9] = dxF[3]
+
     return Swr

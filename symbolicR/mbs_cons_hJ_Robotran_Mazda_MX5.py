@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr  8 15:37:05 2026
+#	==> Generation Date: Wed Apr  8 18:07:17 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -161,8 +161,8 @@ def cons_hJ(h, Jac, s):
     JTlp5_14_3 = -RLlp5_24*ROlp5_62+RLlp5_34*C19
     JTlp5_24_3 = RLlp5_14*ROlp5_62-RLlp5_34*ROlp5_42
     JTlp5_34_3 = -RLlp5_14*C19+RLlp5_24*ROlp5_42
-    RLlp6_22 = s.dpt[2,25]*C11
-    RLlp6_32 = s.dpt[2,25]*S11
+    RLlp6_22 = s.dpt[2,25]*C11-s.dpt[3,25]*S11
+    RLlp6_32 = s.dpt[2,25]*S11+s.dpt[3,25]*C11
     POlp6_12 = s.dpt[1,25]+s.dpt[1,4]
     POlp6_22 = RLlp6_22+s.dpt[2,4]
     POlp6_32 = RLlp6_32+s.dpt[3,4]
@@ -200,8 +200,8 @@ def cons_hJ(h, Jac, s):
     JTlp7_15_4 = -RLlp7_25*ROlp7_63+RLlp7_35*C17
     JTlp7_25_4 = RLlp7_15*ROlp7_63-RLlp7_35*ROlp7_43
     JTlp7_35_4 = -RLlp7_15*C17+RLlp7_25*ROlp7_43
-    RLlp8_22 = s.dpt[2,18]*C7
-    RLlp8_32 = s.dpt[2,18]*S7
+    RLlp8_22 = s.dpt[2,18]*C7-s.dpt[3,18]*S7
+    RLlp8_32 = s.dpt[2,18]*S7+s.dpt[3,18]*C7
     POlp8_12 = s.dpt[1,18]+s.dpt[1,1]
     POlp8_22 = RLlp8_22+s.dpt[2,1]
     POlp8_32 = RLlp8_32+s.dpt[3,1]
@@ -295,8 +295,8 @@ def cons_hJ(h, Jac, s):
     JTlp13_14_3 = -RLlp13_24*ROlp13_62+RLlp13_34*C37
     JTlp13_24_3 = RLlp13_14*ROlp13_62-RLlp13_34*ROlp13_42
     JTlp13_34_3 = -RLlp13_14*C37+RLlp13_24*ROlp13_42
-    RLlp14_22 = s.dpt[2,41]*C26
-    RLlp14_32 = s.dpt[2,41]*S26
+    RLlp14_22 = s.dpt[2,41]*C26-s.dpt[3,41]*S26
+    RLlp14_32 = s.dpt[2,41]*S26+s.dpt[3,41]*C26
     POlp14_12 = s.dpt[1,10]+s.dpt[1,41]
     POlp14_22 = RLlp14_22+s.dpt[2,10]
     POlp14_32 = RLlp14_32+s.dpt[3,10]
@@ -334,8 +334,8 @@ def cons_hJ(h, Jac, s):
     JTlp15_15_4 = -RLlp15_25*ROlp15_63+RLlp15_35*C35
     JTlp15_25_4 = RLlp15_15*ROlp15_63-RLlp15_35*ROlp15_43
     JTlp15_35_4 = -RLlp15_15*C35+RLlp15_25*ROlp15_43
-    RLlp16_22 = s.dpt[2,49]*C32
-    RLlp16_32 = s.dpt[2,49]*S32
+    RLlp16_22 = s.dpt[2,49]*C32-s.dpt[3,49]*S32
+    RLlp16_32 = s.dpt[2,49]*S32+s.dpt[3,49]*C32
     POlp16_12 = s.dpt[1,13]+s.dpt[1,49]
     POlp16_22 = RLlp16_22+s.dpt[2,13]
     POlp16_32 = RLlp16_32+s.dpt[3,13]
