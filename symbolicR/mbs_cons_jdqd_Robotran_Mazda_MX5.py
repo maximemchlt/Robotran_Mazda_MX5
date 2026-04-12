@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Sun Apr 12 10:59:43 2026
+#	==> Generation Date: Sun Apr 12 20:07:47 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -359,8 +359,8 @@ def cons_jdqd(Jdqd, s):
  	  RLjdqd13_14
     Apqpjdqd13_34 = Apqpjdqd13_32+OMjdqd13_13*ORjdqd13_24-OMjdqd13_23*ORjdqd13_14+Ompqpjdqd13_13*RLjdqd13_24- \
  	  Ompqpjdqd13_23*RLjdqd13_14
-    RLjdqd14_22 = s.dpt[2,41]*C26-s.dpt[3,41]*S26
-    RLjdqd14_32 = s.dpt[2,41]*S26+s.dpt[3,41]*C26
+    RLjdqd14_22 = s.dpt[2,41]*C26
+    RLjdqd14_32 = s.dpt[2,41]*S26
     ORjdqd14_22 = -RLjdqd14_32*qd[26]
     ORjdqd14_32 = RLjdqd14_22*qd[26]
     Apqpjdqd14_22 = -ORjdqd14_32*qd[26]
@@ -407,8 +407,8 @@ def cons_jdqd(Jdqd, s):
  	  RLjdqd15_15
     Apqpjdqd15_35 = Apqpjdqd15_33+OMjdqd15_14*ORjdqd15_25-OMjdqd15_24*ORjdqd15_15+Ompqpjdqd15_14*RLjdqd15_25- \
  	  Ompqpjdqd15_24*RLjdqd15_15
-    RLjdqd16_22 = s.dpt[2,49]*C32-s.dpt[3,49]*S32
-    RLjdqd16_32 = s.dpt[2,49]*S32+s.dpt[3,49]*C32
+    RLjdqd16_22 = s.dpt[2,49]*C32
+    RLjdqd16_32 = s.dpt[2,49]*S32
     ORjdqd16_22 = -RLjdqd16_32*qd[32]
     ORjdqd16_32 = RLjdqd16_22*qd[32]
     Apqpjdqd16_22 = -ORjdqd16_32*qd[32]
@@ -458,15 +458,17 @@ def cons_jdqd(Jdqd, s):
  	  Ompqpjdqd17_34*RLjdqd17_15
     Apqpjdqd17_35 = Apqpjdqd17_32+OMjdqd17_14*ORjdqd17_25-OMjdqd17_24*ORjdqd17_15+Ompqpjdqd17_14*RLjdqd17_25- \
  	  Ompqpjdqd17_24*RLjdqd17_15
-    ROjdqd18_83 = -S42*C43
-    ROjdqd18_93 = C42*C43
-    OMjdqd18_23 = qd[43]*C42
-    OMjdqd18_33 = qd[43]*S42
-    Ompqpjdqd18_23 = -qd[42]*qd[43]*S42
-    Ompqpjdqd18_33 = qd[42]*qd[43]*C42
-    RLjdqd18_14 = s.dpt[3,57]*S43
-    RLjdqd18_24 = ROjdqd18_83*s.dpt[3,57]+s.dpt[2,57]*C42
-    RLjdqd18_34 = ROjdqd18_93*s.dpt[3,57]+s.dpt[2,57]*S42
+    ROjdqd18_23 = C42*S43
+    ROjdqd18_33 = S42*S43
+    ROjdqd18_53 = C42*C43
+    ROjdqd18_63 = S42*C43
+    OMjdqd18_23 = -qd[43]*S42
+    OMjdqd18_33 = qd[43]*C42
+    Ompqpjdqd18_23 = -qd[42]*qd[43]*C42
+    Ompqpjdqd18_33 = -qd[42]*qd[43]*S42
+    RLjdqd18_14 = s.dpt[1,57]*C43-s.dpt[2,57]*S43
+    RLjdqd18_24 = ROjdqd18_23*s.dpt[1,57]+ROjdqd18_53*s.dpt[2,57]
+    RLjdqd18_34 = ROjdqd18_33*s.dpt[1,57]+ROjdqd18_63*s.dpt[2,57]
     ORjdqd18_14 = OMjdqd18_23*RLjdqd18_34-OMjdqd18_33*RLjdqd18_24
     ORjdqd18_24 = OMjdqd18_33*RLjdqd18_14-RLjdqd18_34*qd[42]
     ORjdqd18_34 = -OMjdqd18_23*RLjdqd18_14+RLjdqd18_24*qd[42]
@@ -477,15 +479,17 @@ def cons_jdqd(Jdqd, s):
     jdqd25 = Apqpjdqd17_15-Apqpjdqd18_14
     jdqd26 = Apqpjdqd17_25-Apqpjdqd18_24
     jdqd27 = Apqpjdqd17_35-Apqpjdqd18_34
-    ROjdqd19_83 = -S40*C41
-    ROjdqd19_93 = C40*C41
-    OMjdqd19_23 = qd[41]*C40
-    OMjdqd19_33 = qd[41]*S40
-    Ompqpjdqd19_23 = -qd[40]*qd[41]*S40
-    Ompqpjdqd19_33 = qd[40]*qd[41]*C40
-    RLjdqd19_14 = s.dpt[3,56]*S41
-    RLjdqd19_24 = ROjdqd19_83*s.dpt[3,56]+s.dpt[2,56]*C40
-    RLjdqd19_34 = ROjdqd19_93*s.dpt[3,56]+s.dpt[2,56]*S40
+    ROjdqd19_23 = C40*S41
+    ROjdqd19_33 = S40*S41
+    ROjdqd19_53 = C40*C41
+    ROjdqd19_63 = S40*C41
+    OMjdqd19_23 = -qd[41]*S40
+    OMjdqd19_33 = qd[41]*C40
+    Ompqpjdqd19_23 = -qd[40]*qd[41]*C40
+    Ompqpjdqd19_33 = -qd[40]*qd[41]*S40
+    RLjdqd19_14 = s.dpt[1,56]*C41-s.dpt[2,56]*S41
+    RLjdqd19_24 = ROjdqd19_23*s.dpt[1,56]+ROjdqd19_53*s.dpt[2,56]
+    RLjdqd19_34 = ROjdqd19_33*s.dpt[1,56]+ROjdqd19_63*s.dpt[2,56]
     ORjdqd19_14 = OMjdqd19_23*RLjdqd19_34-OMjdqd19_33*RLjdqd19_24
     ORjdqd19_24 = OMjdqd19_33*RLjdqd19_14-RLjdqd19_34*qd[40]
     ORjdqd19_34 = -OMjdqd19_23*RLjdqd19_14+RLjdqd19_24*qd[40]

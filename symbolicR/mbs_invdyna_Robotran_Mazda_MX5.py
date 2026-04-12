@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Sun Apr 12 10:59:43 2026
+#	==> Generation Date: Sun Apr 12 20:07:47 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -603,23 +603,19 @@ def invdyna(phi,s,tsim):
     ALPHA140 = ALPHA139+BETA239*s.dpt[2,54]
     ALPHA240 = C40*(ALPHA239+BS539*s.dpt[2,54])+S40*(ALPHA339+BETA839*s.dpt[2,54])
     ALPHA340 = C40*(ALPHA339+BETA839*s.dpt[2,54])-S40*(ALPHA239+BS539*s.dpt[2,54])
-    OM141 = OM140*C41-OM340*S41
-    OM241 = qd[41]+OM240
-    OM341 = OM140*S41+OM340*C41
-    OMp141 = C41*(OMp140-qd[41]*OM340)-S41*(OMp340+qd[41]*OM140)
-    OMp241 = qdd[41]+OMp240
-    OMp341 = C41*(OMp340+qd[41]*OM140)+S41*(OMp140-qd[41]*OM340)
+    OM141 = OM140*C41+OM240*S41
+    OM241 = -OM140*S41+OM240*C41
+    OM341 = qd[41]+OM340
+    OMp141 = C41*(OMp140+qd[41]*OM240)+S41*(OMp240-qd[41]*OM140)
+    OMp241 = C41*(OMp240-qd[41]*OM140)-S41*(OMp140+qd[41]*OM240)
+    OMp341 = qdd[41]+OMp340
     BS241 = OM141*OM241
-    BS341 = OM141*OM341
     BS541 = -OM141*OM141-OM341*OM341
     BS641 = OM241*OM341
-    BS941 = -OM141*OM141-OM241*OM241
     BETA241 = BS241-OMp341
-    BETA341 = BS341+OMp241
-    BETA641 = BS641-OMp141
     BETA841 = BS641+OMp141
-    ALPHA141 = ALPHA140*C41-ALPHA340*S41
-    ALPHA341 = ALPHA140*S41+ALPHA340*C41
+    ALPHA141 = ALPHA140*C41+ALPHA240*S41
+    ALPHA241 = -ALPHA140*S41+ALPHA240*C41
     OM142 = qd[42]+OM16
     OM242 = OM26*C42+OM36*S42
     OM342 = -OM26*S42+OM36*C42
@@ -629,60 +625,54 @@ def invdyna(phi,s,tsim):
     ALPHA142 = ALPHA139+BETA239*s.dpt[2,55]
     ALPHA242 = C42*(ALPHA239+BS539*s.dpt[2,55])+S42*(ALPHA339+BETA839*s.dpt[2,55])
     ALPHA342 = C42*(ALPHA339+BETA839*s.dpt[2,55])-S42*(ALPHA239+BS539*s.dpt[2,55])
-    OM143 = OM142*C43-OM342*S43
-    OM243 = qd[43]+OM242
-    OM343 = OM142*S43+OM342*C43
-    OMp143 = C43*(OMp142-qd[43]*OM342)-S43*(OMp342+qd[43]*OM142)
-    OMp243 = qdd[43]+OMp242
-    OMp343 = C43*(OMp342+qd[43]*OM142)+S43*(OMp142-qd[43]*OM342)
+    OM143 = OM142*C43+OM242*S43
+    OM243 = -OM142*S43+OM242*C43
+    OM343 = qd[43]+OM342
+    OMp143 = C43*(OMp142+qd[43]*OM242)+S43*(OMp242-qd[43]*OM142)
+    OMp243 = C43*(OMp242-qd[43]*OM142)-S43*(OMp142+qd[43]*OM242)
+    OMp343 = qdd[43]+OMp342
     BS243 = OM143*OM243
-    BS343 = OM143*OM343
     BS543 = -OM143*OM143-OM343*OM343
     BS643 = OM243*OM343
-    BS943 = -OM143*OM143-OM243*OM243
     BETA243 = BS243-OMp343
-    BETA343 = BS343+OMp243
-    BETA643 = BS643-OMp143
     BETA843 = BS643+OMp143
-    ALPHA143 = ALPHA142*C43-ALPHA342*S43
-    ALPHA343 = ALPHA142*S43+ALPHA342*C43
+    ALPHA143 = ALPHA142*C43+ALPHA242*S43
+    ALPHA243 = -ALPHA142*S43+ALPHA242*C43
  
 # Backward Dynamics
 
-    Fs143 = -s.frc[1,43]+s.m[43]*(ALPHA143+BETA243*s.l[2,43]+BETA343*s.l[3,43])
-    Fs243 = -s.frc[2,43]+s.m[43]*(ALPHA242+BETA643*s.l[3,43]+BS543*s.l[2,43])
-    Fs343 = -s.frc[3,43]+s.m[43]*(ALPHA343+BETA843*s.l[2,43]+BS943*s.l[3,43])
-    Cq143 = -s.trq[1,43]+s.In[1,43]*OMp143-s.In[5,43]*OM243*OM343+s.In[9,43]*OM243*OM343-Fs243*s.l[3,43]+Fs343* \
- 	  s.l[2,43]
-    Cq243 = -s.trq[2,43]+s.In[1,43]*OM143*OM343+s.In[5,43]*OMp243-s.In[9,43]*OM143*OM343+Fs143*s.l[3,43]
+    Fs143 = -s.frc[1,43]+s.m[43]*(ALPHA143+BETA243*s.l[2,43])
+    Fs243 = -s.frc[2,43]+s.m[43]*(ALPHA243+BS543*s.l[2,43])
+    Fs343 = -s.frc[3,43]+s.m[43]*(ALPHA342+BETA843*s.l[2,43])
+    Cq143 = -s.trq[1,43]+s.In[1,43]*OMp143-s.In[5,43]*OM243*OM343+s.In[9,43]*OM243*OM343+Fs343*s.l[2,43]
+    Cq243 = -s.trq[2,43]+s.In[1,43]*OM143*OM343+s.In[5,43]*OMp243-s.In[9,43]*OM143*OM343
     Cq343 = -s.trq[3,43]-s.In[1,43]*OM143*OM243+s.In[5,43]*OM143*OM243+s.In[9,43]*OMp343-Fs143*s.l[2,43]
-    Fq142 = Fs143*C43+Fs343*S43
-    Fq342 = -Fs143*S43+Fs343*C43
-    Cq142 = Cq143*C43+Cq343*S43
-    Cq342 = -Cq143*S43+Cq343*C43
-    Fs141 = -s.frc[1,41]+s.m[41]*(ALPHA141+BETA241*s.l[2,41]+BETA341*s.l[3,41])
-    Fs241 = -s.frc[2,41]+s.m[41]*(ALPHA240+BETA641*s.l[3,41]+BS541*s.l[2,41])
-    Fs341 = -s.frc[3,41]+s.m[41]*(ALPHA341+BETA841*s.l[2,41]+BS941*s.l[3,41])
-    Cq141 = -s.trq[1,41]+s.In[1,41]*OMp141-s.In[5,41]*OM241*OM341+s.In[9,41]*OM241*OM341-Fs241*s.l[3,41]+Fs341* \
- 	  s.l[2,41]
-    Cq241 = -s.trq[2,41]+s.In[1,41]*OM141*OM341+s.In[5,41]*OMp241-s.In[9,41]*OM141*OM341+Fs141*s.l[3,41]
+    Fq142 = Fs143*C43-Fs243*S43
+    Fq242 = Fs143*S43+Fs243*C43
+    Cq142 = Cq143*C43-Cq243*S43
+    Cq242 = Cq143*S43+Cq243*C43
+    Fs141 = -s.frc[1,41]+s.m[41]*(ALPHA141+BETA241*s.l[2,41])
+    Fs241 = -s.frc[2,41]+s.m[41]*(ALPHA241+BS541*s.l[2,41])
+    Fs341 = -s.frc[3,41]+s.m[41]*(ALPHA340+BETA841*s.l[2,41])
+    Cq141 = -s.trq[1,41]+s.In[1,41]*OMp141-s.In[5,41]*OM241*OM341+s.In[9,41]*OM241*OM341+Fs341*s.l[2,41]
+    Cq241 = -s.trq[2,41]+s.In[1,41]*OM141*OM341+s.In[5,41]*OMp241-s.In[9,41]*OM141*OM341
     Cq341 = -s.trq[3,41]-s.In[1,41]*OM141*OM241+s.In[5,41]*OM141*OM241+s.In[9,41]*OMp341-Fs141*s.l[2,41]
-    Fq140 = Fs141*C41+Fs341*S41
-    Fq340 = -Fs141*S41+Fs341*C41
-    Cq140 = Cq141*C41+Cq341*S41
-    Cq340 = -Cq141*S41+Cq341*C41
+    Fq140 = Fs141*C41-Fs241*S41
+    Fq240 = Fs141*S41+Fs241*C41
+    Cq140 = Cq141*C41-Cq241*S41
+    Cq240 = Cq141*S41+Cq241*C41
     Fs139 = -s.frc[1,39]+s.m[39]*ALPHA139
     Fs239 = -s.frc[2,39]+s.m[39]*ALPHA239
     Fs339 = -s.frc[3,39]+s.m[39]*ALPHA339
     Fq139 = Fq140+Fq142+Fs139
-    Fq239 = Fs239-Fq340*S40-Fq342*S42+Fs241*C40+Fs243*C42
-    Fq339 = Fs339+Fq340*C40+Fq342*C42+Fs241*S40+Fs243*S42
-    Cq139 = -s.trq[1,39]+Cq140+Cq142+s.In[1,39]*OMp16-s.In[5,39]*OM26*OM36+s.In[9,39]*OM26*OM36+s.dpt[2,54]*(Fq340* \
- 	  C40+Fs241*S40)+s.dpt[2,55]*(Fq342*C42+Fs243*S42)
-    Cq239 = -s.trq[2,39]+s.In[1,39]*OM16*OM36+s.In[5,39]*OMp26-s.In[9,39]*OM16*OM36+Cq241*C40+Cq243*C42-Cq340*S40- \
- 	  Cq342*S42
-    Cq339 = -s.trq[3,39]-s.In[1,39]*OM16*OM26+s.In[5,39]*OM16*OM26+s.In[9,39]*OMp36+Cq241*S40+Cq243*S42+Cq340*C40+ \
- 	  Cq342*C42-Fq140*s.dpt[2,54]-Fq142*s.dpt[2,55]
+    Fq239 = Fs239+Fq240*C40+Fq242*C42-Fs341*S40-Fs343*S42
+    Fq339 = Fs339+Fq240*S40+Fq242*S42+Fs341*C40+Fs343*C42
+    Cq139 = -s.trq[1,39]+Cq140+Cq142+s.In[1,39]*OMp16-s.In[5,39]*OM26*OM36+s.In[9,39]*OM26*OM36+s.dpt[2,54]*(Fq240* \
+ 	  S40+Fs341*C40)+s.dpt[2,55]*(Fq242*S42+Fs343*C42)
+    Cq239 = -s.trq[2,39]+s.In[1,39]*OM16*OM36+s.In[5,39]*OMp26-s.In[9,39]*OM16*OM36+Cq240*C40+Cq242*C42-Cq341*S40- \
+ 	  Cq343*S42
+    Cq339 = -s.trq[3,39]-s.In[1,39]*OM16*OM26+s.In[5,39]*OM16*OM26+s.In[9,39]*OMp36+Cq240*S40+Cq242*S42+Cq341*C40+ \
+ 	  Cq343*C42-Fq140*s.dpt[2,54]-Fq142*s.dpt[2,55]
     Fs138 = -s.frc[1,38]+s.m[38]*(ALPHA138+BETA338*s.l[3,38])
     Fs238 = -s.frc[2,38]+s.m[38]*(ALPHA237+BETA638*s.l[3,38])
     Fs338 = -s.frc[3,38]+s.m[38]*(ALPHA338+BS938*s.l[3,38])
@@ -1009,9 +999,9 @@ def invdyna(phi,s,tsim):
     Qq[38] = Cq238
     Qq[39] = Fq239
     Qq[40] = Cq140
-    Qq[41] = Cq241
+    Qq[41] = Cq341
     Qq[42] = Cq142
-    Qq[43] = Cq243
+    Qq[43] = Cq343
 
 # Number of continuation lines = 7
 

@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Sun Apr 12 10:59:43 2026
+#	==> Generation Date: Sun Apr 12 20:07:47 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -295,8 +295,8 @@ def cons_hJ(h, Jac, s):
     JTlp13_14_3 = -RLlp13_24*ROlp13_62+RLlp13_34*C37
     JTlp13_24_3 = RLlp13_14*ROlp13_62-RLlp13_34*ROlp13_42
     JTlp13_34_3 = -RLlp13_14*C37+RLlp13_24*ROlp13_42
-    RLlp14_22 = s.dpt[2,41]*C26-s.dpt[3,41]*S26
-    RLlp14_32 = s.dpt[2,41]*S26+s.dpt[3,41]*C26
+    RLlp14_22 = s.dpt[2,41]*C26
+    RLlp14_32 = s.dpt[2,41]*S26
     POlp14_12 = s.dpt[1,10]+s.dpt[1,41]
     POlp14_22 = RLlp14_22+s.dpt[2,10]
     POlp14_32 = RLlp14_32+s.dpt[3,10]
@@ -334,8 +334,8 @@ def cons_hJ(h, Jac, s):
     JTlp15_15_4 = -RLlp15_25*ROlp15_63+RLlp15_35*C35
     JTlp15_25_4 = RLlp15_15*ROlp15_63-RLlp15_35*ROlp15_43
     JTlp15_35_4 = -RLlp15_15*C35+RLlp15_25*ROlp15_43
-    RLlp16_22 = s.dpt[2,49]*C32-s.dpt[3,49]*S32
-    RLlp16_32 = s.dpt[2,49]*S32+s.dpt[3,49]*C32
+    RLlp16_22 = s.dpt[2,49]*C32
+    RLlp16_32 = s.dpt[2,49]*S32
     POlp16_12 = s.dpt[1,13]+s.dpt[1,49]
     POlp16_22 = RLlp16_22+s.dpt[2,13]
     POlp16_32 = RLlp16_32+s.dpt[3,13]
@@ -374,33 +374,37 @@ def cons_hJ(h, Jac, s):
     JTlp17_15_4 = -RLlp17_25*ROlp17_93+RLlp17_35*ROlp17_83
     JTlp17_25_4 = RLlp17_15*ROlp17_93-RLlp17_35*S23
     JTlp17_35_4 = -RLlp17_15*ROlp17_83+RLlp17_25*S23
-    ROlp18_83 = -S42*C43
-    ROlp18_93 = C42*C43
+    ROlp18_23 = C42*S43
+    ROlp18_33 = S42*S43
+    ROlp18_53 = C42*C43
+    ROlp18_63 = S42*C43
     POlp18_22 = q[39]+s.dpt[2,55]
-    RLlp18_14 = s.dpt[3,57]*S43
-    RLlp18_24 = ROlp18_83*s.dpt[3,57]+s.dpt[2,57]*C42
-    RLlp18_34 = ROlp18_93*s.dpt[3,57]+s.dpt[2,57]*S42
+    RLlp18_14 = s.dpt[1,57]*C43-s.dpt[2,57]*S43
+    RLlp18_24 = ROlp18_23*s.dpt[1,57]+ROlp18_53*s.dpt[2,57]
+    RLlp18_34 = ROlp18_33*s.dpt[1,57]+ROlp18_63*s.dpt[2,57]
     POlp18_14 = RLlp18_14+s.dpt[1,15]
     POlp18_24 = POlp18_22+RLlp18_24
     POlp18_34 = RLlp18_34+s.dpt[3,15]
-    JTlp18_14_3 = -RLlp18_24*S42+RLlp18_34*C42
-    JTlp18_24_3 = RLlp18_14*S42
-    JTlp18_34_3 = -RLlp18_14*C42
+    JTlp18_14_3 = -RLlp18_24*C42-RLlp18_34*S42
+    JTlp18_24_3 = RLlp18_14*C42
+    JTlp18_34_3 = RLlp18_14*S42
     h_25 = POlp17_15-POlp18_14
     h_26 = POlp17_25-POlp18_24
     h_27 = POlp17_35-POlp18_34
-    ROlp19_83 = -S40*C41
-    ROlp19_93 = C40*C41
+    ROlp19_23 = C40*S41
+    ROlp19_33 = S40*S41
+    ROlp19_53 = C40*C41
+    ROlp19_63 = S40*C41
     POlp19_22 = q[39]+s.dpt[2,54]
-    RLlp19_14 = s.dpt[3,56]*S41
-    RLlp19_24 = ROlp19_83*s.dpt[3,56]+s.dpt[2,56]*C40
-    RLlp19_34 = ROlp19_93*s.dpt[3,56]+s.dpt[2,56]*S40
+    RLlp19_14 = s.dpt[1,56]*C41-s.dpt[2,56]*S41
+    RLlp19_24 = ROlp19_23*s.dpt[1,56]+ROlp19_53*s.dpt[2,56]
+    RLlp19_34 = ROlp19_33*s.dpt[1,56]+ROlp19_63*s.dpt[2,56]
     POlp19_14 = RLlp19_14+s.dpt[1,15]
     POlp19_24 = POlp19_22+RLlp19_24
     POlp19_34 = RLlp19_34+s.dpt[3,15]
-    JTlp19_14_3 = -RLlp19_24*S40+RLlp19_34*C40
-    JTlp19_24_3 = RLlp19_14*S40
-    JTlp19_34_3 = -RLlp19_14*C40
+    JTlp19_14_3 = -RLlp19_24*C40-RLlp19_34*S40
+    JTlp19_24_3 = RLlp19_14*C40
+    JTlp19_34_3 = RLlp19_14*S40
     ROlp20_52 = C27*C28-S27*S28
     ROlp20_62 = C27*S28+S27*C28
     ROlp20_82 = -C27*S28-S27*C28

@@ -41,9 +41,9 @@ except:
 # =============================================================================
 mbs_data = Robotran.MbsData("dataR/Robotran_Mazda_MX5.mbs")
 
-# =========================================================
+# ===========================================================================
 # INITIALISATION DU USER MODEL
-# =========================================================
+# =============================================================================
 um = {}
 um['FrontTire']       = {'R': 0.288, 'K': 180000.0}
 um['RearTire']        = {'R': 0.288, 'K': 180000.0}
@@ -63,7 +63,15 @@ mbs_part.set_options(rowperm=1, verbose=1)
 mbs_part.run()
 print ("Partitionning done.")
 
+# ===========================================================================
+# Verification du partitionnement et de la configuration initiale
 # =============================================================================
+print ("Verification of partitionning and initial configuration...")
+mbs_data.q[39] = 0.0
+mbs_data.qd[39] = 0.0
+mbs_data.qdd[39] = 0.0
+
+# ===========================================================================
 # Equilibrium
 # =============================================================================
 print ("Equilibrium...")
@@ -73,27 +81,27 @@ mbs_equil.set_options(method=1, senstol=1e-1, verbose=1, save2file=1)
 mbs_equil.run()
 print ("Equilibrium done.")
 
-# ============================================================================
-# Modal Analysis
-# =============================================================================
-print ("Modal analysis...")
-mbs_data.process = 4
-mbs_modal = Robotran.MbsModal(mbs_data)
-mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
-mbs_modal.run()
-print ("Modal analysis done.")
-
-# =============================================================================
+# ===========================================================================
 # Direct Dynamics
 # =============================================================================
-print ("Direct dynamics...")
-mbs_data.process = 3
-mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-2, tf=2, save2file=1)
-mbs_dirdyn.run()
-print ("Direct dynamics done.")
+#print ("Direct dynamics...")
+# mbs_data.process = 3
+# mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
+# mbs_dirdyn.set_options(dt0=1e-2, tf=10, save2file=1)
+# mbs_dirdyn.run()
+# print ("Direct dynamics done.")
 
+# ===========================================================================
+# Modal Analysis
 # =============================================================================
+# print ("Modal analysis...")
+# mbs_data.process = 4
+# mbs_modal = Robotran.MbsModal(mbs_data)
+# mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
+# mbs_modal.run()
+# print ("Modal analysis done.")
+
+# ===========================================================================
 # Inverse Kinematics
 # =============================================================================
 # mbs_data.process = 5
@@ -105,7 +113,7 @@ print ("Direct dynamics done.")
 # mbs_solvekin.set_options(motion="trajectory")
 # mbs_solvekin.run()
 
-# =============================================================================
+# ===========================================================================
 # Inverse Dynamics
 # =============================================================================
 # mbs_data.process = 6

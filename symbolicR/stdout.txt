@@ -1,8 +1,8 @@
 
 ##############################################################
-#	file7.gen 12/04/2026 10:59:43    messages
+#	file1b.gen 12/04/2026 20:07:47    messages
 ##############################################################
-    Old current.gen /usr/local/robotran/users/LEPL1504/upload/file7.gen loading
-Symbolic generation file : /usr/local/robotran/users/LEPL1504/upload/file7.gen
+    Old current.gen /usr/local/robotran/users/LEPL1504/upload/file1b.gen loading
+Symbolic generation file : /usr/local/robotran/users/LEPL1504/upload/file1b.gen
 Project: /usr/local/robotran/users/LEPL1504/upload/upload.mbs
-F2 - Recursive Inverse Dynamics of tree-like MBS
+F6 - Sensors Kinematics

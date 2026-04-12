@@ -429,7 +429,7 @@
         <coordinates>
           <x>1.16</x>
           <y>0.0</y>
-          <z>0.129</z>
+          <z>0.169</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -492,7 +492,7 @@
       <joint>
         <jointname>R1_Bras_inf_AR_D</jointname>
         <type>R1</type>
-        <nature>dependent</nature>
+        <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
@@ -1028,7 +1028,7 @@
       <joint>
         <jointname>R1_Bras_inf_AR_G</jointname>
         <type>R1</type>
-        <nature>dependent</nature>
+        <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
@@ -2078,7 +2078,7 @@
       <joint>
         <jointname>R1_Bras_sup_AV_G</jointname>
         <type>R1</type>
-        <nature>dependent</nature>
+        <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
@@ -2297,9 +2297,9 @@
       <point>
         <pointname>Pt_Direction_G</pointname>
         <coordinates>
-          <x>0.12</x>
-          <y>-0.03</y>
-          <z>0.131</z>
+          <x>0.06</x>
+          <y>-0.02</y>
+          <z>-0.131</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -2578,7 +2578,7 @@
         <coordinates>
           <x>-0.2</x>
           <y>-0.1</y>
-          <z>0.36</z>
+          <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -2665,7 +2665,7 @@
       <joint>
         <jointname>R1_Bras_sup_AV_D</jointname>
         <type>R1</type>
-        <nature>dependent</nature>
+        <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
@@ -2884,9 +2884,9 @@
       <point>
         <pointname>Pt_Direction_G</pointname>
         <coordinates>
-          <x>0.12</x>
-          <y>0.03</y>
-          <z>0.131</z>
+          <x>0.06</x>
+          <y>0.02</y>
+          <z>-0.131</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -3165,7 +3165,7 @@
         <coordinates>
           <x>-0.2</x>
           <y>0.1</y>
-          <z>0.36</z>
+          <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -3499,7 +3499,7 @@
           <x2D>
             <position>
               <x>1126.0</x>
-              <y>306.0</y>
+              <y>309.0</y>
             </position>
           </x2D>
           <x3D>
@@ -3543,7 +3543,7 @@
         <coordinates>
           <x>0.0</x>
           <y>0.0</y>
-          <z>0.14</z>
+          <z>-0.1414</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -3681,7 +3681,7 @@
         <coordinates>
           <x>0.0</x>
           <y>0.0</y>
-          <z>0.14</z>
+          <z>-0.1414</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -3794,7 +3794,7 @@
         <pointname>Bras_Direction_D</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>0.25</y>
+          <y>0.3</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
@@ -3811,7 +3811,7 @@
         <pointname>Bras_Direction_G</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>-0.25</y>
+          <y>-0.3</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
@@ -3886,7 +3886,7 @@
               <shininess>250.0</shininess>
               <transparency>0.0</transparency>
               <radius>0.01</radius>
-              <height>0.5</height>
+              <height>0.6</height>
             </cylinder>
           </x3D_shapes>
         </x3D>
@@ -3916,8 +3916,8 @@
         </graphics>
       </joint>
       <joint>
-        <jointname>R2_Barredir_D</jointname>
-        <type>R2</type>
+        <jointname>R3_Barredir_D</jointname>
+        <type>R3</type>
         <nature>dependent</nature>
         <graphics>
           <x2D>
@@ -3936,8 +3936,8 @@
       <com>
         <coordinates>
           <x>0.0</x>
-          <y>0.205</y>
-          <z>0.14</z>
+          <y>0.23</y>
+          <z>0.0</z>
         </coordinates>
       </com>
       <inertia>
@@ -3948,15 +3948,15 @@
       <point>
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
-          <x>0.0</x>
-          <y>0.46</y>
-          <z>0.302</z>
+          <x>-0.06</x>
+          <y>0.4</y>
+          <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
               <x>1249.0</x>
-              <y>60.0</y>
+              <y>59.0</y>
             </position>
           </x2D>
           <x3D />
@@ -3966,7 +3966,7 @@
         <x2D>
           <position>
             <x>-15.0</x>
-            <y>2.0</y>
+            <y>1.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -3980,19 +3980,19 @@
           <control_points>
             <control_point>
               <x>104.0</x>
-              <y>2.0</y>
+              <y>1.0</y>
             </control_point>
             <control_point>
               <x>104.0</x>
-              <y>30.0</y>
+              <y>29.0</y>
             </control_point>
             <control_point>
               <x>-15.0</x>
-              <y>30.0</y>
+              <y>29.0</y>
             </control_point>
             <control_point>
               <x>-15.0</x>
-              <y>2.0</y>
+              <y>1.0</y>
             </control_point>
           </control_points>
           <angle>17.904447506248204</angle>
@@ -4005,9 +4005,9 @@
             <cylinder>
               <name>Bielle</name>
               <position>
-                <x>0.0</x>
-                <y>0.23</y>
-                <z>0.151</z>
+                <x>-0.03</x>
+                <y>0.2</y>
+                <z>0.0</z>
               </position>
               <scale>
                 <x>1.0</x>
@@ -4015,16 +4015,16 @@
                 <z>1.0</z>
               </scale>
               <rotation>
-                <x>0.5759586531581287</x>
+                <x>0.0</x>
                 <y>0.0</y>
-                <z>0.0</z>
+                <z>0.12217304763960307</z>
               </rotation>
               <color R="0" G="204" B="204" />
               <specularColor R="255" G="255" B="255" />
               <shininess>250.0</shininess>
               <transparency>0.0</transparency>
               <radius>0.01</radius>
-              <height>0.55</height>
+              <height>0.4</height>
             </cylinder>
           </x3D_shapes>
         </x3D>
@@ -4054,8 +4054,8 @@
         </graphics>
       </joint>
       <joint>
-        <jointname>R2_Barredir_G</jointname>
-        <type>R2</type>
+        <jointname>R3_Barredir_G</jointname>
+        <type>R3</type>
         <nature>dependent</nature>
         <graphics>
           <x2D>
@@ -4074,8 +4074,8 @@
       <com>
         <coordinates>
           <x>0.0</x>
-          <y>-0.205</y>
-          <z>0.14</z>
+          <y>-0.23</y>
+          <z>0.0</z>
         </coordinates>
       </com>
       <inertia>
@@ -4086,9 +4086,9 @@
       <point>
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
-          <x>0.0</x>
-          <y>-0.46</y>
-          <z>0.302</z>
+          <x>-0.06</x>
+          <y>-0.4</y>
+          <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -4143,9 +4143,9 @@
             <cylinder>
               <name>Bielle</name>
               <position>
-                <x>0.0</x>
-                <y>-0.23</y>
-                <z>0.151</z>
+                <x>-0.03</x>
+                <y>-0.2</y>
+                <z>0.0</z>
               </position>
               <scale>
                 <x>1.0</x>
@@ -4153,16 +4153,16 @@
                 <z>1.0</z>
               </scale>
               <rotation>
-                <x>2.5656340004316642</x>
+                <x>0.0</x>
                 <y>0.0</y>
-                <z>0.0</z>
+                <z>-0.12217304763960307</z>
               </rotation>
               <color R="0" G="204" B="204" />
               <specularColor R="255" G="255" B="255" />
               <shininess>250.0</shininess>
               <transparency>0.0</transparency>
               <radius>0.01</radius>
-              <height>0.55</height>
+              <height>0.4</height>
             </cylinder>
           </x3D_shapes>
         </x3D>
@@ -4416,10 +4416,10 @@
     <viewpoints>
       <!--This is the viewpoint list-->
       <viewpoint>
-        <name>New_Viewpoint</name>
-        <joint>R2_Roue_AR_D</joint>
+        <name>Suspenstion_avant</name>
+        <joint>R1_Barredir_G</joint>
         <position>
-          <x>-0.25</x>
+          <x>0.5</x>
           <y>-1.0</y>
           <z>1.0</z>
         </position>
@@ -4440,11 +4440,11 @@
         <backClipDst>50.0</backClipDst>
       </viewpoint>
       <viewpoint>
-        <name>New_Viewpoint</name>
+        <name>Vue_avant</name>
         <joint>base</joint>
         <position>
           <x>4.0</x>
-          <y>1.0</y>
+          <y>0.0</y>
           <z>1.0</z>
         </position>
         <target>
@@ -4464,12 +4464,12 @@
         <backClipDst>50.0</backClipDst>
       </viewpoint>
       <viewpoint>
-        <name>New_Viewpoint</name>
+        <name>Roue_AV_G</name>
         <joint>R3_fusee_AV_D</joint>
         <position>
           <x>0.5</x>
-          <y>0.55</y>
-          <z>-0.251</z>
+          <y>-0.55</y>
+          <z>0.25</z>
         </position>
         <target>
           <x>0.0</x>
