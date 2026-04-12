@@ -11,15 +11,19 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
     wheel_ids = [mbs_data.extforce_id.get(n) for n in wheel_names]
 
     if ixF in wheel_ids:
-        K_tire = 200000.0  # [N/m] raideur verticale pneu
-        R_tire = 0.295     # [m]   rayon nominal pneu MX-5
+        um = mbs_data.user_model
+        
+        # Determine if front or rear wheel
+        wheel_index = wheel_ids.index(ixF)
+        is_front = wheel_index < 2
+        
+        tire_data = um['FrontTire'] if is_front else um['RearTire']
+        K_tire = tire_data['K']  # [N/m]
+        R_tire = tire_data['R']  # [m]
 
         # --- ETAPE 1 : Cinématique du contact ---
         pen, rz, angslip, angcamb, slip, Pct, Vmct, Rt_ground, dxF_tgc = \
             tgc_car_kine_wheel(PxF, RxF, VxF, OMxF, R_tire)
-
- 
-
 
         # Correction d'indice (annonce profs du 4 mars)
         dxF_tgc[0:3] = dxF_tgc[1:4]

@@ -50,6 +50,7 @@ um['RearTire']        = {'R': 0.288, 'K': 180000.0}
 
 um['FrontSuspension'] = {'K': 27000.0, 'C': 2200.0, 'C_bar': 2500.0, 'Z0': 0.40}
 um['RearSuspension']  = {'K': 17000.0, 'C': 1800.0, 'C_bar': 1800.0, 'Z0': 0.40}
+
 mbs_data.user_model = um
 
 # ===========================================================================
@@ -68,19 +69,19 @@ print ("Partitionning done.")
 print ("Equilibrium...")
 mbs_data.process = 2
 mbs_equil = Robotran.MbsEquil(mbs_data)
-mbs_equil.set_options(method=1, senstol=1e-6, verbose=1)
+mbs_equil.set_options(method=1, senstol=1e-1, verbose=1, save2file=1)
 mbs_equil.run()
 print ("Equilibrium done.")
 
 # ============================================================================
 # Modal Analysis
 # =============================================================================
-# print ("Modal analysis...")
-# mbs_data.process = 4
-# mbs_modal = Robotran.MbsModal(mbs_data)
-# mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
-# mbs_modal.run()
-# print ("Modal analysis done.")
+print ("Modal analysis...")
+mbs_data.process = 4
+mbs_modal = Robotran.MbsModal(mbs_data)
+mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
+mbs_modal.run()
+print ("Modal analysis done.")
 
 # =============================================================================
 # Direct Dynamics

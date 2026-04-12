@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr  8 22:23:55 2026
+#	==> Generation Date: Sun Apr 12 10:59:43 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -184,8 +184,8 @@ def cons_jdqd(Jdqd, s):
     Apqpjdqd5_24 = -OMjdqd5_13*ORjdqd5_34+OMjdqd5_33*ORjdqd5_14-Ompqpjdqd5_13*RLjdqd5_34+Ompqpjdqd5_33*RLjdqd5_14
     Apqpjdqd5_34 = Apqpjdqd5_32+OMjdqd5_13*ORjdqd5_24-OMjdqd5_23*ORjdqd5_14+Ompqpjdqd5_13*RLjdqd5_24-Ompqpjdqd5_23* \
  	  RLjdqd5_14
-    RLjdqd6_22 = s.dpt[2,25]*C11-s.dpt[3,25]*S11
-    RLjdqd6_32 = s.dpt[2,25]*S11+s.dpt[3,25]*C11
+    RLjdqd6_22 = s.dpt[2,25]*C11
+    RLjdqd6_32 = s.dpt[2,25]*S11
     ORjdqd6_22 = -RLjdqd6_32*qd[11]
     ORjdqd6_32 = RLjdqd6_22*qd[11]
     Apqpjdqd6_22 = -ORjdqd6_32*qd[11]
@@ -231,8 +231,8 @@ def cons_jdqd(Jdqd, s):
     Apqpjdqd7_25 = -OMjdqd7_14*ORjdqd7_35+OMjdqd7_34*ORjdqd7_15-Ompqpjdqd7_14*RLjdqd7_35+Ompqpjdqd7_34*RLjdqd7_15
     Apqpjdqd7_35 = Apqpjdqd7_33+OMjdqd7_14*ORjdqd7_25-OMjdqd7_24*ORjdqd7_15+Ompqpjdqd7_14*RLjdqd7_25-Ompqpjdqd7_24* \
  	  RLjdqd7_15
-    RLjdqd8_22 = s.dpt[2,18]*C7-s.dpt[3,18]*S7
-    RLjdqd8_32 = s.dpt[2,18]*S7+s.dpt[3,18]*C7
+    RLjdqd8_22 = s.dpt[2,18]*C7
+    RLjdqd8_32 = s.dpt[2,18]*S7
     ORjdqd8_22 = -RLjdqd8_32*qd[7]
     ORjdqd8_32 = RLjdqd8_22*qd[7]
     Apqpjdqd8_22 = -ORjdqd8_32*qd[7]

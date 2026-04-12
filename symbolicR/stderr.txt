@@ -1,6 +1,36 @@
 
 ##############################################################
-#	file7.gen 08/04/2026 22:22:17    errors
+#	file6.gen 12/04/2026 10:59:43    errors
+##############################################################
+git hash : 0e4e6a608eeee06956095d2f2ad315abdb092777
+Warning !
+Unknown option/flag found in generation file : useXML
+
+
+ Warning (error_data) : The link(1D or 3D) menus require the presence of link(s) (1D or 3D) in the MBS 
+
+
+
+ Warning in the symbolic generator !
+
+
+
+		Maximum simultaneous symbolic expressions :  554
+
+		Maximum number of allocated Kbytes :  25
+
+
+	The symbolic equations have been generated 
+	in the directory: /usr/local/robotran/users/LEPL1504/upload/
+
+
+ 		*** Warning during symbolic generation ! ***
+
+
+
+
+##############################################################
+#	file7.gen 12/04/2026 10:59:43    errors
 ##############################################################
 git hash : 0e4e6a608eeee06956095d2f2ad315abdb092777
 Warning !
@@ -38,7 +68,7 @@ Unknown option/flag found in generation file : useXML
 
 
 ##############################################################
-#	file3.gen 08/04/2026 22:22:17    errors
+#	file5.gen 12/04/2026 10:59:43    errors
 ##############################################################
 git hash : 0e4e6a608eeee06956095d2f2ad315abdb092777
 Warning !
@@ -48,122 +78,9 @@ Unknown option/flag found in generation file : useXML
 	Elimination of the superfluous equations.....................
 
 
-		Maximum simultaneous symbolic expressions :  3255
+		Maximum simultaneous symbolic expressions :  4440
 
-		Maximum number of allocated Kbytes :  152
-
-
-	The symbolic equations have been generated 
-	in the directory: /usr/local/robotran/users/LEPL1504/upload/
-
-
- 		*** Generation symbolique reussie ! ***
-
-
-
-
-##############################################################
-#	file1b.gen 08/04/2026 22:22:17    errors
-##############################################################
-git hash : 0e4e6a608eeee06956095d2f2ad315abdb092777
-Warning !
-Unknown option/flag found in generation file : useXML
-
-
-	Elimination of the superfluous equations.....................
-
-
-		Maximum simultaneous symbolic expressions :  22074
-
-		Maximum number of allocated Kbytes :  1034
-
-
-	The symbolic equations have been generated 
-	in the directory: /usr/local/robotran/users/LEPL1504/upload/
-
-
- 		*** Generation symbolique reussie ! ***
-
-
-
-
-##############################################################
-#	file0.gen 08/04/2026 22:22:17    errors
-##############################################################
-git hash : 0e4e6a608eeee06956095d2f2ad315abdb092777
-Warning !
-Unknown option/flag found in generation file : useXML
-
-	Computation of the kinematics........
-
-	Computation of the dynamics.....................
-
-		Joints   43  42  41  40  39  38  37  36  35  34
-
-		    -->  33  32  31  30  29  28  27  26  25  24
-
-		    -->  23  22  21  20  19  18  17  16  15  14
-
-		    -->  13  12  11  10   9   8   7   6   5   4
-
-		    -->   3   2   1
-
-	Elimination of the superfluous equations.....................
-
-
-		Maximum simultaneous symbolic expressions :  21080
-
-		Maximum number of allocated Kbytes :  988
-
-
-	The symbolic equations have been generated 
-	in the directory: /usr/local/robotran/users/LEPL1504/upload/
-
-
- 		*** Generation symbolique reussie ! ***
-
-
-
-
-##############################################################
-#	file4.gen 08/04/2026 22:22:17    errors
-##############################################################
-git hash : 0e4e6a608eeee06956095d2f2ad315abdb092777
-Warning !
-Unknown option/flag found in generation file : useXML
-
-
-	Elimination of the superfluous equations.....................
-
-
-		Maximum simultaneous symbolic expressions :  4642
-
-		Maximum number of allocated Kbytes :  217
-
-
-	The symbolic equations have been generated 
-	in the directory: /usr/local/robotran/users/LEPL1504/upload/
-
-
- 		*** Generation symbolique reussie ! ***
-
-
-
-
-##############################################################
-#	file2.gen 08/04/2026 22:22:17    errors
-##############################################################
-git hash : 0e4e6a608eeee06956095d2f2ad315abdb092777
-Warning !
-Unknown option/flag found in generation file : useXML
-
-
-	Elimination of the superfluous equations.....................
-
-
-		Maximum simultaneous symbolic expressions :  1231
-
-		Maximum number of allocated Kbytes :  57
+		Maximum number of allocated Kbytes :  208
 
 
 	The symbolic equations have been generated 

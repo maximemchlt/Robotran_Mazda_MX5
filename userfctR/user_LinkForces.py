@@ -44,11 +44,4 @@ def user_LinkForces(Z, Zd, mbs_data, tsim, identity):
 
         Flink = K * (Z - Z0) + C * Zd
 
-
-
-    # Example: linear spring
-    # k = 1000 #N/m
-    # Z0= 0.1  #m
-    # Flink = k*(Z-Z0)
-
     return Flink

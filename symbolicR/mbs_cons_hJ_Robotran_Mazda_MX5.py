@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr  8 22:23:55 2026
+#	==> Generation Date: Sun Apr 12 10:59:43 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -161,8 +161,8 @@ def cons_hJ(h, Jac, s):
     JTlp5_14_3 = -RLlp5_24*ROlp5_62+RLlp5_34*C19
     JTlp5_24_3 = RLlp5_14*ROlp5_62-RLlp5_34*ROlp5_42
     JTlp5_34_3 = -RLlp5_14*C19+RLlp5_24*ROlp5_42
-    RLlp6_22 = s.dpt[2,25]*C11-s.dpt[3,25]*S11
-    RLlp6_32 = s.dpt[2,25]*S11+s.dpt[3,25]*C11
+    RLlp6_22 = s.dpt[2,25]*C11
+    RLlp6_32 = s.dpt[2,25]*S11
     POlp6_12 = s.dpt[1,25]+s.dpt[1,4]
     POlp6_22 = RLlp6_22+s.dpt[2,4]
     POlp6_32 = RLlp6_32+s.dpt[3,4]
@@ -200,8 +200,8 @@ def cons_hJ(h, Jac, s):
     JTlp7_15_4 = -RLlp7_25*ROlp7_63+RLlp7_35*C17
     JTlp7_25_4 = RLlp7_15*ROlp7_63-RLlp7_35*ROlp7_43
     JTlp7_35_4 = -RLlp7_15*C17+RLlp7_25*ROlp7_43
-    RLlp8_22 = s.dpt[2,18]*C7-s.dpt[3,18]*S7
-    RLlp8_32 = s.dpt[2,18]*S7+s.dpt[3,18]*C7
+    RLlp8_22 = s.dpt[2,18]*C7
+    RLlp8_32 = s.dpt[2,18]*S7
     POlp8_12 = s.dpt[1,18]+s.dpt[1,1]
     POlp8_22 = RLlp8_22+s.dpt[2,1]
     POlp8_32 = RLlp8_32+s.dpt[3,1]
