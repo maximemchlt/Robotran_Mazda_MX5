@@ -253,3 +253,26 @@ for attr in ["qu", "qv", "qc", "qd", "q"]:
 # EQUILIBRE
 # =========================================================
 run_equilibrium_debug(mbs_data)
+
+# =========================================================
+# DYNAMICS SIMULATION
+# =========================================================
+title("INITIALISATION DYNAMIQUE")
+mbs_data.process = 3
+mbs_dyn = Robotran.MbsDyn(mbs_data)
+mbs_dyn.set_options(method=1, verbose=1)
+
+print_object_attrs(mbs_dyn, "mbs_dyn", max_items=150)
+
+try:
+    mbs_dyn.run()
+    print("\nDynamique terminée sans exception Python.")
+except Exception as e:
+    print("\nException Python capturée pendant la dynamique :")
+    print(repr(e))
+
+title("État de mbs_dyn après run()")
+for attr in ["t", "q", "qd", "qdd", "Qe", "flag", "status"]:
+    val = safe_get(mbs_dyn, attr, None)
+    if val is not None:
+        print_vector_with_indices(attr, val, one_based=False, max_len=10)
