@@ -62,6 +62,57 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
     # Concatenating force, torque and force application point to returned array.
     # This must not be modified.
 
+    wheel_names = ['F_pneu_av_g', 'F_pneu_av_d', 'F_pneu_ar_g', 'F_pneu_ar_d']
+    wheel_ids = [mbs_data.extforce_id.get(n) for n in wheel_names]
+
+    if ixF in wheel_ids:
+        if ixF == wheel_ids[0] or ixF == wheel_ids[1]:
+            K_tire = mbs_data.user_model['FrontTire']['K']  # [N/m] raideur verticale pneu avant
+            R_tire = mbs_data.user_model['FrontTire']['R']  # [m] rayon du pneu avant
+        else:
+            K_tire = mbs_data.user_model['RearTire']['K']  # [N/m] raideur verticale pneu arrière
+            R_tire = mbs_data.user_model['RearTire']['R']  # [m] rayon du pneu arrière
+
+        # === Calcul cinématique de la roue ===
+        pen = 0 # Pénétration du pneu dans le sol
+        pen, rz, angslip, angcamb, slip, Pct, Vmct, Rt_ground, dxF_tgc = tgc_car_kine_wheel(
+            PxF, RxF, VxF, OMxF, R_tire
+        )
+
+        # Correction d'indice (annonce profs du 4 mars)
+        dxF_tgc[0:3] = dxF_tgc[1:4]
+        dxF = dxF_tgc[0:3]
+
+        # === Cas 1 : Equilibre  ===
+        if mbs_data.process == 2:
+            if pen > 0:
+                Fz = K_tire * pen  # force normale Fz dans [T]
+            else:
+                Fz = 0.0
+            Fx = Fy = Mx = My = Mz = 0.0
+
+        # === Cas 2 : Equilibre dynamique ===
+        elif mbs_data.process == 3:
+            if pen > 0:
+                T_F = np.zeros(4)  # forces dans repère [T]
+                T_M = np.zeros(4)  # moments dans repère [T]
+                tgc_bakker_contact(T_F, T_M, angslip, angcamb, slip)
+            else:
+                T_F = np.zeros(4)
+                T_M = np.zeros(4)
+            
+            # Transformation des forces et moments de [T] vers [I]
+            # (en supposant que RxF est la matrice de rotation de [I] vers [T])
+            F_inertial = matrix_vector_product(Rt_ground, T_F)
+            M_inertial = matrix_vector_product(Rt_ground, T_M)
+
+            Fx = F_inertial[1]  # Force X dans le repère inertiel
+            Fy = F_inertial[2]  # Force Y dans le repère inert
+            Fz = F_inertial[3]  # Force Z dans le repère inertiel
+            Mx = M_inertial[0]  # Moment X dans le repère inertiel
+            My = M_inertial[1]  # Moment Y dans le repère inertiel
+            Mz = M_inertial[2]  # Moment Z dans le repère inertiel
+
     Swr = mbs_data.SWr[ixF]
     Swr[1:] = [Fx, Fy, Fz, Mx, My, Mz, dxF[0], dxF[1], dxF[2]]
 
