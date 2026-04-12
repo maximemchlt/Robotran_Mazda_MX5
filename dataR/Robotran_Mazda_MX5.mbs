@@ -106,7 +106,7 @@
         <type>T3</type>
         <nature>independent</nature>
         <initialvalue>
-          <q>0.5</q>
+          <q>0.143</q>
         </initialvalue>
         <graphics>
           <x2D>
@@ -286,6 +286,7 @@
           </x2D>
           <x3D />
         </graphics>
+        <sensor name="L1" Pos="true" />
       </point>
       <point>
         <pointname>Point_barre_antiRoulis_AR</pointname>
@@ -528,7 +529,7 @@
         <graphics>
           <x2D>
             <position>
-              <x>1181.0</x>
+              <x>1180.0</x>
               <y>679.0</y>
             </position>
           </x2D>
@@ -605,9 +606,33 @@
           <angle>0.0</angle>
         </x2D>
         <x3D>
-          <x3D_com />
-          <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Brasinf</name>
+              <position>
+                <x>0.0</x>
+                <y>0.185</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="204" G="0" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.35</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -703,6 +728,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>BrasSuperieur</name>
+              <position>
+                <x>0.0</x>
+                <y>0.115</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="255" G="165" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.23</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -815,6 +866,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Fusee</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>-0.135</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>1.5707963267948966</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="255" G="255" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.27</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -959,10 +1036,7 @@
               <y>682.0</y>
             </position>
           </x2D>
-          <x3D>
-            <x3D_joint />
-            <x3D_frame />
-          </x3D>
+          <x3D />
         </graphics>
       </joint>
       <mass>4.0</mass>
@@ -1011,6 +1085,7 @@
           </x2D>
           <x3D />
         </graphics>
+        <sensor name="L2" Pos="true" />
       </point>
       <point>
         <pointname>Bras_inf_bielle_G</pointname>
@@ -1065,16 +1140,13 @@
           <angle>0.0</angle>
         </x2D>
         <x3D>
-          <x3D_com />
-          <x3D_points />
           <x3D_lines />
           <x3D_shapes>
-            <sphere>
-              <name>New_Shape</name>
-              <hide />
+            <cylinder>
+              <name>Brasinf</name>
               <position>
-                <x>0.1</x>
-                <y>-0.1</y>
+                <x>0.0</x>
+                <y>-0.185</y>
                 <z>0.0</z>
               </position>
               <scale>
@@ -1087,12 +1159,13 @@
                 <y>0.0</y>
                 <z>0.0</z>
               </rotation>
-              <color R="0" G="0" B="0" />
+              <color R="204" G="0" B="0" />
               <specularColor R="255" G="255" B="255" />
               <shininess>250.0</shininess>
-              <transparency>0.5</transparency>
-              <radius>0.025</radius>
-            </sphere>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.35</height>
+            </cylinder>
           </x3D_shapes>
         </x3D>
       </graphics>
@@ -1189,6 +1262,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>BrasSuperieur</name>
+              <position>
+                <x>0.0</x>
+                <y>-0.115</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="255" G="165" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.23</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -1301,6 +1400,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Fusee</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>-0.135</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>1.5707963267948966</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="255" G="255" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.27</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -1522,10 +1647,9 @@
           <x3D_lines />
           <x3D_shapes>
             <cylinder>
-              <name>New_Shape</name>
-              <hide />
+              <name>BarreAntiRoulis</name>
               <position>
-                <x>0.0</x>
+                <x>0.05</x>
                 <y>-0.225</y>
                 <z>0.0</z>
               </position>
@@ -1537,13 +1661,13 @@
               <rotation>
                 <x>0.0</x>
                 <y>0.0</y>
-                <z>0.0</z>
+                <z>0.2617993877991494</z>
               </rotation>
-              <color R="0" G="0" B="0" />
+              <color R="128" G="0" B="128" />
               <specularColor R="255" G="255" B="255" />
               <shininess>250.0</shininess>
-              <transparency>0.5</transparency>
-              <radius>0.025</radius>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
               <height>0.45</height>
             </cylinder>
           </x3D_shapes>
@@ -1642,6 +1766,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>BarreAntiRoulis</name>
+              <position>
+                <x>0.05</x>
+                <y>0.225</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>-0.2617993877991494</z>
+              </rotation>
+              <color R="128" G="0" B="128" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.45</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -1754,6 +1904,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Bielle</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0707</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>1.5707963267948966</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="0" G="0" B="255" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.1414</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -1864,32 +2040,6 @@
         </x2D>
         <x3D>
           <x3D_points />
-          <x3D_shapes>
-            <cylinder>
-              <name>New_Shape</name>
-              <position>
-                <x>0.0</x>
-                <y>0.0</y>
-                <z>0.0707</z>
-              </position>
-              <scale>
-                <x>1.0</x>
-                <y>1.0</y>
-                <z>1.0</z>
-              </scale>
-              <rotation>
-                <x>1.5707963267948966</x>
-                <y>0.0</y>
-                <z>0.0</z>
-              </rotation>
-              <color R="0" G="0" B="0" />
-              <specularColor R="255" G="255" B="255" />
-              <shininess>250.0</shininess>
-              <transparency>0.5</transparency>
-              <radius>0.01</radius>
-              <height>0.1414</height>
-            </cylinder>
-          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -1985,6 +2135,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>BrasSuperieur</name>
+              <position>
+                <x>0.0</x>
+                <y>-0.115</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="255" G="165" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.23</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -2148,6 +2324,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Fusee</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>-0.135</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>1.5707963267948966</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="255" G="255" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.27</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -2398,9 +2600,33 @@
           <angle>0.0</angle>
         </x2D>
         <x3D>
-          <x3D_com />
-          <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Brasinf</name>
+              <position>
+                <x>0.0</x>
+                <y>-0.185</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="204" G="0" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.35</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -2496,6 +2722,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>BrasSuperieur</name>
+              <position>
+                <x>0.0</x>
+                <y>0.115</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="255" G="165" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.23</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -2659,6 +2911,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Fusee</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>-0.135</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>1.5707963267948966</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="255" G="255" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.27</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -2909,9 +3187,33 @@
           <angle>0.0</angle>
         </x2D>
         <x3D>
-          <x3D_com />
-          <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Brasinf</name>
+              <position>
+                <x>0.0</x>
+                <y>0.185</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="204" G="0" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.35</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -3007,6 +3309,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>BarreAntiRoulis</name>
+              <position>
+                <x>-0.05</x>
+                <y>-0.225</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>-0.2617993877991494</z>
+              </rotation>
+              <color R="128" G="0" B="128" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.45</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -3326,6 +3654,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>Bielle</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0707</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="0" G="0" B="255" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>0.1414</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -3352,11 +3706,17 @@
           </x3D>
         </graphics>
       </joint>
+      <mass>3.0</mass>
+      <inertia>
+        <Ixx>0.05</Ixx>
+        <Iyy>0.05</Iyy>
+        <Izz>0.05</Izz>
+      </inertia>
       <point>
         <pointname>Bras_Direction_D</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>0.3</y>
+          <y>0.66</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
@@ -3373,7 +3733,7 @@
         <pointname>Bras_Direction_G</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>-0.3</y>
+          <y>-0.66</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
@@ -3425,6 +3785,32 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <cylinder>
+              <name>BarreDirection</name>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </position>
+              <scale>
+                <x>1.0</x>
+                <y>1.0</y>
+                <z>1.0</z>
+              </scale>
+              <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="0" G="128" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.0</transparency>
+              <radius>0.01</radius>
+              <height>1.32</height>
+            </cylinder>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -3453,7 +3839,7 @@
       </joint>
       <joint>
         <jointname>R3_Barredir_D</jointname>
-        <type>R3</type>
+        <type>R2</type>
         <nature>dependent</nature>
         <graphics>
           <x2D>
@@ -3468,12 +3854,12 @@
           </x3D>
         </graphics>
       </joint>
-      <mass>1.5</mass>
+      <mass>1.0</mass>
       <com>
         <coordinates>
           <x>0.0</x>
-          <y>0.215</y>
-          <z>0.0</z>
+          <y>0.205</y>
+          <z>0.14</z>
         </coordinates>
       </com>
       <inertia>
@@ -3485,13 +3871,13 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>0.41</y>
-          <z>0.28</z>
+          <y>0.05</y>
+          <z>0.302</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
-              <x>1254.0</x>
+              <x>1253.0</x>
               <y>61.0</y>
             </position>
           </x2D>
@@ -3565,7 +3951,7 @@
       </joint>
       <joint>
         <jointname>R3_Barredir_G</jointname>
-        <type>R3</type>
+        <type>R2</type>
         <nature>dependent</nature>
         <graphics>
           <x2D>
@@ -3580,12 +3966,12 @@
           </x3D>
         </graphics>
       </joint>
-      <mass>1.5</mass>
+      <mass>1.0</mass>
       <com>
         <coordinates>
           <x>0.0</x>
-          <y>0.215</y>
-          <z>0.0</z>
+          <y>-0.205</y>
+          <z>0.14</z>
         </coordinates>
       </com>
       <inertia>
@@ -3597,14 +3983,14 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>-0.41</y>
-          <z>0.28</z>
+          <y>-0.05</y>
+          <z>0.302</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
               <x>466.0</x>
-              <y>65.0</y>
+              <y>66.0</y>
             </position>
           </x2D>
           <x3D />
@@ -3901,15 +4287,15 @@
       <!--This is the viewpoint list-->
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>R1_Barredir_G</joint>
+        <joint>R2_Roue_AR_D</joint>
         <position>
           <x>-0.25</x>
           <y>-1.0</y>
           <z>1.0</z>
         </position>
         <target>
-          <x>-1.25</x>
-          <y>-0.5</y>
+          <x>0.0</x>
+          <y>0.0</y>
           <z>0.0</z>
         </target>
         <up>

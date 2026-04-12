@@ -68,19 +68,19 @@ print ("Partitionning done.")
 print ("Equilibrium...")
 mbs_data.process = 2
 mbs_equil = Robotran.MbsEquil(mbs_data)
-mbs_equil.set_options(method=1, senstol=1e-8, verbose=1)
+mbs_equil.set_options(method=1, senstol=1e-6, verbose=1)
 mbs_equil.run()
 print ("Equilibrium done.")
 
 # ============================================================================
 # Modal Analysis
 # =============================================================================
-#print ("Modal analysis...")
-#mbs_data.process = 4
-#mbs_modal = Robotran.MbsModal(mbs_data)
-#mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
-#mbs_modal.run()
-#print ("Modal analysis done.")
+# print ("Modal analysis...")
+# mbs_data.process = 4
+# mbs_modal = Robotran.MbsModal(mbs_data)
+# mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
+# mbs_modal.run()
+# print ("Modal analysis done.")
 
 # =============================================================================
 # Direct Dynamics
@@ -88,7 +88,7 @@ print ("Equilibrium done.")
 print ("Direct dynamics...")
 mbs_data.process = 3
 mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-2, tf=5, save2file=1)
+mbs_dirdyn.set_options(dt0=1e-2, tf=2, save2file=1)
 mbs_dirdyn.run()
 print ("Direct dynamics done.")
 

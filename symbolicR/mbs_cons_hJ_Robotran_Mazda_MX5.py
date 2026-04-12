@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr  8 20:48:20 2026
+#	==> Generation Date: Wed Apr  8 22:23:55 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -374,33 +374,33 @@ def cons_hJ(h, Jac, s):
     JTlp17_15_4 = -RLlp17_25*ROlp17_93+RLlp17_35*ROlp17_83
     JTlp17_25_4 = RLlp17_15*ROlp17_93-RLlp17_35*S23
     JTlp17_35_4 = -RLlp17_15*ROlp17_83+RLlp17_25*S23
-    ROlp18_53 = C42*C43
-    ROlp18_63 = S42*C43
+    ROlp18_83 = -S42*C43
+    ROlp18_93 = C42*C43
     POlp18_22 = q[39]+s.dpt[2,55]
-    RLlp18_14 = -s.dpt[2,57]*S43
-    RLlp18_24 = ROlp18_53*s.dpt[2,57]-s.dpt[3,57]*S42
-    RLlp18_34 = ROlp18_63*s.dpt[2,57]+s.dpt[3,57]*C42
+    RLlp18_14 = s.dpt[3,57]*S43
+    RLlp18_24 = ROlp18_83*s.dpt[3,57]+s.dpt[2,57]*C42
+    RLlp18_34 = ROlp18_93*s.dpt[3,57]+s.dpt[2,57]*S42
     POlp18_14 = RLlp18_14+s.dpt[1,15]
     POlp18_24 = POlp18_22+RLlp18_24
     POlp18_34 = RLlp18_34+s.dpt[3,15]
-    JTlp18_14_3 = -RLlp18_24*C42-RLlp18_34*S42
-    JTlp18_24_3 = RLlp18_14*C42
-    JTlp18_34_3 = RLlp18_14*S42
+    JTlp18_14_3 = -RLlp18_24*S42+RLlp18_34*C42
+    JTlp18_24_3 = RLlp18_14*S42
+    JTlp18_34_3 = -RLlp18_14*C42
     h_25 = POlp17_15-POlp18_14
     h_26 = POlp17_25-POlp18_24
     h_27 = POlp17_35-POlp18_34
-    ROlp19_53 = C40*C41
-    ROlp19_63 = S40*C41
+    ROlp19_83 = -S40*C41
+    ROlp19_93 = C40*C41
     POlp19_22 = q[39]+s.dpt[2,54]
-    RLlp19_14 = -s.dpt[2,56]*S41
-    RLlp19_24 = ROlp19_53*s.dpt[2,56]-s.dpt[3,56]*S40
-    RLlp19_34 = ROlp19_63*s.dpt[2,56]+s.dpt[3,56]*C40
+    RLlp19_14 = s.dpt[3,56]*S41
+    RLlp19_24 = ROlp19_83*s.dpt[3,56]+s.dpt[2,56]*C40
+    RLlp19_34 = ROlp19_93*s.dpt[3,56]+s.dpt[2,56]*S40
     POlp19_14 = RLlp19_14+s.dpt[1,15]
     POlp19_24 = POlp19_22+RLlp19_24
     POlp19_34 = RLlp19_34+s.dpt[3,15]
-    JTlp19_14_3 = -RLlp19_24*C40-RLlp19_34*S40
-    JTlp19_24_3 = RLlp19_14*C40
-    JTlp19_34_3 = RLlp19_14*S40
+    JTlp19_14_3 = -RLlp19_24*S40+RLlp19_34*C40
+    JTlp19_24_3 = RLlp19_14*S40
+    JTlp19_34_3 = -RLlp19_14*C40
     ROlp20_52 = C27*C28-S27*S28
     ROlp20_62 = C27*S28+S27*C28
     ROlp20_82 = -C27*S28-S27*C28
