@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Sun Apr 12 20:07:47 2026
+#	==> Generation Date: Mon Apr 13 14:16:22 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -119,8 +119,8 @@ def link(frc, trq, Flink, Z, Zd, s, tsim):
     fPlnk21 = Flink1*e21
     fPlnk31 = Flink1*e31
     trqlnk6_1_1 = -fPlnk21*(s.dpt[3,3]-s.l[3,6])+fPlnk31*s.dpt[2,3]
-    trqlnk6_1_2 = fPlnk11*(s.dpt[3,3]-s.l[3,6])-fPlnk31*s.dpt[1,3]
-    trqlnk6_1_3 = -fPlnk11*s.dpt[2,3]+fPlnk21*s.dpt[1,3]
+    trqlnk6_1_2 = fPlnk11*(s.dpt[3,3]-s.l[3,6])-fPlnk31*(s.dpt[1,3]-s.l[1,6])
+    trqlnk6_1_3 = -fPlnk11*s.dpt[2,3]+fPlnk21*(s.dpt[1,3]-s.l[1,6])
     fSlnk11 = Flink1*e11
     fSlnk21 = Flink1*(e21*C7+e31*S7)
     fSlnk31 = Flink1*(-e21*S7+e31*C7)
@@ -140,8 +140,8 @@ def link(frc, trq, Flink, Z, Zd, s, tsim):
     frclnk6_2_2 = fPlnk21-fSlnk22
     frclnk6_2_3 = fPlnk31-fSlnk32
     trqlnk6_2_1 = trqlnk6_1_1+fSlnk22*(s.dpt[3,6]-s.l[3,6])-fSlnk32*s.dpt[2,6]
-    trqlnk6_2_2 = trqlnk6_1_2-fSlnk12*(s.dpt[3,6]-s.l[3,6])+fSlnk32*s.dpt[1,6]
-    trqlnk6_2_3 = trqlnk6_1_3+fSlnk12*s.dpt[2,6]-fSlnk22*s.dpt[1,6]
+    trqlnk6_2_2 = trqlnk6_1_2-fSlnk12*(s.dpt[3,6]-s.l[3,6])+fSlnk32*(s.dpt[1,6]-s.l[1,6])
+    trqlnk6_2_3 = trqlnk6_1_3+fSlnk12*s.dpt[2,6]-fSlnk22*(s.dpt[1,6]-s.l[1,6])
     fPlnk13 = Flink3*e13
     fPlnk23 = Flink3*e23
     fPlnk33 = Flink3*e33
@@ -149,8 +149,8 @@ def link(frc, trq, Flink, Z, Zd, s, tsim):
     frclnk6_3_2 = fPlnk23+frclnk6_2_2
     frclnk6_3_3 = fPlnk33+frclnk6_2_3
     trqlnk6_3_1 = trqlnk6_2_1-fPlnk23*(s.dpt[3,8]-s.l[3,6])+fPlnk33*s.dpt[2,8]
-    trqlnk6_3_2 = trqlnk6_2_2+fPlnk13*(s.dpt[3,8]-s.l[3,6])-fPlnk33*s.dpt[1,8]
-    trqlnk6_3_3 = trqlnk6_2_3-fPlnk13*s.dpt[2,8]+fPlnk23*s.dpt[1,8]
+    trqlnk6_3_2 = trqlnk6_2_2+fPlnk13*(s.dpt[3,8]-s.l[3,6])-fPlnk33*(s.dpt[1,8]-s.l[1,6])
+    trqlnk6_3_3 = trqlnk6_2_3-fPlnk13*s.dpt[2,8]+fPlnk23*(s.dpt[1,8]-s.l[1,6])
     fSlnk13 = Flink3*e13
     fSlnk23 = Flink3*(e23*C26+e33*S26)
     fSlnk33 = Flink3*(-e23*S26+e33*C26)
@@ -164,8 +164,8 @@ def link(frc, trq, Flink, Z, Zd, s, tsim):
     frclnk6_4_2 = fPlnk24+frclnk6_3_2
     frclnk6_4_3 = fPlnk34+frclnk6_3_3
     trqlnk6_4_1 = trqlnk6_3_1-fPlnk24*(s.dpt[3,11]-s.l[3,6])+fPlnk34*s.dpt[2,11]
-    trqlnk6_4_2 = trqlnk6_3_2+fPlnk14*(s.dpt[3,11]-s.l[3,6])-fPlnk34*s.dpt[1,11]
-    trqlnk6_4_3 = trqlnk6_3_3-fPlnk14*s.dpt[2,11]+fPlnk24*s.dpt[1,11]
+    trqlnk6_4_2 = trqlnk6_3_2+fPlnk14*(s.dpt[3,11]-s.l[3,6])-fPlnk34*(s.dpt[1,11]-s.l[1,6])
+    trqlnk6_4_3 = trqlnk6_3_3-fPlnk14*s.dpt[2,11]+fPlnk24*(s.dpt[1,11]-s.l[1,6])
     fSlnk14 = Flink4*e14
     fSlnk24 = Flink4*(e24*C32+e34*S32)
     fSlnk34 = Flink4*(-e24*S32+e34*C32)

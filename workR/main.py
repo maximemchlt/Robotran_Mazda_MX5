@@ -48,8 +48,8 @@ um = {}
 um['FrontTire']       = {'R': 0.288, 'K': 180000.0}
 um['RearTire']        = {'R': 0.288, 'K': 180000.0}
 
-um['FrontSuspension'] = {'K': 27000.0, 'C': 2200.0, 'C_bar': 2500.0, 'Z0': 0.40}
-um['RearSuspension']  = {'K': 17000.0, 'C': 1800.0, 'C_bar': 1800.0, 'Z0': 0.40}
+um['FrontSuspension'] = {'K': 27000.0, 'C': 2200.0, 'C_bar': 2500.0, 'Z0': 0.43}
+um['RearSuspension']  = {'K': 17000.0, 'C': 1800.0, 'C_bar': 1800.0, 'Z0': 0.43}
 
 mbs_data.user_model = um
 

@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Sun Apr 12 20:07:47 2026
+#	==> Generation Date: Mon Apr 13 14:16:22 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Robotran_Mazda_MX5
@@ -917,9 +917,9 @@ def invdyna(phi,s,tsim):
     Cq17 = -s.trq[1,7]+s.In[1,7]*OMp17-s.In[5,7]*OM27*OM37+s.In[9,7]*OM27*OM37+Fs37*s.l[2,7]
     Cq27 = -s.trq[2,7]+s.In[1,7]*OM17*OM37+s.In[5,7]*OMp27-s.In[9,7]*OM17*OM37
     Cq37 = -s.trq[3,7]-s.In[1,7]*OM17*OM27+s.In[5,7]*OM17*OM27+s.In[9,7]*OMp37-Fs17*s.l[2,7]
-    Fs16 = -s.frc[1,6]+s.m[6]*(ALPHA16+BETA36*s.l[3,6])
-    Fs26 = -s.frc[2,6]+s.m[6]*(ALPHA26+BETA66*s.l[3,6])
-    Fs36 = -s.frc[3,6]+s.m[6]*(ALPHA35+BS96*s.l[3,6])
+    Fs16 = -s.frc[1,6]+s.m[6]*(ALPHA16+BETA36*s.l[3,6]+BS16*s.l[1,6])
+    Fs26 = -s.frc[2,6]+s.m[6]*(ALPHA26+BETA46*s.l[1,6]+BETA66*s.l[3,6])
+    Fs36 = -s.frc[3,6]+s.m[6]*(ALPHA35+BETA76*s.l[1,6]+BS96*s.l[3,6])
     Fq16 = Fq112+Fq121+Fq127+Fq139+Fq18+Fs111+Fs126+Fs132+Fs16+Fs17+Fq115*C15+Fq133*C33+Fq315*S15+Fq333*S33
     Fq26 = Fq215+Fq233+Fq239+Fs26+Fq212*C12+Fq221*C21+Fq227*C27+Fq28*C8-Fq312*S12-Fq321*S21-Fq327*S27-Fq38*S8+Fs211* \
  	  C11+Fs226*C26+Fs232*C32+Fs27*C7-Fs311*S11-Fs326*S26-Fs332*S32-Fs37*S7
@@ -935,18 +935,18 @@ def invdyna(phi,s,tsim):
     Cq26 = -s.trq[2,6]+Cq215+Cq233+Cq239+s.In[1,6]*OM16*OM36+s.In[5,6]*OMp26-s.In[9,6]*OM16*OM36+Cq211*C11+Cq212*C12+ \
  	  Cq221*C21+Cq226*C26+Cq227*C27+Cq232*C32+Cq27*C7+Cq28*C8-Cq311*S11-Cq312*S12-Cq321*S21-Cq326*S26-Cq327*S27-Cq332*S32- \
  	  Cq37*S7-Cq38*S8+Fq112*s.dpt[3,5]+Fq121*s.dpt[3,9]+Fq127*s.dpt[3,12]+Fq139*s.dpt[3,15]+Fq18*s.dpt[3,2]-Fq339* \
- 	  s.dpt[1,15]+Fs111*s.dpt[3,4]+Fs126*s.dpt[3,10]+Fs132*s.dpt[3,13]+Fs16*s.l[3,6]+Fs17*s.dpt[3,1]-s.dpt[1,10]*(Fs226*S26+ \
- 	  Fs326*C26)-s.dpt[1,12]*(Fq227*S27+Fq327*C27)-s.dpt[1,13]*(Fs232*S32+Fs332*C32)-s.dpt[1,14]*(-Fq133*S33+Fq333*C33)- \
- 	  s.dpt[1,1]*(Fs27*S7+Fs37*C7)-s.dpt[1,2]*(Fq28*S8+Fq38*C8)-s.dpt[1,4]*(Fs211*S11+Fs311*C11)-s.dpt[1,5]*(Fq212*S12+Fq312 \
- 	  *C12)-s.dpt[1,7]*(-Fq115*S15+Fq315*C15)-s.dpt[1,9]*(Fq221*S21+Fq321*C21)+s.dpt[3,14]*(Fq133*C33+Fq333*S33)+s.dpt[3,7]* \
- 	  (Fq115*C15+Fq315*S15)
+ 	  s.dpt[1,15]+Fs111*s.dpt[3,4]+Fs126*s.dpt[3,10]+Fs132*s.dpt[3,13]+Fs16*s.l[3,6]+Fs17*s.dpt[3,1]-Fs36*s.l[1,6]- \
+ 	  s.dpt[1,10]*(Fs226*S26+Fs326*C26)-s.dpt[1,12]*(Fq227*S27+Fq327*C27)-s.dpt[1,13]*(Fs232*S32+Fs332*C32)-s.dpt[1,14]*(- \
+ 	  Fq133*S33+Fq333*C33)-s.dpt[1,1]*(Fs27*S7+Fs37*C7)-s.dpt[1,2]*(Fq28*S8+Fq38*C8)-s.dpt[1,4]*(Fs211*S11+Fs311*C11)- \
+ 	  s.dpt[1,5]*(Fq212*S12+Fq312*C12)-s.dpt[1,7]*(-Fq115*S15+Fq315*C15)-s.dpt[1,9]*(Fq221*S21+Fq321*C21)+s.dpt[3,14]*(Fq133 \
+ 	  *C33+Fq333*S33)+s.dpt[3,7]*(Fq115*C15+Fq315*S15)
     Cq36 = -s.trq[3,6]+Cq339-q[39]*Fq139-s.In[1,6]*OM16*OM26+s.In[5,6]*OM16*OM26+s.In[9,6]*OMp36-Cq115*S15-Cq133*S33+ \
  	  Cq211*S11+Cq212*S12+Cq221*S21+Cq226*S26+Cq227*S27+Cq232*S32+Cq27*S7+Cq28*S8+Cq311*C11+Cq312*C12+Cq315*C15+Cq321*C21+ \
  	  Cq326*C26+Cq327*C27+Cq332*C32+Cq333*C33+Cq37*C7+Cq38*C8-Fq112*s.dpt[2,5]-Fq121*s.dpt[2,9]-Fq127*s.dpt[2,12]-Fq18* \
  	  s.dpt[2,2]+Fq215*s.dpt[1,7]+Fq233*s.dpt[1,14]+Fq239*s.dpt[1,15]-Fs111*s.dpt[2,4]-Fs126*s.dpt[2,10]-Fs132*s.dpt[2,13]- \
- 	  Fs17*s.dpt[2,1]+s.dpt[1,10]*(Fs226*C26-Fs326*S26)+s.dpt[1,12]*(Fq227*C27-Fq327*S27)+s.dpt[1,13]*(Fs232*C32-Fs332*S32)+ \
- 	  s.dpt[1,1]*(Fs27*C7-Fs37*S7)+s.dpt[1,2]*(Fq28*C8-Fq38*S8)+s.dpt[1,4]*(Fs211*C11-Fs311*S11)+s.dpt[1,5]*(Fq212*C12-Fq312 \
- 	  *S12)+s.dpt[1,9]*(Fq221*C21-Fq321*S21)
+ 	  Fs17*s.dpt[2,1]+Fs26*s.l[1,6]+s.dpt[1,10]*(Fs226*C26-Fs326*S26)+s.dpt[1,12]*(Fq227*C27-Fq327*S27)+s.dpt[1,13]*(Fs232* \
+ 	  C32-Fs332*S32)+s.dpt[1,1]*(Fs27*C7-Fs37*S7)+s.dpt[1,2]*(Fq28*C8-Fq38*S8)+s.dpt[1,4]*(Fs211*C11-Fs311*S11)+s.dpt[1,5]*( \
+ 	  Fq212*C12-Fq312*S12)+s.dpt[1,9]*(Fq221*C21-Fq321*S21)
     Fq15 = Fq16*C6-Fq26*S6
     Fq25 = Fq16*S6+Fq26*C6
     Cq15 = Cq16*C6-Cq26*S6

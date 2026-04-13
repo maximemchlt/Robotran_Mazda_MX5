@@ -106,7 +106,7 @@
         <type>T3</type>
         <nature>independent</nature>
         <initialvalue>
-          <q>0.143</q>
+          <q>0.3</q>
         </initialvalue>
         <graphics>
           <x2D>
@@ -175,7 +175,7 @@
       <mass>830.0</mass>
       <com>
         <coordinates>
-          <x>0.0</x>
+          <x>0.115</x>
           <y>0.0</y>
           <z>0.47</z>
         </coordinates>
@@ -493,6 +493,9 @@
         <jointname>R1_Bras_inf_AR_D</jointname>
         <type>R1</type>
         <nature>independent</nature>
+        <initialvalue>
+          <q>-0.2531831</q>
+        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -646,6 +649,9 @@
         <jointname>R1_Bras_sup_AR_D</jointname>
         <type>R1</type>
         <nature>dependent</nature>
+        <initialvalue>
+          <q>-0.4474437</q>
+        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -767,6 +773,9 @@
         <jointname>R1_fusee_AR_D</jointname>
         <type>R1</type>
         <nature>dependent</nature>
+        <initialvalue>
+          <q>0.5643174</q>
+        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -1029,6 +1038,9 @@
         <jointname>R1_Bras_inf_AR_G</jointname>
         <type>R1</type>
         <nature>independent</nature>
+        <initialvalue>
+          <q>0.2725843</q>
+        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -1180,6 +1192,9 @@
         <jointname>R1_Bras_sup_AR_G</jointname>
         <type>R1</type>
         <nature>dependent</nature>
+        <initialvalue>
+          <q>0.4802669</q>
+        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -1301,6 +1316,9 @@
         <jointname>R1_fusee_AR_G</jointname>
         <type>R1</type>
         <nature>dependent</nature>
+        <initialvalue>
+          <q>-0.6031572</q>
+        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -4465,7 +4483,7 @@
       </viewpoint>
       <viewpoint>
         <name>Roue_AV_G</name>
-        <joint>R3_fusee_AV_D</joint>
+        <joint>R1_fusee_AR_G</joint>
         <position>
           <x>0.5</x>
           <y>-0.55</y>
