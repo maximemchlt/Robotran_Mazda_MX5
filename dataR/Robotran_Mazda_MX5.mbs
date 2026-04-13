@@ -4505,6 +4505,30 @@
         <frontClipDst>0.01</frontClipDst>
         <backClipDst>50.0</backClipDst>
       </viewpoint>
+      <viewpoint>
+        <name>New_Viewpoint</name>
+        <joint>T1_chassis</joint>
+        <position>
+          <x>5.0</x>
+          <y>5.0</y>
+          <z>5.0</z>
+        </position>
+        <target>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </target>
+        <up>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </up>
+        <projection>perspective</projection>
+        <scale>1.0</scale>
+        <fieldOfView>0.785</fieldOfView>
+        <frontClipDst>0.01</frontClipDst>
+        <backClipDst>50.0</backClipDst>
+      </viewpoint>
     </viewpoints>
     <lights>
       <!--This is the light list-->

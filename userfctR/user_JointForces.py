@@ -1,60 +1,38 @@
 # -*- coding: utf-8 -*-
-"""Module for the definition of joint forces."""
-# Author: Robotran Team
-# (c) Universite catholique de Louvain, 2020
-
+import numpy as np
 
 def user_JointForces(mbs_data, tsim):
-    """Compute the force and torques in the joint.
-
-    It fills the MBsysPy.MbsData.Qq array.
-
-    Parameters
-    ----------
-    mbs_data : MBsysPy.MbsData
-        The multibody system associated to this computation.
-    tsim : float
-        The current time of the simulation.
-
-    Notes
-    -----
-    The numpy.ndarray MBsysPy.MbsData.Qq is 1D array with index starting at 1.
-    The first index (array[0]) must not be modified. The first index to be
-    filled is array[1].
-
-    Returns
-    -------
-    None
-    """
-    # cleaning previous forces value
+    # Nettoyage des forces précédentes
     mbs_data.Qq[:] = 0.0
 
-    # --- 1) Précharge pour l'équilibre ---
-    if tsim == 0.0:
-        try:
-            mbs_data.Qq[mbs_data.joint_id["R2_Roue_AR_D"]]       = 0.0
-            mbs_data.Qq[mbs_data.joint_id["R2_Roue_AR_G"]]       = 0.0
-            mbs_data.Qq[mbs_data.joint_id["T2_barre_direction"]] = 0.0
-        except Exception:
-            pass
+    # --- 1) VERROUILLAGE DE LA DIRECTION ---
+    # On crée une raideur et un amortissement virtuels très élevés pour 
+    # forcer la barre de direction à rester à 0.
+    jid_dir = mbs_data.joint_id["T2_barre_direction"]
+    K_lock = 1e6  # Raideur de maintien
+    D_lock = 1e4  # Amortissement de maintien
+    mbs_data.Qq[jid_dir] = -K_lock * mbs_data.q[jid_dir] - D_lock * mbs_data.qd[jid_dir]
 
-    # --- 2) Barre anti-roulis avant et arrière ---
-    try:
-        jid = mbs_data.joint_id["R2_Roue_AR_D"]
-        mbs_data.Qq[jid] = -mbs_data.user_model["FrontSuspension"]["C_bar"] * mbs_data.q[jid]
-    except Exception:
-        pass
+    # --- 2) BARRE ANTI-ROULIS AVANT ---
+    # On agit sur les bras SUPÉRIEURS qui sont les joints indépendants à l'avant
+    jid_av_g = mbs_data.joint_id["R1_Bras_sup_AV_G"]
+    jid_av_d = mbs_data.joint_id["R1_Bras_sup_AV_D"]
+    
+    k_bar_av = mbs_data.user_model["FrontSuspension"]["C_bar"]
+    diff_av = mbs_data.q[jid_av_g] - mbs_data.q[jid_av_d]
+    
+    mbs_data.Qq[jid_av_g] -= k_bar_av * diff_av
+    mbs_data.Qq[jid_av_d] += k_bar_av * diff_av
 
-    try:
-        jid = mbs_data.joint_id["R2_Roue_AR_G"]
-        mbs_data.Qq[jid] = -mbs_data.user_model["RearSuspension"]["C_bar"] * mbs_data.q[jid]
-    except Exception:
-        pass
-
-
-
-    # Example: damping in joint number 5
-    # D = 0.5 # N/(m/s)
-    # mbs_data.Qq[5] = -D * mbs_data.qd[5]
+    # --- 3) BARRE ANTI-ROULIS ARRIÈRE ---
+    # On agit sur les bras INFÉRIEURS qui sont les joints indépendants à l'arrière
+    jid_ar_g = mbs_data.joint_id["R1_Bras_inf_AR_G"]
+    jid_ar_d = mbs_data.joint_id["R1_Bras_inf_AR_D"]
+    
+    k_bar_ar = mbs_data.user_model["RearSuspension"]["C_bar"]
+    diff_ar = mbs_data.q[jid_ar_g] - mbs_data.q[jid_ar_d]
+    
+    mbs_data.Qq[jid_ar_g] -= k_bar_ar * diff_ar
+    mbs_data.Qq[jid_ar_d] += k_bar_ar * diff_ar
 
     return mbs_data.Qq
