@@ -85,7 +85,7 @@ mbs_data.qd[2] = 0.0         # Tuer le glissement latéral parasite (Y)
 mbs_data.qd[6] = 0.0         # Tuer la rotation parasite (Yaw)
 
 print(f">> Lancement de la simulation ({simulation})...")
-mbs_dirdyn.set_options(dt0=1e-3, tf=8.0, save2file=1)
+mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=1)
 mbs_dirdyn.run()
 
 # =============================================================================

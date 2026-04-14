@@ -37,18 +37,25 @@ def user_JointForces(mbs_data, tsim):
         Y_actuel = mbs_data.q[jid_Y]
         Yaw_actuel = mbs_data.q[jid_Yaw]
         
-        # 2. Définition de la trajectoire (La "Cible")
+        # 2. Définition de la trajectoire fluide (Courbe en S)
         Y_cible = 0.0
         
-        if tsim < 1.0:
-            Y_cible = 0.0  # Reste à droite
+        if tsim < 2.0:
+            Y_cible = 0.0
             
-        elif 1.0 <= tsim < 6.0:
-            Y_cible = 3.0  # Bande de gauche (Déboîtement basé sur la position)
+        elif 2.0 <= tsim < 3.0:
+            # Déboîtement : Interpolation douce de 0 à 3m en 1 seconde
+            Y_cible = 3.0 * (0.5 - 0.5 * np.cos(np.pi * (tsim - 2.0) / 1.0))
             
-        elif tsim >= 6.0:
-            Y_cible = 0.0  # Retour à droite (Rabattement basé sur le temps, comme demandé)
-
+        elif 3.0 <= tsim < 6.0:
+            Y_cible = 3.0  # Stabilisé sur la bande de gauche
+            
+        elif 6.0 <= tsim < 7.5:
+            # Rabattement : Retour doux de 3m à 0m en 1.5 secondes (on prend plus son temps pour se rabattre)
+            Y_cible = 3.0 * (0.5 + 0.5 * np.cos(np.pi * (tsim - 6.0) / 0.5))
+            
+        else:
+            Y_cible = 0.0
         # 3. Le cerveau du pilote (Calcul du coup de volant)
         erreur_Y = Y_cible - Y_actuel
         erreur_Yaw = 0.0 - Yaw_actuel # Le nez doit toujours finir droit (0°)
