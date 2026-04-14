@@ -493,9 +493,6 @@
         <jointname>R1_Bras_inf_AR_D</jointname>
         <type>R1</type>
         <nature>independent</nature>
-        <initialvalue>
-          <q>-0.2531831</q>
-        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -649,9 +646,6 @@
         <jointname>R1_Bras_sup_AR_D</jointname>
         <type>R1</type>
         <nature>dependent</nature>
-        <initialvalue>
-          <q>-0.4474437</q>
-        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -665,7 +659,7 @@
           </x3D>
         </graphics>
       </joint>
-      <mass>0.23</mass>
+      <mass>1.5</mass>
       <com>
         <coordinates>
           <x>0.0</x>
@@ -1038,9 +1032,6 @@
         <jointname>R1_Bras_inf_AR_G</jointname>
         <type>R1</type>
         <nature>independent</nature>
-        <initialvalue>
-          <q>0.2725843</q>
-        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -1192,9 +1183,6 @@
         <jointname>R1_Bras_sup_AR_G</jointname>
         <type>R1</type>
         <nature>dependent</nature>
-        <initialvalue>
-          <q>0.4802669</q>
-        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -2697,7 +2685,7 @@
           </x3D>
         </graphics>
       </joint>
-      <mass>0.23</mass>
+      <mass>1.5</mass>
       <com>
         <coordinates>
           <x>0.0</x>
@@ -4190,20 +4178,6 @@
   <cuts>
     <!--this is the cut list-->
     <ball>
-      <name>Cut_0</name>
-      <endpoint1>
-        <bodyname>Bras_inf_AR_D</bodyname>
-        <pointname>Bras_inf_fusee</pointname>
-      </endpoint1>
-      <endpoint2>
-        <bodyname>fusee_AR_D</bodyname>
-        <pointname>fusee_bras_inf_D</pointname>
-      </endpoint2>
-      <graphics>
-        <x3D />
-      </graphics>
-    </ball>
-    <ball>
       <name>Cut_1</name>
       <endpoint1>
         <bodyname>fusee_AR_G</bodyname>
@@ -4268,22 +4242,6 @@
       </graphics>
     </ball>
     <ball>
-      <name>Cut_5</name>
-      <endpoint1>
-        <bodyname>Bras_inf_AV_D</bodyname>
-        <pointname>Bras_inf_fusee</pointname>
-      </endpoint1>
-      <endpoint2>
-        <bodyname>fusee_AV_D</bodyname>
-        <pointname>fusee_bras_inf_D</pointname>
-      </endpoint2>
-      <graphics>
-        <x3D>
-          <shown />
-        </x3D>
-      </graphics>
-    </ball>
-    <ball>
       <name>Cut_6</name>
       <endpoint1>
         <bodyname>Bielle_AV_G</bodyname>
@@ -4332,14 +4290,46 @@
       </graphics>
     </ball>
     <ball>
-      <name>Cut_9</name>
+      <name>Cut_5</name>
       <endpoint1>
-        <bodyname>Bielle_Direction_D</bodyname>
-        <pointname>Bielle_dir_fusee</pointname>
+        <bodyname>fusee_AV_D</bodyname>
+        <pointname>fusee_bras_inf_D</pointname>
       </endpoint1>
       <endpoint2>
+        <bodyname>Bras_inf_AV_D</bodyname>
+        <pointname>Bras_inf_fusee</pointname>
+      </endpoint2>
+      <graphics>
+        <x3D>
+          <shown />
+        </x3D>
+      </graphics>
+    </ball>
+    <ball>
+      <name>Cut_0</name>
+      <endpoint1>
+        <bodyname>fusee_AR_D</bodyname>
+        <pointname>fusee_bras_inf_D</pointname>
+      </endpoint1>
+      <endpoint2>
+        <bodyname>Bras_inf_AR_D</bodyname>
+        <pointname>Bras_inf_fusee</pointname>
+      </endpoint2>
+      <graphics>
+        <x3D>
+          <shown />
+        </x3D>
+      </graphics>
+    </ball>
+    <ball>
+      <name>Cut_9</name>
+      <endpoint1>
         <bodyname>fusee_AV_D</bodyname>
         <pointname>Pt_Direction_G</pointname>
+      </endpoint1>
+      <endpoint2>
+        <bodyname>Bielle_Direction_D</bodyname>
+        <pointname>Bielle_dir_fusee</pointname>
       </endpoint2>
       <graphics>
         <x3D>

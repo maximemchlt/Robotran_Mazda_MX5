@@ -69,12 +69,12 @@ omega = vitesse_ms / 0.288 # Vitesse angulaire
 # Application des vitesses
 mbs_data.qd[1] = vitesse_ms  # Châssis (vitesse longitudinale X)
 
-# --- AJOUT CRUCIAL : PURGE DE LA DÉRIVE ---
-mbs_data.q[2]  = 0.0  # Force la position Y (latérale) parfaitement au centre
-mbs_data.q[6]  = 0.0  # Force l'angle de lacet (Yaw) parfaitement droit
-mbs_data.qd[2] = 0.0  # Annule la micro-vitesse latérale due au tassement
-mbs_data.qd[6] = 0.0  # Annule la micro-rotation due au tassement
-# ------------------------------------------
+mbs_data.q[2]  = 0.0  # Y
+mbs_data.q[4]  = 0.0  # Roulis (Nouveau !)
+mbs_data.q[6]  = 0.0  # Lacet (Yaw)
+mbs_data.qd[2] = 0.0  
+mbs_data.qd[4] = 0.0  # Vitesse de Roulis (Nouveau !)
+mbs_data.qd[6] = 0.0
 
 mbs_data.qd[25] = omega      # Roue AV_G (indices à vérifier selon votre .mbs)
 mbs_data.qd[31] = omega      # Roue AV_D

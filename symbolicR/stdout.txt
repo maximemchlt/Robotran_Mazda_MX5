@@ -1,6 +1,6 @@
 
 ##############################################################
-#	file1b.gen 14/04/2026 12:31:41    messages
+#	file1b.gen 14/04/2026 13:45:47    messages
 ##############################################################
     Old current.gen /usr/local/robotran/users/LEPL1504/upload/file1b.gen loading
 Symbolic generation file : /usr/local/robotran/users/LEPL1504/upload/file1b.gen

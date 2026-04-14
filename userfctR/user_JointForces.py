@@ -32,23 +32,5 @@ def user_JointForces(mbs_data, tsim):
     for jid in wheels_prop:
         mbs_data.Qq[jid] = torque_drive
 
-    # =========================================================
-    # 3. BARRE ANTI-ROULIS (Le Bug Corrigé)
-    # =========================================================
-    # Avant (Bras supérieurs)
-    jid_av_g, jid_av_d = mbs_data.joint_id["R1_Bras_sup_AV_G"], mbs_data.joint_id["R1_Bras_sup_AV_D"]
-    k_bar_av = mbs_data.user_model["FrontSuspension"]["C_bar"]
-    # CORRECTION : Addition car les joints sont en miroir !
-    diff_av = mbs_data.q[jid_av_g] + mbs_data.q[jid_av_d] 
-    # Même signe pour les deux pour transférer la charge correctement
-    mbs_data.Qq[jid_av_g] -= k_bar_av * diff_av
-    mbs_data.Qq[jid_av_d] -= k_bar_av * diff_av
-
-    # Arrière (Bras inférieurs)
-    jid_ar_g, jid_ar_d = mbs_data.joint_id["R1_Bras_inf_AR_G"], mbs_data.joint_id["R1_Bras_inf_AR_D"]
-    k_bar_ar = mbs_data.user_model["RearSuspension"]["C_bar"]
-    diff_ar = mbs_data.q[jid_ar_g] + mbs_data.q[jid_ar_d]
-    mbs_data.Qq[jid_ar_g] -= k_bar_ar * diff_ar
-    mbs_data.Qq[jid_ar_d] -= k_bar_ar * diff_ar
 
     return mbs_data.Qq
