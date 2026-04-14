@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 # =============================================================================
 # 1. PARAMÈTRES DE LA SIMULATION
 # =============================================================================
-simulation = "virage"  # Options: "MRU", "acceleration", "freinage", "dos_d_ane"
-vitesse_kmh = {"MRU": 36, "acceleration": 7, "freinage": 70, "dos_d_ane": 60, "virage": 30}[simulation]
+simulation = "MRU"  # Options: "MRU", "acceleration", "freinage", "dos_d_ane"
+vitesse_kmh = {"MRU": 36, "acceleration": 7, "freinage": 70, "dos_d_ane": 60, "virage": 10}[simulation]
 
 print(f"--- Démarrage du projet Mazda MX-5 : Mode {simulation} ---")
 
@@ -31,7 +31,7 @@ um['RearSuspension']  = {'K': 17000.0, 'C': 1800.0, 'C_bar': 1800.0, 'Z0': 0.43}
 mbs_data.user_model = um
 
 # Configuration initiale (Hauteur pour garantir le contact pneu/sol)
-mbs_data.q[3] = 0.11 
+mbs_data.q[3] = 0.2 
 
 # =============================================================================
 # 3. PARTITIONNEMENT
@@ -67,11 +67,22 @@ vitesse_ms = vitesse_kmh / 3.6
 omega = vitesse_ms / 0.288 # Vitesse angulaire
 
 # Application des vitesses
-mbs_data.qd[1] = vitesse_ms  # Châssis
+mbs_data.qd[1] = vitesse_ms  # Châssis (vitesse longitudinale X)
+
+# --- AJOUT CRUCIAL : PURGE DE LA DÉRIVE ---
+mbs_data.q[2]  = 0.0  # Force la position Y (latérale) parfaitement au centre
+mbs_data.q[6]  = 0.0  # Force l'angle de lacet (Yaw) parfaitement droit
+mbs_data.qd[2] = 0.0  # Annule la micro-vitesse latérale due au tassement
+mbs_data.qd[6] = 0.0  # Annule la micro-rotation due au tassement
+# ------------------------------------------
+
 mbs_data.qd[25] = omega      # Roue AV_G (indices à vérifier selon votre .mbs)
 mbs_data.qd[31] = omega      # Roue AV_D
 mbs_data.qd[14] = omega      # Roue AR_G
 mbs_data.qd[10] = omega      # Roue AR_D
+# Application des vitesses
+mbs_data.qd[2] = 0.0         # Tuer le glissement latéral parasite (Y)
+mbs_data.qd[6] = 0.0         # Tuer la rotation parasite (Yaw)
 
 print(f">> Lancement de la simulation ({simulation})...")
 mbs_dirdyn.set_options(dt0=1e-3, tf=8.0, save2file=1)
@@ -85,26 +96,18 @@ results_dir = os.path.normpath(os.path.join(work_dir, "..", "resultsR"))
 results_path = os.path.join(results_dir, "dirdyn_q.res")
 results = np.loadtxt(results_path)
 
+time = results[:, 0]
 
-
-
-
-
-
-# Récupération automatique des colonnes
-id_av_g = mbs_data.joint_id["R1_Bras_sup_AV_G"] # Indice pour le bras indépendant avant
-id_ar_g = mbs_data.joint_id["R1_Bras_inf_AR_G"] # Indice pour le bras indépendant arrière
+# --- MODIFICATION : Récupération dynamique des bonnes colonnes ---
+id_av_g = mbs_data.joint_id["R1_Bras_sup_AV_G"] 
+id_ar_g = mbs_data.joint_id["R1_Bras_inf_AR_G"] 
 
 q_av_g = results[:, id_av_g] * (180 / np.pi)
 q_ar_g = results[:, id_ar_g] * (180 / np.pi)
-
-
-
-time = results[:, 0]
-q_av_g = results[:, 7] * (180 / np.pi)   # À ajuster selon vos indices
-q_ar_g = results[:, 24] * (180 / np.pi) 
+# -----------------------------------------------------------------
 
 fig, axs = plt.subplots(2, 1, figsize=(8, 5), sharex=True)
+# ... (le reste de ton code pour le plot reste identique)
 fig.suptitle(f'Réponse des Suspensions - {simulation}', fontsize=12, fontweight='bold')
 
 # Avant Gauche

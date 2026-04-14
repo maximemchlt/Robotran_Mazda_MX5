@@ -3818,8 +3818,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>1060.0</x>
-              <y>35.0</y>
+              <x>1066.0</x>
+              <y>33.0</y>
             </position>
           </x2D>
           <x3D />
@@ -3835,8 +3835,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>673.0</x>
-              <y>35.0</y>
+              <x>679.0</x>
+              <y>33.0</y>
             </position>
           </x2D>
           <x3D />
@@ -3845,8 +3845,8 @@
       <graphics>
         <x2D>
           <position>
-            <x>-206.0</x>
-            <y>-16.0</y>
+            <x>-200.0</x>
+            <y>-18.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -3859,20 +3859,20 @@
           </size>
           <control_points>
             <control_point>
-              <x>208.0</x>
-              <y>-16.0</y>
+              <x>214.0</x>
+              <y>-18.0</y>
             </control_point>
             <control_point>
-              <x>208.0</x>
-              <y>11.0</y>
+              <x>214.0</x>
+              <y>9.0</y>
             </control_point>
             <control_point>
-              <x>-206.0</x>
-              <y>11.0</y>
+              <x>-200.0</x>
+              <y>9.0</y>
             </control_point>
             <control_point>
-              <x>-206.0</x>
-              <y>-16.0</y>
+              <x>-200.0</x>
+              <y>-18.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -4512,6 +4512,30 @@
           <x>5.0</x>
           <y>5.0</y>
           <z>5.0</z>
+        </position>
+        <target>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </target>
+        <up>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </up>
+        <projection>perspective</projection>
+        <scale>1.0</scale>
+        <fieldOfView>0.785</fieldOfView>
+        <frontClipDst>0.01</frontClipDst>
+        <backClipDst>50.0</backClipDst>
+      </viewpoint>
+      <viewpoint>
+        <name>New_Viewpoint</name>
+        <joint>T1_chassis</joint>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>10.0</z>
         </position>
         <target>
           <x>0.0</x>
