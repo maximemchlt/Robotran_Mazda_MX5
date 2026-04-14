@@ -11,16 +11,62 @@ def user_JointForces(mbs_data, tsim):
     q_target = 0.0
     torque_drive = 0.0
 
+
+
     # --- CAS : ÉVITEMENT D'OBSTACLE ---
-    if mode == "evitement" or mode == "virage":
+
+    if mode == "virage":
+
         if 2.0 <= tsim < 4.0:
+
             q_target = 0.02 * np.sin(np.pi * (tsim - 2.0) / 2.0)
+
         elif 4.0 <= tsim < 6.0:
+
             q_target = -0.02 * np.sin(np.pi * (tsim - 4.0) / 2.0)
+
+
+# =========================================================
+    # SCÉNARIO : ÉVITEMENT / DÉPASSEMENT (Pilote automatique)
+    # =========================================================
+    if mode == "evitement" :
+        # 1. On récupère les "yeux" du pilote
+        jid_Y = mbs_data.joint_id["T2_chassis"]
+        jid_Yaw = mbs_data.joint_id["R3_chassis"]
+        
+        Y_actuel = mbs_data.q[jid_Y]
+        Yaw_actuel = mbs_data.q[jid_Yaw]
+        
+        # 2. Définition de la trajectoire (La "Cible")
+        Y_cible = 0.0
+        
+        if tsim < 1.0:
+            Y_cible = 0.0  # Reste à droite
+            
+        elif 1.0 <= tsim < 6.0:
+            Y_cible = 3.0  # Bande de gauche (Déboîtement basé sur la position)
+            
+        elif tsim >= 6.0:
+            Y_cible = 0.0  # Retour à droite (Rabattement basé sur le temps, comme demandé)
+
+        # 3. Le cerveau du pilote (Calcul du coup de volant)
+        erreur_Y = Y_cible - Y_actuel
+        erreur_Yaw = 0.0 - Yaw_actuel # Le nez doit toujours finir droit (0°)
+        
+        # Réglage de l'agressivité du pilote
+        Kp_Y = 0.015  # Plus c'est grand, plus il jette la voiture vers la cible
+        Kd_Yaw = 0.1  # Plus c'est grand, plus il contre-braque fort pour stabiliser
+        
+        raw_q_target = (Kp_Y * erreur_Y) + (Kd_Yaw * erreur_Yaw)
+        
+        # Sécurité : On bride les bras du pilote pour ne pas casser la crémaillère
+        # (Max +/- 2.5 cm de déplacement sur la barre de direction)
+        q_target = np.clip(raw_q_target, -0.025, 0.025)
+
 
     # --- CAS : ACCÉLÉRATION / FREINAGE ---
     if mode == "acceleration" and tsim > 1.0:
-        torque_drive = 300.0  
+        torque_drive = 600.0  
     elif mode == "freinage" and tsim > 1.0:
         torque_drive = -600.0 
 

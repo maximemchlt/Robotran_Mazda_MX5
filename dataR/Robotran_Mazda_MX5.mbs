@@ -480,6 +480,31 @@
           <x3D_com />
           <x3D_points />
           <x3D_lines />
+          <x3D_shapes>
+            <inline>
+              <name>Carosserie</name>
+              <position>
+                <x>-0.15</x>
+                <y>0.0</y>
+                <z>-0.125</z>
+              </position>
+              <scale>
+                <x>0.84</x>
+                <y>1.0</y>
+                <z>0.9</z>
+              </scale>
+              <rotation>
+                <x>1.5707963267948966</x>
+                <y>1.5707963267948966</y>
+                <z>0.0</z>
+              </rotation>
+              <color R="0" G="0" B="0" />
+              <specularColor R="255" G="255" B="255" />
+              <shininess>250.0</shininess>
+              <transparency>0.5</transparency>
+              <url>PRJPATH/dataR/Car.wrl</url>
+            </inline>
+          </x3D_shapes>
         </x3D>
       </graphics>
     </body>
@@ -767,9 +792,6 @@
         <jointname>R1_fusee_AR_D</jointname>
         <type>R1</type>
         <nature>dependent</nature>
-        <initialvalue>
-          <q>0.5643174</q>
-        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -1304,9 +1326,6 @@
         <jointname>R1_fusee_AR_G</jointname>
         <type>R1</type>
         <nature>dependent</nature>
-        <initialvalue>
-          <q>-0.6031572</q>
-        </initialvalue>
         <graphics>
           <x2D>
             <position>
@@ -4497,11 +4516,11 @@
       </viewpoint>
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>T1_chassis</joint>
+        <joint>T3_chassis</joint>
         <position>
-          <x>5.0</x>
-          <y>5.0</y>
-          <z>5.0</z>
+          <x>25.0</x>
+          <y>30.0</y>
+          <z>10.0</z>
         </position>
         <target>
           <x>0.0</x>
@@ -4521,11 +4540,35 @@
       </viewpoint>
       <viewpoint>
         <name>New_Viewpoint</name>
-        <joint>T1_chassis</joint>
+        <joint>R2_barre_bielle_AR_D</joint>
         <position>
           <x>0.0</x>
           <y>0.0</y>
           <z>10.0</z>
+        </position>
+        <target>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </target>
+        <up>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </up>
+        <projection>perspective</projection>
+        <scale>1.0</scale>
+        <fieldOfView>0.785</fieldOfView>
+        <frontClipDst>0.01</frontClipDst>
+        <backClipDst>50.0</backClipDst>
+      </viewpoint>
+      <viewpoint>
+        <name>Arriere-voiture</name>
+        <joint>T3_chassis</joint>
+        <position>
+          <x>-7.0</x>
+          <y>0.0</y>
+          <z>5.0</z>
         </position>
         <target>
           <x>0.0</x>
