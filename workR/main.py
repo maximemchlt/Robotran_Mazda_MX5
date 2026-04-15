@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 # =============================================================================
 # 1. PARAMÈTRES DE LA SIMULATION
 # =============================================================================
-simulation = "evitement"  # Options: "MRU", "acceleration", "freinage", "dos_d_ane", "virage", "evitement"
-vitesse_kmh = {"MRU": 36, "acceleration": 7, "freinage": 70, "dos_d_ane": 60, "virage": 50, "evitement": 50}[simulation]
+simulation = "freinage"  # Options: "MRU", "acceleration", "freinage", "dos_d_ane", "virage", "evitement"
+vitesse_kmh = {"MRU": 36, "acceleration": 7, "freinage": 50, "dos_d_ane": 60, "virage": 50, "evitement": 50}[simulation]
 
 print(f"--- Démarrage du projet Mazda MX-5 : Mode {simulation} ---")
 

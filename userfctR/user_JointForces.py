@@ -83,10 +83,24 @@ def user_JointForces(mbs_data, tsim):
 
 
     # --- CAS : ACCÉLÉRATION / FREINAGE PUR ---
+    jid_X = mbs_data.joint_id["T1_chassis"] # On regarde l'axe d'avancement
+    vitesse_actuelle = mbs_data.qd[jid_X]   # Vitesse longitudinale de la voiture
+
     if mode == "acceleration" and tsim > 1.0:
         torque_rear = 600.0  
+        torque_front = 0.0
+
     elif mode == "freinage" and tsim > 1.0:
-        torque_rear = -600.0 
+        # On freine SEULEMENT si la voiture roule encore à plus de 1 m/s (3.6 km/h)
+        if vitesse_actuelle > 1.0:
+            # Vrai freinage 4 roues pour éviter le tête-à-queue
+            torque_front = -800.0 * 0.60 
+            torque_rear  = -800.0 * 0.40 
+        else:
+            # La voiture est (presque) à l'arrêt, on lâche les freins pour éviter 
+            # la division par zéro du modèle de pneu.
+            torque_front = 0.0
+            torque_rear  = 0.0
 
     # 1. APPLICATION DU CONTRÔLE DE DIRECTION
     K_steering, D_steering = 1e6, 1e4
