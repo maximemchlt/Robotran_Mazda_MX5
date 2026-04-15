@@ -56,4 +56,17 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
     # Remplissage du vecteur de sortie Swr
     Swr = mbs_data.SWr[ixF]
     Swr[1:] = [Fx, Fy, Fz, Mx, My, Mz, dxF[0], dxF[1], dxF[2]]
+    # =========================================================
+    # SAUVEGARDE DES 3 COMPOSANTES DE LA FORCE DE CONTACT
+    # (ixF correspond au numéro de la roue : 1, 2, 3 ou 4)
+    # =========================================================
+    
+    # Swr[1] : Force longitudinale (Accélération / Freinage)
+    mbs_data.set_output(Swr[1], f"F_Longi_Roue_{int(ixF)}")
+    
+    # Swr[2] : Force latérale (Adhérence en virage / Dérapage)
+    mbs_data.set_output(Swr[2], f"F_Lat_Roue_{int(ixF)}")
+    
+    # Swr[3] : Force normale (Poids de la voiture sur cette roue)
+    mbs_data.set_output(Swr[3], f"F_Norm_Roue_{int(ixF)}")
     return Swr

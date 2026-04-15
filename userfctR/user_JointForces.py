@@ -2,115 +2,177 @@
 import numpy as np
 
 def user_JointForces(mbs_data, tsim):
+    
+    # TABLEAU DE BORD
+    enable_esp = False 
+    enable_abs = True   
+
     mbs_data.Qq[:] = 0.0
-    mode = mbs_data.user_model.get('simulation', 'MRU')
+    um = mbs_data.user_model
+    mode = um.get('simulation', 'MRU')
+    jid_X = mbs_data.joint_id["T1_chassis"]
+    v_veh = mbs_data.qd[jid_X]
     
     jid_dir = mbs_data.joint_id["T2_barre_direction"]
     
-    # 1. On récupère les roues Arrière ET Avant pour un vrai freinage
     wheels_rear = [mbs_data.joint_id["R2_Roue_AR_G"], mbs_data.joint_id["R2_Roue_AR_D"]]
     try:
         wheels_front = [mbs_data.joint_id["R2_Roue_AV_G"], mbs_data.joint_id["R2_Roue_AV_D"]]
     except KeyError:
-        wheels_front = [] # Sécurité si les noms dans ton .mbs sont différents
+        wheels_front = []
 
     q_target = 0.0
     torque_rear = 0.0
     torque_front = 0.0
+    force_freinage = -1000.0 
+
+    
+    # =========================================================
+    #  MÉMOIRE DU PILOTE
+    # =========================================================
+    # Si la variable n'existe pas encore, on la crée à False
+    
+    if 'has_rolled' not in um:
+        um['has_rolled'] = False  
+    if 'is_stopped' not in um:
+        um['is_stopped'] = False  
+
+    jid_X = mbs_data.joint_id["T1_chassis"]
+    v_veh = mbs_data.qd[jid_X]
+
+    # Étape 1 : On confirme que la vraie simulation a commencé
+    if v_veh > 5.0:
+        um['has_rolled'] = True
+
+    # Étape 2 : Si la voiture est passée sous les 2 m/s, on coupe tout 
+    if um['has_rolled'] and v_veh < 2.0:
+        um['is_stopped'] = True
+        
+        # LA SOLUTION : On force Robotran à arrêter la simulation proprement
+        mbs_data.flag_stop = 1 
+        
+        # Petit message pour prévenir dans la console
+        if 'stop_msg_printed' not in um:
+            print(f"\n Véhicule arrêté à t = {tsim:.2f}s. Fin de la simulation ordonnée.")
+            um['stop_msg_printed'] = True
+    # =========================================================
+    #  CAPTEUR DE BLOCAGE DE ROUES (Pour ton diagnostic)
+    # =========================================================
+    if 'warning_printed' not in um:
+        um['warning_printed'] = False
+
+    # On écoute la roue arrière gauche
+    jid_wheel_ar_g = mbs_data.joint_id["R2_Roue_AR_G"]
+    omega_roue = mbs_data.qd[jid_wheel_ar_g]
+    
+    # Règle : Si la voiture roule à plus de 5 m/s MAIS que la roue 
+    # tourne à moins de 2 rad/s (elle est quasi figée), on glisse !
+    if v_veh > 5.0 and abs(omega_roue) < 2.0:
+        if not um['warning_printed']:
+            print(f"\n⚠ DANGER : Blocage des roues arrière détecté à t = {tsim:.2f}s !")
+            um['warning_printed'] = True
 
 
-    # --- CAS : VIRAGE (inchangé) ---
+
+
+    # =========================================================
+    # SCÉNARIO : VIRAGE 
+    # =========================================================
     if mode == "virage":
         if 2.0 <= tsim < 4.0:
             q_target = 0.02 * np.sin(np.pi * (tsim - 2.0) / 2.0)
         elif 4.0 <= tsim < 6.0:
             q_target = -0.02 * np.sin(np.pi * (tsim - 4.0) / 2.0)
 
-
     # =========================================================
-    # SCÉNARIO : ÉVITEMENT / DÉPASSEMENT (Pilote automatique)
+    # SCÉNARIO : ÉVITEMENT 
     # =========================================================
     if mode == "evitement":
         
-        # ---------------------------------------------------------
-        # A. LE VOLANT (Ta boucle fermée de direction)
-        # ---------------------------------------------------------
+        # --- LE VOLANT ---
         jid_Y = mbs_data.joint_id["T2_chassis"]
         jid_Yaw = mbs_data.joint_id["R3_chassis"]
         
         Y_actuel = mbs_data.q[jid_Y]
         Yaw_actuel = mbs_data.q[jid_Yaw]
         
-        # Définition de la trajectoire
         Y_cible = 0.0
-        if tsim < 2.0:
-            Y_cible = 0.0
-        elif 2.0 <= tsim < 3.0:
-            Y_cible = 3.0 * (0.5 - 0.5 * np.cos(np.pi * (tsim - 2.0) / 1.0))
-        elif 3.0 <= tsim < 6.0:
-            Y_cible = 3.0  
-        elif 6.0 <= tsim < 7.5:
-            Y_cible = 3.0 * (0.5 + 0.5 * np.cos(np.pi * (tsim - 6.0) / 1.0))
-        else:
-            Y_cible = 0.0
+        if tsim < 2.0: Y_cible = 0.0
+        elif 2.0 <= tsim < 3.0: Y_cible = 3.0 * (0.5 - 0.5 * np.cos(np.pi * (tsim - 2.0) / 1.0))
+        elif 3.0 <= tsim < 6.0: Y_cible = 3.0  
+        elif 6.0 <= tsim < 7.5: Y_cible = 3.0 * (0.5 + 0.5 * np.cos(np.pi * (tsim - 6.0) / 1.0))
+        else: Y_cible = 0.0
             
-        # Cerveau du pilote (Volant)
         erreur_Y = Y_cible - Y_actuel
         erreur_Yaw = 0.0 - Yaw_actuel 
         
         Kp_Y = 0.015  
-        Kd_Yaw = 0.1  
+        Kd_Yaw = 0.1 if enable_esp else 0.0
         
         raw_q_target = (Kp_Y * erreur_Y) + (Kd_Yaw * erreur_Yaw)
         q_target = np.clip(raw_q_target, -0.025, 0.025)
 
-        # ---------------------------------------------------------
-        # B. LES PÉDALES (Indépendant de la direction)
-        # ---------------------------------------------------------
-        # Paramètres modifiables pour tester tes conducteurs :
-        t_debut_frein = 1.5   # L'obstacle apparaît ! Le conducteur freine (le volant tourne à 2.0s)
-        t_fin_frein = 3.5     # Le conducteur relâche la pédale
-        force_freinage = -400.0 # Force totale du freinage (N.m). Plus c'est négatif, plus ça pile.
+        # --- LES PÉDALES (Crash Test) ---
+        t_debut_frein = 2.0   
+        t_fin_frein = 4.0     
+        
+        # On freine SEULEMENT si on est dans les temps ET que la voiture n'a pas été déclarée "arrêtée"
+        if t_debut_frein <= tsim <= t_fin_frein and not um['is_stopped']:
+            torque_front = force_freinage * 0.50
+            torque_rear  = force_freinage * 0.50
 
-        if t_debut_frein <= tsim <= t_fin_frein:
-            # On applique les freins (60% avant, 40% arrière pour la stabilité)
-            torque_front = force_freinage * 0.60
-            torque_rear  = force_freinage * 0.40
-        else:
-            # Le conducteur a le pied levé (roue libre)
-            torque_front = 0.0
-            torque_rear  = 0.0
-
-
-    # --- CAS : ACCÉLÉRATION / FREINAGE PUR ---
-    jid_X = mbs_data.joint_id["T1_chassis"] # On regarde l'axe d'avancement
-    vitesse_actuelle = mbs_data.qd[jid_X]   # Vitesse longitudinale de la voiture
-
+    # =========================================================
+    # SCÉNARIO : ACCELERATION OU FREINAGE  
+    # =========================================================
     if mode == "acceleration" and tsim > 1.0:
         torque_rear = 600.0  
-        torque_front = 0.0
-
+        
     elif mode == "freinage" and tsim > 1.0:
-        # On freine SEULEMENT si la voiture roule encore à plus de 1 m/s (3.6 km/h)
-        if vitesse_actuelle > 1.0:
-            # Vrai freinage 4 roues pour éviter le tête-à-queue
-            torque_front = -800.0 * 0.60 
-            torque_rear  = -800.0 * 0.40 
-        else:
-            # La voiture est (presque) à l'arrêt, on lâche les freins pour éviter 
-            # la division par zéro du modèle de pneu.
-            torque_front = 0.0
-            torque_rear  = 0.0
+        # Même logique de sécurité que pour l'évitement
+        if not um['is_stopped']: 
+            torque_front = force_freinage * 0.60
+            torque_rear  = force_freinage * 0.40
+
 
     # 1. APPLICATION DU CONTRÔLE DE DIRECTION
     K_steering, D_steering = 1e6, 1e4
     mbs_data.Qq[jid_dir] = -K_steering * (mbs_data.q[jid_dir] - q_target) - D_steering * mbs_data.qd[jid_dir]
 
-    # 2. APPLICATION DES COUPLES (Moteur ou Freins)
-    for jid in wheels_rear:
-        mbs_data.Qq[jid] = torque_rear
+    # =========================================================
+    # 2. APPLICATION DES COUPLES & SYSTÈME ABS à  hystérésis
+    # =========================================================
+
+    if 'abs_state' not in um:
+        # Mémoire individuelle pour chaque roue (False = Frein normal, True = ABS relâche)
+        um['abs_state'] = {}
         
-    for jid in wheels_front:
-        mbs_data.Qq[jid] = torque_front
+    R_wheel = 0.288
+    all_wheels = wheels_rear + wheels_front
+    
+    for jid in all_wheels:
+        # On initialise la mémoire de la roue si elle n'existe pas
+        if jid not in um['abs_state']:
+            um['abs_state'][jid] = False 
+            
+        # On détermine si on regarde une roue arrière ou avant
+        couple_base = torque_rear if jid in wheels_rear else torque_front
+        
+        # Logique ABS
+        if enable_abs and couple_base < 0 and um['has_rolled'] and v_veh > 2.0:
+            omega = mbs_data.qd[jid]
+            v_ideale = v_veh / R_wheel
+            
+            # --- L'HYSTÉRÉSIS (Le secret anti-tremblement) ---
+            if not um['abs_state'][jid] and abs(omega) < (v_ideale * 0.80):
+                um['abs_state'][jid] = True  # La roue bloque -> On coupe les freins
+            elif um['abs_state'][jid] and abs(omega) > (v_ideale * 0.95):
+                um['abs_state'][jid] = False # La roue a repris sa vitesse -> On refreine
+            # --------------------------------------------------
+            
+            # Application du couple selon l'état de l'ABS
+            mbs_data.Qq[jid] = 0.0 if um['abs_state'][jid] else couple_base
+        else:
+            # Freinage normal (ou accélération) si l'ABS n'est pas nécessaire
+            mbs_data.Qq[jid] = couple_base
 
     return mbs_data.Qq
