@@ -16,7 +16,7 @@ print(f"--- Démarrage du projet Mazda MX-5 : Mode {simulation} ---")
 
 # Chargement du projet
 work_dir = os.path.dirname(os.path.abspath(__file__))
-mbs_file = os.path.normpath(os.path.join(work_dir, "..", "dataR", "Robotran_Mazda_MX5.mbs"))
+mbs_file = os.path.normpath(os.path.join(work_dir, "..", "dataR", "Robotran_Mazda_MX5_transmition_integrale.mbs")) # Modifie le nom du .mbs si tu as un modèle différent ! (Attention à la transmission intégrale ou simple)
 mbs_data = Robotran.MbsData(mbs_file)
 
 # =============================================================================
@@ -43,7 +43,8 @@ mbs_part.run()
 
 
 
-mbs_data.q[39] = mbs_data.qd[39] = mbs_data.qdd[39] = 0
+mbs_data.q[43] = mbs_data.qd[43] = mbs_data.qdd[43] = 0 # joint 43 quand on est en transmission intégrale (Joint de la barre de direction avant) sinon c'est le joint 39
+mbs_data.q[48] = mbs_data.qd[48] = mbs_data.qdd[48] = 0 # joint 48 quand on est en transmission intégrale (Joint de la barre de direction arrière)
 
 
 
