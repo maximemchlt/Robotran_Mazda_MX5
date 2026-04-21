@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 # 1. PARAMÈTRES DE LA SIMULATION
 # =============================================================================
 simulation = "evitement"  # Options: "MRU", "acceleration", "freinage", "dos_d_ane", "virage", "evitement"
-vitesse_kmh = {"MRU": 36, "acceleration": 7, "freinage": 70, "dos_d_ane": 60, "virage": 50, "evitement": 60}[simulation]
+vitesse_kmh = {"MRU": 36, "acceleration": 7, "freinage": 70, "dos_d_ane": 60, "virage": 50, "evitement": 80}[simulation]
 
 print(f"--- Démarrage du projet Mazda MX-5 : Mode {simulation} ---")
 
@@ -27,7 +27,9 @@ um['simulation']      = simulation
 um['FrontTire']       = {'R': 0.288, 'K': 180000.0}
 um['RearTire']        = {'R': 0.288, 'K': 180000.0}
 um['FrontSuspension'] = {'K': 27000.0, 'C': 2200.0, 'C_bar': 2500.0, 'Z0': 0.43}
-um['RearSuspension']  = {'K': 17000.0, 'C': 1800.0, 'C_bar': 1800.0, 'Z0': 0.43}
+um['RearSuspension']  = {'K': 27000.0, 'C': 1800.0, 'C_bar': 1800.0, 'Z0': 0.43}
+um['enable_esp']     = True  # Active ou désactive l'ESP (contrôle de stabilité)
+um['enable_abs']     = True  # Active ou désactive l'ABS (antiblocage des roues)
 mbs_data.user_model = um
 
 # Configuration initiale (Hauteur pour garantir le contact pneu/sol)
@@ -77,10 +79,10 @@ mbs_data.qd[2] = 0.0
 mbs_data.qd[4] = 0.0  # Vitesse de Roulis (Nouveau !)
 mbs_data.qd[6] = 0.0
 
-mbs_data.qd[25] = omega      # Roue AV_G (indices à vérifier selon votre .mbs)
-mbs_data.qd[31] = omega      # Roue AV_D
-mbs_data.qd[14] = omega      # Roue AR_G
-mbs_data.qd[10] = omega      # Roue AR_D
+mbs_data.qd[29] = omega      # Roue AV_G (indices à vérifier selon votre .mbs)
+mbs_data.qd[35] = omega      # Roue AV_D
+mbs_data.qd[18] = omega      # Roue AR_G
+mbs_data.qd[12] = omega      # Roue AR_D
 # Application des vitesses
 mbs_data.qd[2] = 0.0         # Tuer le glissement latéral parasite (Y)
 mbs_data.qd[6] = 0.0         # Tuer la rotation parasite (Yaw)
@@ -142,7 +144,7 @@ try:
     
     plt.savefig(plot_save_path, format="pdf", bbox_inches='tight')
     print(f">> Graphique sauvegardé : {plot_save_path}")
-    plt.show()
+#    plt.show()
 
 except Exception as e:
     print(f"Impossible de lire le fichier de résultats (Fichier corrompu par le crash) : {e}")
@@ -235,7 +237,7 @@ try:
     plt.savefig(plot_save_path_abs, format="pdf", bbox_inches='tight')
     print(f">> Graphique ABS sauvegardé : {plot_save_path_abs}")
     
-    plt.show() # Ceci doit TOUJOURS rester la toute dernière ligne de ton main.py !
+#    plt.show() # Ceci doit TOUJOURS rester la toute dernière ligne de ton main.py !
 
 except Exception as e:
     print(f"Impossible de générer le graphique ABS : {e}")

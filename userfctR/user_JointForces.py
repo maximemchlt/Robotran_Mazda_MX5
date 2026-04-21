@@ -4,8 +4,8 @@ import numpy as np
 def user_JointForces(mbs_data, tsim):
     
     # TABLEAU DE BORD
-    enable_esp = False 
-    enable_abs = True   
+    enable_esp = mbs_data.user_model['enable_esp'] 
+    enable_abs = mbs_data.user_model['enable_abs']   
 
     mbs_data.Qq[:] = 0.0
     um = mbs_data.user_model
@@ -14,6 +14,7 @@ def user_JointForces(mbs_data, tsim):
     v_veh = mbs_data.qd[jid_X]
     
     jid_dir = mbs_data.joint_id["T2_barre_direction"]
+    jid_dir_ar = mbs_data.joint_id["T2_barre_direction_AR"]
     
     wheels_rear = [mbs_data.joint_id["R2_Roue_AR_G"], mbs_data.joint_id["R2_Roue_AR_D"]]
     try:
@@ -53,7 +54,7 @@ def user_JointForces(mbs_data, tsim):
         
         # Petit message pour prévenir dans la console
         if 'stop_msg_printed' not in um:
-            print(f"\n Véhicule arrêté à t = {tsim:.2f}s. Fin de la simulation ordonnée.")
+            print(f"\n Véhicule arrêté à t = {tsim:.2f}s. Fin de la simulation ordonnée. Has_rolled = {um['has_rolled']}, Is_stopped = {um['is_stopped']}")
             um['stop_msg_printed'] = True
     # =========================================================
     #  CAPTEUR DE BLOCAGE DE ROUES (Pour ton diagnostic)
@@ -104,7 +105,7 @@ def user_JointForces(mbs_data, tsim):
         else: Y_cible = 0.0
             
         erreur_Y = Y_cible - Y_actuel
-        erreur_Yaw = 0.0 - Yaw_actuel 
+        erreur_Yaw = 0.0 - Yaw_actuel  
         
         Kp_Y = 0.015  
         Kd_Yaw = 0.1 if enable_esp else 0.0
@@ -137,6 +138,10 @@ def user_JointForces(mbs_data, tsim):
     # 1. APPLICATION DU CONTRÔLE DE DIRECTION
     K_steering, D_steering = 1e6, 1e4
     mbs_data.Qq[jid_dir] = -K_steering * (mbs_data.q[jid_dir] - q_target) - D_steering * mbs_data.qd[jid_dir]
+
+    # Barre AR : cible = 10% de la cible AV
+    q_target_ar = 0.10 * q_target
+    mbs_data.Qq[jid_dir_ar] = -K_steering * (mbs_data.q[jid_dir_ar] - q_target_ar) - D_steering * mbs_data.qd[jid_dir_ar]
 
     # =========================================================
     # 2. APPLICATION DES COUPLES & SYSTÈME ABS à  hystérésis

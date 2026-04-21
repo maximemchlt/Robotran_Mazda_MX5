@@ -62,7 +62,7 @@
             <position>
               <x>0.0</x>
               <y>0.0</y>
-              <z>0.0</z>
+              <z>-0.15</z>
             </position>
             <scale>
               <x>2.0</x>
@@ -4525,7 +4525,7 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>0.06</x>
-          <y>-0.4</y>
+          <y>-0.375</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
@@ -4663,7 +4663,7 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>0.06</x>
-          <y>0.4</y>
+          <y>0.375</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
@@ -5123,7 +5123,7 @@
       </viewpoint>
       <viewpoint>
         <name>Vue_du_dessus</name>
-        <joint>R2_barre_bielle_AR_D</joint>
+        <joint>T3_chassis</joint>
         <position>
           <x>0.0</x>
           <y>0.0</y>
