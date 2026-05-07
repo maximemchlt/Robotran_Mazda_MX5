@@ -13,8 +13,16 @@ def user_JointForces(mbs_data, tsim):
     jid_X = mbs_data.joint_id["T1_chassis"]
     v_veh = mbs_data.qd[jid_X]
     
-    jid_dir = mbs_data.joint_id["T2_barre_direction"]
-    jid_dir_ar = mbs_data.joint_id["T2_barre_direction_AR"]
+    # Get the joint id's
+    jid_dir_av = mbs_data.joint_id['T2_barre_direction']
+    jid_dir_ar = mbs_data.joint_id['T2_barre_direction_AR']
+    
+    # Get the vehicule speed
+    jid_X = mbs_data.joint_id["T1_chassis"]
+    v_veh = mbs_data.qd[jid_X]
+    jid_roll = mbs_data.joint_id['R1_chassis']
+    jid_T3 = mbs_data.joint_id['T3_chassis']
+    jid_Yaw = mbs_data.joint_id['R3_chassis']
     
     wheels_rear = [mbs_data.joint_id["R2_Roue_AR_G"], mbs_data.joint_id["R2_Roue_AR_D"]]
     try:
@@ -25,21 +33,17 @@ def user_JointForces(mbs_data, tsim):
     q_target = 0.0
     torque_rear = 0.0
     torque_front = 0.0
-    force_freinage = -1000.0 
+    force_freinage = -400.0 
 
     
     # =========================================================
     #  MÉMOIRE DU PILOTE
     # =========================================================
     # Si la variable n'existe pas encore, on la crée à False
-    
     if 'has_rolled' not in um:
         um['has_rolled'] = False  
     if 'is_stopped' not in um:
         um['is_stopped'] = False  
-
-    jid_X = mbs_data.joint_id["T1_chassis"]
-    v_veh = mbs_data.qd[jid_X]
 
     # Étape 1 : On confirme que la vraie simulation a commencé
     if v_veh > 5.0:
@@ -56,6 +60,7 @@ def user_JointForces(mbs_data, tsim):
         if 'stop_msg_printed' not in um:
             print(f"\n Véhicule arrêté à t = {tsim:.2f}s. Fin de la simulation ordonnée. Has_rolled = {um['has_rolled']}, Is_stopped = {um['is_stopped']}")
             um['stop_msg_printed'] = True
+
     # =========================================================
     #  CAPTEUR DE BLOCAGE DE ROUES (Pour ton diagnostic)
     # =========================================================
@@ -74,8 +79,6 @@ def user_JointForces(mbs_data, tsim):
             um['warning_printed'] = True
 
 
-
-
     # =========================================================
     # SCÉNARIO : VIRAGE 
     # =========================================================
@@ -86,39 +89,54 @@ def user_JointForces(mbs_data, tsim):
             q_target = -0.02 * np.sin(np.pi * (tsim - 4.0) / 2.0)
 
     # =========================================================
-    # SCÉNARIO : ÉVITEMENT 
+    # SCÉNARIO : ÉVITEMENT (LOGIQUE SPATIALE / "VRAI PILOTE")
     # =========================================================
     if mode == "evitement":
+        # 1. On récupère la position et l'angle du châssis
+        jid_X = mbs_data.joint_id["T1_chassis"] # Distance parcourue (X)
+        jid_Y = mbs_data.joint_id["T2_chassis"] # Décalage latéral (Y)
+        jid_Yaw = mbs_data.joint_id["R3_chassis"] # Angle de lacet (Yaw)
         
-        # --- LE VOLANT ---
-        jid_Y = mbs_data.joint_id["T2_chassis"]
-        jid_Yaw = mbs_data.joint_id["R3_chassis"]
-        
+        X_actuel = mbs_data.q[jid_X]
         Y_actuel = mbs_data.q[jid_Y]
         Yaw_actuel = mbs_data.q[jid_Yaw]
+
+        # 2. On définit le tracé de la chicane en MÈTRES sur la route
+        # (Peu importe si on va vite ou si on freine, la chicane ne bouge pas)
+        X_debut_decalage = 10.0  # La voiture commence à tourner à 30m
+        X_fin_decalage   = 60.0  # Elle doit être sur la voie de gauche à 50m
+        X_debut_retour   = 100.0  # Elle commence à revenir à 90m
+        X_fin_retour     = 150.0 # Elle est revenue à droite à 120m
         
         Y_cible = 0.0
-        if tsim < 2.0: Y_cible = 0.0
-        elif 2.0 <= tsim < 3.0: Y_cible = 3.0 * (0.5 - 0.5 * np.cos(np.pi * (tsim - 2.0) / 1.0))
-        elif 3.0 <= tsim < 6.0: Y_cible = 3.0  
-        elif 6.0 <= tsim < 7.5: Y_cible = 3.0 * (0.5 + 0.5 * np.cos(np.pi * (tsim - 6.0) / 1.0))
-        else: Y_cible = 0.0
-            
+        if X_actuel < X_debut_decalage:
+            Y_cible = 0.0
+        elif X_debut_decalage <= X_actuel < X_fin_decalage:
+            progression = (X_actuel - X_debut_decalage) / (X_fin_decalage - X_debut_decalage)
+            Y_cible = 3.0 * (0.5 - 0.5 * np.cos(np.pi * progression))
+        elif X_fin_decalage <= X_actuel < X_debut_retour:
+            Y_cible = 3.0  
+        elif X_debut_retour <= X_actuel < X_fin_retour:
+            progression = (X_actuel - X_debut_retour) / (X_fin_retour - X_debut_retour)
+            Y_cible = 3.0 * (0.5 + 0.5 * np.cos(np.pi * progression))
+        else:
+            Y_cible = 0.0
+
+        # 3. Calcul de l'erreur pour le contrôleur PD
         erreur_Y = Y_cible - Y_actuel
-        erreur_Yaw = 0.0 - Yaw_actuel  
+        erreur_Yaw = 0.0 - Yaw_actuel # On veut que la voiture reste bien droite (Yaw=0)
         
-        Kp_Y = 0.015  
+        # Gains du pilote (ajustés pour le 4WS)
+        Kp_Y = 0.012  
         Kd_Yaw = 0.1 if enable_esp else 0.0
         
+        # Calcul de la commande de direction finale
         raw_q_target = (Kp_Y * erreur_Y) + (Kd_Yaw * erreur_Yaw)
         q_target = np.clip(raw_q_target, -0.025, 0.025)
 
-        # --- LES PÉDALES (Crash Test) ---
-        t_debut_frein = 2.0   
-        t_fin_frein = 4.0     
-        
-        # On freine SEULEMENT si on est dans les temps ET que la voiture n'a pas été déclarée "arrêtée"
-        if t_debut_frein <= tsim <= t_fin_frein and not um['is_stopped']:
+        # --- GESTION DES FREINS PENDANT L'ÉVITEMENT ---
+        # On freine entre 2.0s et 4.0s (on garde le temps ici car c'est une action de pied)
+        if 2.0 <= tsim <= 4.0 and not um['is_stopped']:
             torque_front = force_freinage * 0.50
             torque_rear  = force_freinage * 0.50
 
@@ -126,7 +144,8 @@ def user_JointForces(mbs_data, tsim):
     # SCÉNARIO : ACCELERATION OU FREINAGE  
     # =========================================================
     if mode == "acceleration" and tsim > 1.0:
-        torque_rear = 600.0  
+        # RÉDUCTION DU COUPLE (Anti-Burnout) : 150 Nm au lieu de 600 Nm
+        torque_rear = 150.0  
         
     elif mode == "freinage" and tsim > 1.0:
         # Même logique de sécurité que pour l'évitement
@@ -134,17 +153,26 @@ def user_JointForces(mbs_data, tsim):
             torque_front = force_freinage * 0.60
             torque_rear  = force_freinage * 0.40
 
-
-    # 1. APPLICATION DU CONTRÔLE DE DIRECTION
-    K_steering, D_steering = 1e6, 1e4
-    mbs_data.Qq[jid_dir] = -K_steering * (mbs_data.q[jid_dir] - q_target) - D_steering * mbs_data.qd[jid_dir]
-
-    # Barre AR : cible = 10% de la cible AV
-    q_target_ar = 0.10 * q_target
-    mbs_data.Qq[jid_dir_ar] = -K_steering * (mbs_data.q[jid_dir_ar] - q_target_ar) - D_steering * mbs_data.qd[jid_dir_ar]
-
     # =========================================================
-    # 2. APPLICATION DES COUPLES & SYSTÈME ABS à  hystérésis
+    # 1. APPLICATION DU CONTRÔLE DE DIRECTION (AV + AR)
+    # =========================================================
+    K_steering, D_steering = 1e6, 1e4
+    
+    # --- Direction AVANT ---
+    mbs_data.Qq[jid_dir_av] = -K_steering * (mbs_data.q[jid_dir_av] - q_target) - D_steering * mbs_data.qd[jid_dir_av]
+
+    # --- Direction ARRIÈRE (4WS Activé !) ---
+    # Règle des 10% : L'arrière braque dans le MÊME SENS que l'avant 
+    # (Idéal pour la stabilité à haute vitesse lors d'un évitement)
+    if mode == "evitement":
+        q_target_AR = 0.05 * -q_target 
+    else:
+        q_target_AR = 0.0 # On bloque l'arrière pour les autres modes (accélération/freinage)
+        
+    mbs_data.Qq[jid_dir_ar] = -K_steering * (mbs_data.q[jid_dir_ar] - q_target_AR) - D_steering * mbs_data.qd[jid_dir_ar]
+    
+    # =========================================================
+    # 2. APPLICATION DES COUPLES & SYSTÈME ABS à hystérésis
     # =========================================================
 
     if 'abs_state' not in um:
@@ -179,5 +207,60 @@ def user_JointForces(mbs_data, tsim):
         else:
             # Freinage normal (ou accélération) si l'ABS n'est pas nécessaire
             mbs_data.Qq[jid] = couple_base
-
+    
+    # =============================================================================================
+    # ------------------------------------------- Debug -------------------------------------------
+    # =============================================================================================    
+    # =========================================================================
+    # DEBUG (une seule impression par fenêtre temporelle grâce au verrou)
+    # =========================================================================
+    if mbs_data.process != 2:
+        last_print = um.get('last_print_time', -1.0)
+        if tsim > 0 and (tsim - last_print) >= 0.2:
+            um['last_print_time'] = tsim
+ 
+            crem_AV = mbs_data.q[jid_dir_av] * 1000.0
+            crem_AR = mbs_data.q[jid_dir_ar] * 1000.0
+            ratio_crem = (crem_AR / crem_AV) * 100 if abs(crem_AV) > 0.1 else 0.0
+ 
+            # Angle crémaillère → braquage approx (bras levier 60 mm)
+            try:
+                angle_AV = np.degrees(np.arcsin(np.clip(mbs_data.q[jid_dir_av] / 0.06, -1, 1)))
+                angle_AR = np.degrees(np.arcsin(np.clip(mbs_data.q[jid_dir_ar] / 0.06, -1, 1)))
+            except Exception:
+                angle_AV = angle_AR = 0.0
+ 
+            print(f"\n--- t = {tsim:.2f} s ---")
+            print(f"Crémaillères (mm)  : AV = {crem_AV:+.2f} | AR = {crem_AR:+.2f}  (Ratio: {ratio_crem:+.1f}%)")
+            print(f"Angle approx (deg) : AV = {angle_AV:+.2f}° | AR = {angle_AR:+.2f}°")
+            print(f"Position X         : {mbs_data.q[jid_X]:.2f} m | Vitesse : {v_veh:.2f} m/s")
+ 
+            # Ackermann
+            try:
+                ag = np.degrees(mbs_data.q[mbs_data.joint_id["R3_fusee_AV_G"]])
+                ad = np.degrees(mbs_data.q[mbs_data.joint_id["R3_fusee_AV_D"]])
+                print(f"Ackermann (deg)    : G = {ag:+.2f}° | D = {ad:+.2f}° | ΔG-D = {ag+ad:+.2f}°")
+            except KeyError:
+                pass
+ 
+            # Roulis / lacet / hauteur
+            if jid_roll >= 0:
+                phi_deg = np.degrees(mbs_data.q[jid_roll])
+                flag = '⚠ EXCESSIF' if abs(phi_deg) > 5 else 'OK'
+                print(f"Roulis R1          : {phi_deg:+.2f}°  ({flag})")
+            if jid_T3 >= 0:
+                print(f"Hauteur châssis    : {mbs_data.q[jid_T3]*1000:.1f} mm")
+            if jid_Yaw >= 0:
+                print(f"Lacet R3           : {np.degrees(mbs_data.q[jid_Yaw]):+.2f}°")
+ 
+            # Anti-roulis : couple appliqué
+            if jid_roll >= 0 and mbs_data.process == 3:
+                phi     = mbs_data.q[jid_roll]
+                phi_dot = mbs_data.qd[jid_roll]
+                K_total = um['FrontSuspension']['C_bar'] + um['RearSuspension']['C_bar']
+                C_arb   = um.get('C_arb', 3000.0)
+                T_arb   = -(K_total * phi + C_arb * phi_dot)
+                print(f"Couple ARB total   : {T_arb:+.0f} N·m")
+ 
+            print("-" * 38)
     return mbs_data.Qq

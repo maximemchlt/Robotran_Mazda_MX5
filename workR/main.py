@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 # 1. PARAMÈTRES DE LA SIMULATION
 # =============================================================================
 simulation = "evitement"  # Options: "MRU", "acceleration", "freinage", "dos_d_ane", "virage", "evitement"
-vitesse_kmh = {"MRU": 36, "acceleration": 7, "freinage": 70, "dos_d_ane": 60, "virage": 50, "evitement": 80}[simulation]
+vitesse_kmh = {"MRU": 36, "acceleration": 7, "freinage": 70, "dos_d_ane": 60, "virage": 50, "evitement": 100}[simulation]
 
 print(f"--- Démarrage du projet Mazda MX-5 : Mode {simulation} ---")
 
@@ -58,7 +58,7 @@ mbs_data.process = 2
 mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
 # On utilise un pas de temps fin (1e-3) pour stabiliser le modèle Bakker
 print(">> Phase de tassement (2 secondes)...")
-mbs_dirdyn.set_options(dt0=1e-2, tf=2.0, save2file=0) 
+mbs_dirdyn.set_options(dt0=1e-2, tf=5.0, save2file=0) 
 mbs_dirdyn.run()
 
 # =============================================================================

@@ -207,8 +207,8 @@
       </com>
       <inertia>
         <Ixx>340.0</Ixx>
-        <Iyy>340.0</Iyy>
-        <Izz>340.0</Izz>
+        <Iyy>1200.0</Iyy>
+        <Izz>1100.0</Izz>
       </inertia>
       <point>
         <pointname>Pt_Bras_inf_AR_D</pointname>
@@ -905,7 +905,7 @@
           <x2D>
             <position>
               <x>1302.0</x>
-              <y>669.0</y>
+              <y>663.0</y>
             </position>
           </x2D>
           <x3D />
@@ -922,7 +922,7 @@
           <x2D>
             <position>
               <x>1353.0</x>
-              <y>636.0</y>
+              <y>632.0</y>
             </position>
           </x2D>
           <x3D />
@@ -939,7 +939,7 @@
           <x2D>
             <position>
               <x>1327.0</x>
-              <y>692.0</y>
+              <y>688.0</y>
             </position>
           </x2D>
           <x3D />
@@ -949,7 +949,7 @@
         <x2D>
           <position>
             <x>-10.0</x>
-            <y>-30.0</y>
+            <y>-33.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -963,19 +963,19 @@
           <control_points>
             <control_point>
               <x>26.0</x>
-              <y>-30.0</y>
+              <y>-33.0</y>
             </control_point>
             <control_point>
               <x>26.0</x>
-              <y>77.0</y>
+              <y>74.0</y>
             </control_point>
             <control_point>
               <x>-10.0</x>
-              <y>77.0</y>
+              <y>74.0</y>
             </control_point>
             <control_point>
               <x>-10.0</x>
-              <y>-30.0</y>
+              <y>-33.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -1524,7 +1524,7 @@
           <x2D>
             <position>
               <x>396.0</x>
-              <y>708.0</y>
+              <y>706.0</y>
             </position>
           </x2D>
           <x3D />
@@ -3027,7 +3027,7 @@
           <x2D>
             <position>
               <x>1305.0</x>
-              <y>111.0</y>
+              <y>110.0</y>
             </position>
           </x2D>
           <x3D />
@@ -3043,7 +3043,7 @@
         <graphics>
           <x2D>
             <position>
-              <x>1344.0</x>
+              <x>1345.0</x>
               <y>138.0</y>
             </position>
           </x2D>
@@ -3061,7 +3061,7 @@
           <x2D>
             <position>
               <x>1332.0</x>
-              <y>82.0</y>
+              <y>80.0</y>
             </position>
           </x2D>
           <x3D />
@@ -3963,14 +3963,14 @@
         <pointname>Bras_Direction_D</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>0.3</y>
+          <y>0.35</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
               <x>1066.0</x>
-              <y>33.0</y>
+              <y>28.0</y>
             </position>
           </x2D>
           <x3D />
@@ -3980,14 +3980,14 @@
         <pointname>Bras_Direction_G</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>-0.3</y>
+          <y>-0.35</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
               <x>674.0</x>
-              <y>32.0</y>
+              <y>30.0</y>
             </position>
           </x2D>
           <x3D />
@@ -4118,14 +4118,14 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>-0.06</x>
-          <y>0.4</y>
+          <y>0.35</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
               <x>1249.0</x>
-              <y>59.0</y>
+              <y>55.0</y>
             </position>
           </x2D>
           <x3D />
@@ -4256,14 +4256,14 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>-0.06</x>
-          <y>-0.4</y>
+          <y>-0.35</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
               <x>466.0</x>
-              <y>66.0</y>
+              <y>65.0</y>
             </position>
           </x2D>
           <x3D />
@@ -4370,14 +4370,14 @@
         <pointname>Bras_Direction_G</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>-0.3</y>
+          <y>-0.307</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
-              <x>609.0</x>
-              <y>780.0</y>
+              <x>608.0</x>
+              <y>777.0</y>
             </position>
           </x2D>
           <x3D />
@@ -4387,14 +4387,14 @@
         <pointname>Bras_Direction_D</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>0.3</y>
+          <y>0.307</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
               <x>1128.0</x>
-              <y>780.0</y>
+              <y>777.0</y>
             </position>
           </x2D>
           <x3D />
@@ -4404,7 +4404,7 @@
         <x2D>
           <position>
             <x>-261.0</x>
-            <y>-14.0</y>
+            <y>-16.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -4418,19 +4418,19 @@
           <control_points>
             <control_point>
               <x>260.0</x>
-              <y>-14.0</y>
+              <y>-16.0</y>
             </control_point>
             <control_point>
               <x>260.0</x>
-              <y>14.0</y>
+              <y>12.0</y>
             </control_point>
             <control_point>
               <x>-261.0</x>
-              <y>14.0</y>
+              <y>12.0</y>
             </control_point>
             <control_point>
               <x>-261.0</x>
-              <y>-14.0</y>
+              <y>-16.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -4525,14 +4525,14 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>0.06</x>
-          <y>-0.375</y>
+          <y>-0.4</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
               <x>449.0</x>
-              <y>745.0</y>
+              <y>743.0</y>
             </position>
           </x2D>
           <x3D />
@@ -4663,13 +4663,13 @@
         <pointname>Bielle_dir_fusee</pointname>
         <coordinates>
           <x>0.06</x>
-          <y>0.375</y>
+          <y>0.4</y>
           <z>0.0</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
-              <x>1278.0</x>
+              <x>1279.0</x>
               <y>733.0</y>
             </position>
           </x2D>
@@ -4679,8 +4679,8 @@
       <graphics>
         <x2D>
           <position>
-            <x>-15.0</x>
-            <y>-35.0</y>
+            <x>-14.0</x>
+            <y>-34.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -4693,20 +4693,20 @@
           </size>
           <control_points>
             <control_point>
-              <x>75.0</x>
-              <y>-35.0</y>
+              <x>76.0</x>
+              <y>-34.0</y>
             </control_point>
             <control_point>
-              <x>75.0</x>
-              <y>-10.0</y>
+              <x>76.0</x>
+              <y>-9.0</y>
             </control_point>
             <control_point>
-              <x>-15.0</x>
-              <y>-10.0</y>
+              <x>-14.0</x>
+              <y>-9.0</y>
             </control_point>
             <control_point>
-              <x>-15.0</x>
-              <y>-35.0</y>
+              <x>-14.0</x>
+              <y>-34.0</y>
             </control_point>
           </control_points>
           <angle>-43.025065989118026</angle>
@@ -5126,8 +5126,8 @@
         <joint>T3_chassis</joint>
         <position>
           <x>0.0</x>
-          <y>0.0</y>
-          <z>10.0</z>
+          <y>0.1</y>
+          <z>5.0</z>
         </position>
         <target>
           <x>0.0</x>
